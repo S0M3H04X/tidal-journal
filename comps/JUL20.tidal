@@ -1,0 +1,12 @@
+import Sound.Tidal.Drum.Amen as Am
+
+let bd = take (length Am.bd) Am.bd
+    sn = take (length Am.sn) Am.sn
+
+setcps (90/60/4)
+
+d1 $ stack [
+    s "hh hh hh hh"
+]
+
+hush

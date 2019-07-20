@@ -1,0 +1,41 @@
+-- Dilla Style
+
+setcps (95/60/4)
+
+
+d1 $ jux rev $ s "808bd ~ ~ ~ ~ ~ ~ ~" |+| n "1 3"
+
+d6 $ every 2 (0.25 <~) $ swingBy (1/7) 4 $ s "~ 808bd ~ ~ 808bd 808bd ~ ~" 
+    |+| n "1 2 [3 4]"
+    # squiz "<1 2.5 2>"
+    # room (slow 4 $ range 0 0.2 saw)
+
+d7 $ jux' [id,rev,(# speed 2)] $ swingBy (1/32) 2 $ s "~ ~ ~ ~ ~ 808bd ~ ~" |+| n "4 1"
+
+d2 $ swingBy (1/7) 4 $ s "hh ~ ~ ~ [hh ~ ~ hh] ~ ~ ~"
+    |+| speed (range 0.3 0.6 tri) 
+
+d3 $ swingBy (1/7) 4 $ s "~ ~ hh ~ ~ ~ hh ~"
+
+d4 $ swingBy (1/7) 4 $ s "~ hh ~ hh ~ hh ~ hh"
+    |+| pan "0.2 0.8"
+
+d5 $ swingBy (1/7) 4 $ s "~ ~ cp ~ ~ ~ cp ~" 
+    |+| n "{3 4 2}%2"
+    # hcutoff (range 400 1000 $ sine)
+
+
+d8 $ note ("<c'maj7 d'6by9 <c'maj7 b'min7> [d'6by9 g'maj9]>") # sound "gtr" 
+    # room (slow 4 $ range 0 0.2 sine)
+    # sz 0.5
+    # gain 0.7
+    # legato 1
+    # delay 0.2
+
+d9 $ juxBy 0.125 rev $ chunk 4 ((+ speed (1 + saw)) . ply 3) $ note "<d'6by9 c'maj7 g'maj9>" # sound "bass" |+| n "{3 4 7}%2"
+    # speed "<1.25 0.75>"
+    # legato 2
+    # cutoff (range 100 800 $ sine)
+
+
+hush
