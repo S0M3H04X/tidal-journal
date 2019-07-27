@@ -42,7 +42,7 @@ let inverse 1 = 0
     inverse 0 = 1
 
 do
-  let pat = "[0 0 1/2 1 0 1 1 1/2]"
+  let pat = "[1 0 0 1 1 1 1/1 1/2]"
   d1 $ every 2 (|+| speed "0.75") $ every 4 (0.25 <~) $ every 4 (density 3) $ (0.5 ~>) $ pan pat # s "bass2"
     # cut "1"
   d2 $ (0.25 <~) $ pan (inverse <$> pat) # s "cp"
@@ -65,7 +65,7 @@ do
 do
   let chordpat = "<c'maj7 d'6by9 c'maj7 [d'6by9 g'maj9]>"
   let speedpat = "[1 1.25 0.75 -1.5]/3"
-  d1 $ sometimesBy 0.75 (# crush 0.1) $ "psr" |> note chordpat
+  d1 $ sometimesBy 0.5 (# crush 0.1) $ "psr" |> note chordpat
   d2 $ foldEvery [1,2] (0.25 ~>) $ speed (inverse <$> speedpat) # "gtr" |> note chordpat
 
 

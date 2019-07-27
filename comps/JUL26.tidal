@@ -16,8 +16,8 @@ d1 $ (chop 4 $ sound "drum:2 drum") |> speed "1 2 3"
 d1 silence
 
 -- '>' points to where the values come from
-d2 $ speed "1 1" >| speed "3 4 5" # s "bd sn" -- this gives speed of 3 4 5 
-d2 $ speed "1 1" |> speed "3 4 5" # s "bd sn" -- structure from left, values from right 
+d2 $ speed "1 1" >| speed "3 4 5" # s "bd sn" -- this gives speed of 3 4 5
+d2 $ speed "1 1" |> speed "3 4 5" # s "bd sn" -- structure from left, values from right
 d2 $ speed "1 1" <| speed "3 4 5" # s "bd sn" -- structure from rigth, values from left
 d2 silence
 
@@ -33,13 +33,14 @@ d3 $ n ("1 2" + "4 5 6") + s "bd sn"
 d3 silence
 
 
-
-
 d4 $ fast ("1 [2 4]") $ sound "bd*3" # speed 2
 d4 $ fast (iter 4 "1 [2 4]") $ sound "bd*3" # speed 2
 d4 $ fast (iter "<4 3>" "1 [2 4]") $ sound "bd*3" # speed 2
 d4 $ every "[3 4]" (fast 2) $ sound "bd*3"
-steps (80/60/4)
+
+d4 silence
+
+setcps (80/60/4)
 
 
 
