@@ -16,10 +16,12 @@ d1 $ stack [
 d1 silence
 
 -- Quintuplet Swing
+
 d2 $ stack [
-    s "[hh ~ ~ ~ hh] [hh ~ ~ ~ hh] [hh ~ ~ ~ hh] [hh ~ ~ ~ hh]",
-    s "bd ~ ~ ~ bd ~ ~ [~ bd ~]",
-    s "~ ~ cp ~ ~ ~ cp ~"
+    sound "hh*16",
+    sound "bd*4"
 ]
+
+d2 silence
 
 hush

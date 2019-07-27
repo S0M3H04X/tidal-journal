@@ -1,0 +1,46 @@
+setcps (90/60/4)
+
+-- Quintuplet Swing
+d1 $ stack [
+    s "[hh ~ ~ hh ~] [hh ~ ~ hh ~] [hh ~ ~ hh ~] [hh ~ ~ hh ~]",
+    s "bd ~ ~ ~ bd ~ ~ [~ bd ~]",
+    s "~ ~ cp ~ ~ ~ cp ~"
+]
+
+
+-- # is an alias for |>
+d1 $ (chop 4 $ sound "drum:2 drum") # speed "1 2 3"
+
+-- - |> means structure comes from the left
+d1 $ (chop 4 $ sound "drum:2 drum") |> speed "1 2 3"
+d1 silence
+
+-- '>' points to where the values come from
+d2 $ speed "1 1" >| speed "3 4 5" # s "bd sn" -- this gives speed of 3 4 5 
+d2 $ speed "1 1" |> speed "3 4 5" # s "bd sn" -- structure from left, values from right 
+d2 $ speed "1 1" <| speed "3 4 5" # s "bd sn" -- structure from rigth, values from left
+d2 silence
+
+-- take structure from both sides
+d3 $ speed "2 3" |+| speed "4 5 6" # s "bd sn"
+-- same as: "2 3" + "4 5 6" = "6 [7 8] 9"
+d3 $ speed "2 3" + speed "4 5 6" # s "bd sn"
+d3 $ speed ("1 1" + "1 2 3") # s "bd sn"
+d3 $ sound "bd [sn clap]" |>| speed "2 3 <2 3>"
+    |+| speed "1 2 0.5*3" |* speed (slow 8 sine)
+
+d3 $ n ("1 2" + "4 5 6") + s "bd sn"
+d3 silence
+
+
+
+
+d4 $ fast ("1 [2 4]") $ sound "bd*3" # speed 2
+d4 $ fast (iter 4 "1 [2 4]") $ sound "bd*3" # speed 2
+d4 $ fast (iter "<4 3>" "1 [2 4]") $ sound "bd*3" # speed 2
+d4 $ every "[3 4]" (fast 2) $ sound "bd*3"
+steps (80/60/4)
+
+
+
+hush
