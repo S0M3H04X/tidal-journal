@@ -1,0 +1,53 @@
+setcps(100/60/6)
+
+d1 $ jux (iter 4) $ stack [
+    whenmod 4 2 (|+ speed "0.5 1.25") $ s "ab:5(6,16)",
+    stut 3 0.125 0.75 . (|+| shape "0.5") $ s (samples "bass1(3,16)" (run 8)) 
+        # cut "2"
+        # room "0.3" # sz "0.75",
+    striate 4 $ s "[~ [tech:2]/6]*3"
+        |+ speed "[1 2 32 8]/2"
+        # hcutoff (range 200 1000 $ tri),
+    spread' slow 2 $ whenmod 2 4 (|+ speed "2 1") $ note ("<e'min7 [c'maj7 [a'6by9 g'maj9]]>") # s "latibro:3(5,16)"
+        # hcutoff (range 80 500 $ sine)
+        # room "-0.2" # sz "0.5",
+    sometimesBy 0.75 (# crush 3) $ degrade $ s "sn*16?",
+    whenmod 8 6 (rev)  $ s "{hh(7,16)}%2"
+        # delay "0.3"
+        # resonance "0.4"
+        # gain (range 0.6 0.2 $ saw)
+]
+
+let ninthArp = "-9 -5 -1 0 2 4 8"
+
+d2 $ stack [
+    every 2 (|+ up 3) $ up (run 4) # s "bass2(5,16)" |> note "1 6 2 4 -5"
+        # cutoff (range 80 2000 $ slow 3 $ tri),
+    swingBy (1/7) 4 $ every 1 (fast 1.25) $ off 0.015 (# delay 0.05) $ note ( (|+ "c") $ scale "major" $ ninthArp + 3 ) # s "gtr(7,16)"
+        # orbit 2
+        # squiz "<1 2.5 2>"
+        # cut "1"
+        # legato 2
+        # speed "<1.25 0.75>"
+        # hcutoff (range 200 3000 $ saw)
+        # gain 0.6
+]
+    
+d1 silence
+
+-- Septuplet swing: (+ kick stutters)
+d1 $ stack [
+    s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]",
+    every 8 (0.5 <~) $ sometimesBy 0.5 (# crush 4) $ s "[bass2 ~ ~ ~ ~ ~ ~][cp ~ ~ ~ ~ ~ bass2][bass2 ~ ~ ~ bass2 ~ ~][cp ~ ~ ~ bass2 ~ bass2]",
+    note (scale "minor" ninthArp) # s (swingBy (1/7) 4 "arp(3,8)") |> speed "1 6 2 4 -5" ,
+    chunk 3 (hurry 2) $ fast 2 $ note ( (|+ "c") $ scale "major" $ ninthArp - 3 ) # s "casio(5,16)" |> note "1 6 2 4 -5"
+        |+| speed "1.5 0.7"
+        # cutoff (range 200 1000 $ slow 2 $ tri) 
+        # resonance "0.7",
+    slow 3 $ chunk 4 (hurry 2) $ loopAt 0.5 $ chew 4 ("0 1 [2 1] 3") $ chop 32 $ s "breaks152" 
+        # cut "1"      
+        # legato 1
+        |+ n 1
+        # slow 3 (vowel "a e o")
+        # hcutoff (range 200 1000 $ slow 2 $ tri)
+]
