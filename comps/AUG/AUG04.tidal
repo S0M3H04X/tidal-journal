@@ -51,3 +51,5 @@ d1 $ stack [
         # slow 3 (vowel "a e o")
         # hcutoff (range 200 1000 $ slow 2 $ tri)
 ]
+
+hush
