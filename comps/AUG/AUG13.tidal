@@ -10,7 +10,7 @@ d1 $ whenmod 8 6 (# speed "0.75 2.5") $ stack [
     every 2 (|- note "[9 .. 6] [6 .. 8]") $ n (off 0.75 (+12) $ "[2(3,8) .. 5] [6 .. 4(5,8)]") # s "supergong"
         |> vowel "a e i"
         |> pan sine,
-    s "[~ ~ latibro(3,8) ~ ~ ~ ~](3,8)"
+    s "[~ ~ latibro(3,8) ~ ~ ~ ~]"
         |> hcutoff (range 100 3000 $ sine)
 ]
 
