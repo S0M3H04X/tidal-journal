@@ -26,7 +26,7 @@ d2 $ stack [
         # cutoff (range 80 1000 $ sine),
     chunk 8 (hurry 2) $ s "[gabba ~ ~ ~ ~][cp ~ ~ cp ~][gabba ~ ~ ~ ~][cp ~ ~ gabba ~]"
         # squiz "{2 1.5 0.8}%5",
-    note ( (|+ "e") $ scale "minor" $ ninthArp + 2 ) # s "arpy(5,12)"
+    note ( (|+ "a") $ scale "minor" $ ninthArp + 2 ) # s "arpy(5,12)"
 ]
 
 hush

@@ -15,7 +15,7 @@ d2 $ slow 2 $ jux ((3/8) ~>) $ sound "bass1(3,8,[0,5])"
 d3 $ sometimesBy 0.6 (jux ((3/8) ~>)) $ sound "bass2(3,8)"
     # n "1 2"
     # gain "1.2"
-    # delay "0.5" # delaytime "{0.005 0.02 0.01}%4" # delayfeedback "0.9, 0.6"
+    # delay "0.5" # delaytime "{0.005 0.02 0.01}%4"
 
 d1 $ stack [
     s "bass2(5, 16, [0,6,9,12])"
