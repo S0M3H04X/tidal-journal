@@ -1,0 +1,19 @@
+d1 
+    $ slowspread slow [16, 32, 128, 256]
+    $ jux (|-| speed (range 0.8 1.2 $ density 8 sine))
+    $ (spread (striate' 2048) [(1/256), (1/1024), (1/512)] 
+    $ s "{404:5 404:0}%4")
+        # room (slow 2 $ range 0.25 0.75 $ density 2 sine) # size "0.7"
+        # resonance (slow 2 $ range 0.2 0.7 $ density 32 tri)
+        # lpf (fast 4 $ range 100 2000 $ density 4 saw)
+        
+        
+        hush
+
+d2 
+    $ jux (|*| speed (range 1.2 0.5 $ density 4 tri))
+    $ every 3 (1.75 <~)
+    $ s "<[reverbkick(4,16) hh*32 cp(2,16)]*2, gabba(3,16)>%2"
+
+
+        hush
