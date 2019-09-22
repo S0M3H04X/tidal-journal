@@ -18,7 +18,7 @@ s.waitForBoot {
 	~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 	~dirt.loadSoundFiles("~/Desktop/beSerious/HOAX/VEDAL/samples/*");
-	~dirt.loadSoundFiles("~/Desktop/beSerious/HOAX/VEDAL/synths/");
+	~dirt.loadSynthDefs("~/Desktop/beSerious/HOAX/VEDAL/synths/");
 	// s.sync; // optionally: wait for samples to be read
 	~dirt.start(57120, 0 ! 12);   // start listening on port 57120, create two busses each sending audio to channel 0
 
