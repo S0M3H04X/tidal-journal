@@ -44,10 +44,10 @@ xfadeIn 3 8 $
         # room "0.6"
         # gain (slow 4 $ range 1.2 1.5 sine)
 
-clutch 1 $ 
+d1 $ 
     striate' 128 (1/64) $
     s "acid(3,8)"
-        # n "<1 4 2 6>"
+        # speed "<1 4 2 6>"
         # pF "freq" (slow 2 $ range 200 660 $ tri)
         # room "0.8"
 
