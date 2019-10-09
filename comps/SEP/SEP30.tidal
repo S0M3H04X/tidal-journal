@@ -1,0 +1,55 @@
+
+-- once $ n (segment "<4 8 16>" $ (irand 16)) # s "supermandolin"
+
+
+d3 $
+    spreadr ($) [
+        -- density 2,
+        gap 2,
+        slow 2,
+        striate 3,
+        (# speed "-0.8")
+    ] $
+    -- fast "<2 3>" $
+    stack [
+        s "ho ho:2 ho:3 hc",
+        s "gabba(5,12)"
+        # gain (range 1 1.2 sine)
+    ]
+
+
+hush
+
+d1 $
+    jux rev $
+    whenmod 8 2 (striate "<4 8 6>") $
+    stack [
+        sound "reverbkick reverbkick*2",
+        sound "hh*2 [sn cp] cp future*4",
+        sound "arpy" -| n "0 .. 12"
+    ]
+    # gain 1.2
+    # speed "[[1 0.8], [1.5 2]*2]/3"
+    # lpf( (range 80 2000 $ fast 5.25 isaw) * (range 0.5 1 $ slow 1.25 saw) )
+    -- # silence
+
+d2 $
+    juxBy
+      (range "-1" "1" $ slow 4 $ (sine + isaw)/2)
+      (|- speed (segment 16 $ choose [2/3, 3/5, 8/9])) $
+    whenmod 6 3 (spread ($) [
+        density (1/4),
+        gap 4,
+        striate 16,
+        (# speed "-2.75")
+    ]) $
+    sound "<insect feel>*128"
+    # bpf ( (range 200 4000 $ slow 3.25 sine) * (range 0.5 1 $ slow 2.5 sine) * (range 0.5 1 $ slow 1.75 sine) )
+    # pan (slow 16 isaw)
+    # room 0.4
+    # cps ( "<1.1 1 0.9>" * (discretise 4 $ range 0.5 2 $ slow 3 sine))
+
+
+
+
+hush

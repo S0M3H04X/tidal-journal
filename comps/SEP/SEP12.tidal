@@ -1,5 +1,5 @@
 d1 $ 
-    every' 8 3 (density 2) $
+    -- every' 8 3 (density 2) $
     every 2 (chop 4 . iter 2) $
     (1 <~) $
     every 4 ((1/8) <~) $
@@ -14,13 +14,14 @@ d1 $
         # hresonance "<0 0.2 0.4 0.6>"
     # silence
 
-d2 $ 
+d3 $ 
     every 2 (chop 4) $
     every 4 (iter 2 . superimpose (whenmod 4 2 (|* speed "3"))) $
     s "{gabba(3,16), cp}%2"
         # accelerate "<0 1 -1 0.25 -0.5 2 -3>"
         # gain 1
         # lpf (range 400 5000 $ saw)
+    # cps(140/120/4)
 
 
         hush

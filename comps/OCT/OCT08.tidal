@@ -1,0 +1,66 @@
+d1 
+    $ slow 2
+    $ iter 4
+    $ (chop "<16>"
+    $ n ("[0 1 2*2 3]*1.5" + "<0 1 2 3>") 
+    # sound "psr")
+    # pan sine
+    -- # silence
+
+d2 
+    $ slow 2
+    $ every 4 (superimpose (off 0.75 (iter "<3 6>")))
+    $ s "bd ht*1.5 . [lt ht]*1.5"
+    -- # silence
+
+d3 
+    $ slow 4
+    $ striate' 3 (1/6)
+    $ s "[cp:3 mt lt]*1%3"
+    # delay 0.25 # delaytime "<0.25 0.75 1.25>" # delayfeedback 0.4
+    # room (range 0.1 0.2 tri)
+    # gain 0.8
+    # vowel "<a e i>"
+    # cutoff (range 200 4000 $ slow 2 $ isaw)
+    # shape "{0.1 0.8 0.2}%9"
+    # resonance (range 0.75 0.2 $ density 4 $ sine)
+
+d4 
+    $ jux rev
+    $ iter 2
+    $ randslice "<64 128 32>"
+    $ chunk 3 (slow 2)
+    $ every 4 (fast "1.5 . 2")
+    $ s "pebbles*6"
+    -- # silence
+
+d1 
+    $ jux rev
+    $ iter 3 
+    $ every 4 ( ((1/3) <~) . (|/ speed "<1 0.8 -3>") )
+    $ striate 8 "arpy <arpy:2 arpy:3> arpy:4"
+    # note "<0 2 7>"
+    # room 0.3 # size 0.2
+    # gain 0.8
+    # vowel "<o u i>"
+    # cutoff (range 1000 6000 sine)
+    # delay 0.25 # delaytime "<0.25 0.75 1.25>" # delayfeedback 0.4
+    -- # silence
+
+d2  
+    $ chunk 4 (hurry 1.5)
+    $ loopAt 1 
+    $ slice 8 (iter 4 "0 1 0 2*2 5 0 6*3 0")
+    $ off (3/12) (|* speed "<1.5 0.75>")
+    $ every 4 (chunk 2 (off 0.25 (fast "<2 3>")))
+    $ stack [
+        chop 4
+        $ s "bd*2 sn:2",
+        s "reverbkick(5,8)",
+        iter 2
+        $ splice 4 (iter 2 "1 4 3 6 4 3")
+        $ chop 8
+        $ s "breaks152:4"
+    ] 
+
+hush

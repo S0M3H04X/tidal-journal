@@ -6,12 +6,12 @@ scaleList :: String
 -- "<[0 -3 0 2 1 4 6 3][0 1 0 -3 5 0 6 4]>"
 
 p "m1" $
-    -- jux rev $
-    slow 4 $
-    -- off 0.125 (|+ 7) $
-    -- (1 <~) $
-    -- chunk 4 (slow 2 . (|- n 12)) $
-    -- off 0.75 ((# s "[birds, pm01]") . (|+ speed "<1 1.2 -1.5>") . (# gain (range 0.3 0.6 $ sine))) $
+    jux rev $
+    slow 2 $
+    off 0.125 (|+ 7) $
+    (1 <~) $
+    chunk 4 (slow 2 . (|- n 12)) $
+    off 0.25 ((# s "[birds, pm01]") . (|+ speed "<1 1.2 -1.5>") . (# gain (range 0.3 0.6 $ sine))) $
     -- struct (iter 3 "t(6,12)?") $
     n (scale "dorian" "<[0 2 6 [1 [3 4]]],[2 4]>" + 6)
         # s "pm03"
@@ -33,35 +33,42 @@ p "b1" $
         # gain (fast 4 $ range 1.1 1.2 sine)
         # lpf (range 200 2000 sine)
         -- # room 0.4
-        -- # silence
+        # silence
+
+p "atmoshot" $ 
+    s (samples "atmoshot" (run 3)) 
+        # cut 1
 
 
-d1 $ silence        
 -- 
-p "drum" $
-    every 8 (slow 4) $
+xfadeIn "drum" 16 $
+    -- every 8 (slow 4) $
     sometimesBy 0.25 (# speed "<1 1.2 -3>") $
     s "[reverbkick*2 reverbkick@3, ~@3 [cp@7 cp], ~@2 industrial@3]"
-    # cps(180/60/4)
+    -- # cps(150/60/4)
 
 
 -- TR
 p "drum" $
-    -- superimpose (iter 4) $
-    -- every 4 ((3/12) ~>) $
+    superimpose (iter 4) $
+    every 8 ((3/12) ~>) $
+    every 4 (# crush 2) $
     s "[gabba@5 gabba@7, ~ cp@2 cp@3 , ~@3 reverbkick, hh*6]"
+        # gain (slow 4 $ range 0.6 0.9 $ sine)
     # cps(160/60/4)
     # silence
 
 
 p "sample" $
-    -- every 4 ((1/2) <~) $
-    -- slow 3 $
-    -- struct (iter 2 "t(5,8)?") $
-    -- striate' 4 (1/2) $
-    -- off 0.25 (# s "moan") $
+    every 4 ((1/2) <~) $
+    (1 <~)
+    every 8 (slow 4) $
+    slow 3 $
+    struct (iter 2 "t(5,8)?") $
+    striate' 4 (1/2) $
+    off 0.25 (# s "moan") $
     s "twik"
-        -- # speed "<1 1.5 -2>"
+        # speed "<1 1.5 -2>"
         # n "<1 2>"
         # cut 1
 
@@ -72,19 +79,19 @@ p "moan" $
     striate' 64 (1/16) $
     jux rev $
     sometimesBy 0.69 (|+ speed "<1 1.2 -1.5>") $
-    s "moan(3,8)?"
+    s "moan(3,8)"
         # gain 0.7
         # resonance (perlin + 0.5)
 
 
 
 p "kick" $ 
-    -- sometimesBy 0.75 (jux rev) $
-    -- whenmod 8 2 (# crush 2) $
-    -- (1 ~>) $
-    -- every' 8 6 ((1/3) ~>) $
-    -- off 0.125 ((# s "aoki") . (# cut 1) . (# nudge "[0 0.04]*16")) $
-    -- chunk 4 (density 2) $
+    sometimesBy 0.75 (jux rev) $
+    whenmod 8 2 (# crush 2) $
+    (1 ~>) $
+    every' 8 6 ((1/3) ~>) $
+    off 0.125 ((# s "aoki") . (# cut 1) . (# nudge "[0 0.04]*16")) $
+    chunk 4 (density 2) $
     s (samples "hardkick(2,16)" (run 2))
         # room (range 0 0.8 sine)
         # cut 1
@@ -93,30 +100,33 @@ p "kick" $
 -- TR kick        
 
 p "rg1" $
-    -- off 0.75 ((# s "ragaga") . (# cut 1)) $
-    -- every 8 (density 4) $
+    off 0.75 ((# s "ragaga") . (# cut 1)) $
+    every 8 (density 2) $
     s "<gabba(3,8), cp(2,16)?>"
-    -- # silence
+        # lpf (range 80 400 sine)
+    # silence
 
-p "ti" $ 
-    superimpose ((spin 3) . (iter 2)) $
-    slow 2 $
+xfadeIn "moan" 4 $ 
+    -- superimpose ((spin 3) . (iter 2)) $
+    -- slow 2 $
     striate' 4 (1/2) $
     s "tippi"
         # n 1
         # speed "<0.8 0.6>"
         # cut 1
 
-p "dancehall" $
-    -- off 0.75 ((# s "bar") . (# cut 1) . (|/| speed "<0.585 0.435>")) $
-    -- every 16 ((# hpf 2000) . (rev)) $
+xfade "dancehall" $
+    off 0.75 ((# s "bar") . (# cut 1) . (|/| speed "<0.585 0.435>")) $
+    every 16 ((# hpf 2000) . (rev)) $
     -- (1 <~) $
-    -- every 8 (# hcutoff 800) $
-    s "clubkick(7,12)"
+    every 4 (density 2) $
+    every 8 (# hcutoff 800) $
+    s "clubkick(4,12)"
         # room 0.3
 
 p "clap" $
-    -- superimpose (iter 4) $
+    striate' 64 (1/32) $
+    superimpose (iter 2) $
     s "bunun"
         # cut 1
     -- # silence
@@ -124,7 +134,7 @@ p "clap" $
 -- TR tippi
 p "pula" $
     slow 16 $
-    -- jux rev $
+    jux rev $
     striate' 64 (1/12) $
     sometimesBy 0.25 (# fshift "<240 480 450>") $
     s "ataypula"
@@ -133,42 +143,60 @@ p "pula" $
         # begin 2
         # cut 1
         # orbit 1
+    # silence
+
+p "bar" $
+    s (samples)
 
 
 p "suck" $
-    every 8 (spin "<4 2>") $
+    every 8 (spin "<3 4 2>") $
+    trunc "<0.75 0.25 1>" $ 
+    every 16 (chunk 2) $
     jux rev $
     stack [
         superimpose (density 2) $
         (1 <~) $
         every' 8 6 (iter 4) $
         -- whenmod 6 3 (density (1/6)) $
-        -- s "<clubkick(5,16), cp(3,8)?>",
-        -- every 4 (striate' 32 (1/64)) $
-        -- s "cosmicg"
-            -- # n "<1 [2 5] 4>",
-        off 0.75 (# speed "<2 3 -1>") $
-        s "dr2*3",
-        stut 4 0.25 0.75 . (|*| speed "<2 -1 -1.5 3>") $ 
-        s "diphone(3,8)?"
+        s "<clubkick(3,16), cp(3,8)>",
+        every 4 (striate' 8 (1/16)) $
+        s "trump"
+            # n "<1 [2 5] 4>",
+        -- off 0.25 (# speed "<2 3 -1>") $
+        s "seawolf*3",
+        stut 4 0.125 0.75 . (|*| speed "<2 -1 -1.5 -3>") $ 
+        s "rave2(3,8)?"
             # n "<20 [18 14 6]>"
     ]
-        # room 0.2
-        # cps (150/60/8)        
-
+    # silence
+        -- # lpf (range 200 3000 tri)
+       
+setcps(130/120/4)
 
 p "kick" $
-    every 8 (spin "<4 2>") $
+    every 8 (spin "<2 6>") $
     stack [
         superimpose (density 2) $
         (1 <~) $
-        every' 8 6 (iter 4) $
-        whenmod 6 3 (density (1/6)) $
-        s "<clubkick(5,16), cp(3,8)?>",
-        every 4 (striate' 32 (1/64)) $
-        s "cosmicg"
+        every' 6 3 ((iter 4) . (slow 2)) $
+        whenmod 4 2 (density (1/3)) $
+        s "<hh*16, industrial(3,8)>",
+        every 4 (striate' 8 (1/64)) $
+        s "space"
             # n "<1 [2 5] 4>"
     ]
 
+p "vcv" $
+    every 4 (chunk 4) $
+    every 8 (spin "<4 2>") $
+    striate' 16 (1/8) $
+    s (samples "vcv" (run 2))
+        # cut 1
+
+p "g" 4 $
+    slice 8 "1 2 3 4" $
+    s "sanson"
+        # cut 1
 
 hush
