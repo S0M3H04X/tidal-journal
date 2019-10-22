@@ -1,0 +1,31 @@
+deconstruct 32 $ "t(<2 3>,9,<5 6>)"
+
+d1 
+    -- $ gap "{8 <4 3>}%9"
+    $ foldEvery [3, 4, 5] (stutWith 2 (1/6) ((|* speed "<1.25 0.75>") . (|* gain 0.7)))
+    $ (1 <~)
+    $ chunk 4 (# squiz "[2 4 1]")
+    $ stack [
+        s "bd(<3 4>,9,<2 4>)",
+        s "hh*9"
+            # speed (segment 9 $ range "-0.1" 2 isaw),
+        s "cp(1,9,<4 5 8>)",
+        striate' 32 (1/64)
+        $ struct (every 2 inv "t(<2 3>,9,<5 6>)")
+        $ s "ade:6"
+        # room 0.2 |> size (range 0.2 0.4 sine)
+        # vowel "<a e o>"
+        # hpf 1000
+        # cut 1
+        >| note "0 2 [3 12] [24 7]"
+        |> pan sine,
+        jux rev
+        $ s "gretsch" >| note "0 2 [3 12] [24 7]"
+    ] 
+    >| nudge "[0 0.25]*4"
+    # cps "0.8" -- 0.5
+
+
+
+
+hush
