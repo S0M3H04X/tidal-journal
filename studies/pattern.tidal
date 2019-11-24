@@ -1,0 +1,9 @@
+-- What is a pattern?
+
+d1 $ sound "drum ~ drum drum" # n (choose [0,2,3])
+
+setcps 0.8
+
+"1 2 3" :: Pattern String
+
+hush

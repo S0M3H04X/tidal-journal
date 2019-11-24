@@ -40,7 +40,7 @@ d4
 d5 
     $ jux rev
     $ iter 2
-    $ superimpose (density (3/8))
+    -- $ superimpose (density (3/4))
     $ stut 4 (1/128) (3/8)
     $ s "reverbkick(<3 5>,8)"
 

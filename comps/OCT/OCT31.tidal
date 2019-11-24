@@ -1,0 +1,44 @@
+d2 
+    $ sew "t f*2 f [t f]"
+    (mask (every 4 inv "t(3,8)")
+    $ chunk 4 (iter 2) 
+    $ loopAt 1
+    $ chop 8
+    $ s "404:7"
+    # pan sine
+    # lpf (range 100 2000 sine))
+    (every 4 ((5/8) ~>)
+    $ off 0.125 (|- speed "<0.6 1.1 -0.3>")
+    $ s "reverbkick(5,8)")
+
+    
+d3 
+    $ sew "<[t f]*3 [t(3,8) f(2,16)]>"
+    (chunk 4 (hurry 2) 
+    $ n "0 .. 7" 
+    # s "cp")
+    (arpeggiate $ off 0.125 (|+ n "<5 [24 22] 7 20>")
+    $ s "karplus01"
+    # pF "sustain" (range 0.8 1.5 sine)
+    # pF "brightness" (range 0.3 0.5 $ fast 3 $ tri)
+    # pF "overdrive" (range 0.1 0.5 $ fast 8 $ square)
+    -- # resonance "0.7"
+    # delay 0.4 # delayfeedback 0.3
+    # room 0.4 # sz 0.7 
+    # lpq 0.2 # lpf (rand * 2000)
+    # gain (range 1.1 1.5 sine))
+    -- # silence
+
+
+d4 
+    $ stitch "t(5,8)"
+    (mask (iter 4 "t(5,16)")
+    $ loopAt 1
+    $ chop 8
+    $ n "0 .. 5" 
+    # s "pad")
+    (sound "rave2" # lpq 0.2 # lpf (rand * 2000)) 
+    -- # silence
+
+
+hush

@@ -1,0 +1,25 @@
+do
+   d1 $
+      every 1 (degrade) $
+      whenmod 8 6 (trunc (3/8)) $
+      whenmod 7 5 (0.5 ~>) $
+      every 6 (|=| speed "-1") $
+      every 1 (slow (4/3)) $
+      slow 2 $ s "peri*2  cp*1 peri*2 "
+      |=| n (every 4 (rev) $ every 4 (palindrome) $ every 4 (0.25 <~) $ run 9)
+      |=| cut "3"
+
+
+d1
+   $ every 10 (degrade)
+   $ (0.125 ~>)
+   $ whenmod 2 5 (trunc (1/10))
+   $ palindrome
+   $ struct (fast "<5 2 1>" "t(5,10)")
+   $ slow 2
+   $ note (scale "<dorian phrygian>" "<2 5 1>")
+   # s "karplus01"
+   # pan (rand)
+   # silence
+   
+   

@@ -1,0 +1,21 @@
+d1 
+    $ loopAt 1
+    $ chop 2
+    $ every 2 (slow 4)
+    $ chunk 4 (hurry 2)
+    $ n ("3 4 1 0 5 [4 1]")
+    # s (choose ["gab", "future", "east"])
+    # lpf (range 400 4000 sine)
+    # silence
+
+
+d2
+    $ jux rev
+    $ striate' 8 (1/32)
+    $ stack [
+        sound "clubkick(<3 5>,<8 16>)",
+        s "hh*16"
+    ]
+    # room (range 0.4 0.6 sine) # size 0.2
+
+hush

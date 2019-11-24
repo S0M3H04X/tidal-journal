@@ -1,0 +1,7 @@
+d1
+    $ slow 4
+    $ loopAt 6
+    $ chop 4
+    $ s "sanson"
+
+    hush

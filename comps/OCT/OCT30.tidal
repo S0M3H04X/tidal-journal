@@ -1,0 +1,19 @@
+d1 
+    -- $ loopFirst
+    $ repeatCycles 2
+    $ s "arpy(5,8)"
+    |< n (irand 8)
+
+
+    
+let foo = "a6 e"
+in
+
+d1 $ jux rev $ arpeggiate $ off 0.125 (|+ n "12 7 24")
+    $ sound "supermandolin" >| n (unwrap $ cycleChoose ["a6 e(3,8)", "c e g a*2", "c e*2 f g"])
+    # lpf 3000 #lpq 0.2 # room 0.2 # sz 0.7 # legato 2
+
+resetCycles
+setcps 0.5
+
+hush
