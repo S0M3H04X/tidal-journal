@@ -1,0 +1,12 @@
+setcps(170/60/4)
+
+d1 $ qt $ jux rev $ ply 3 $ n "0*2 0 0*2" # s "bshihat"
+
+d2 $ qt $ every 4 ((1 ~>) . ply 2) $ n "~ ~ 1 ~ ~ ~ ~ 1" # s "rims"
+
+d3 $ qt $ bite 4 "[0 2] 3*2 0 1" $ n "5(5,8)" # s "kick"
+
+d4 $ qt $ every 4 (|* speed "<0.8 1.2>") $ loopAt "<2 4>" $ chop 32 $ s "cvp" # cut 1
+
+
+hush

@@ -1,0 +1,26 @@
+!setcps 0.5
+
+
+d1
+$ striate' 8 (1/4)
+$ every 4 (iter 2)
+$ spin 2
+$ slow "<4 2 8>"
+$ struct (ascii "soul")
+$ s "gh-vo"
+|> n "<2 5 6>"
+# gain 1.1
+# cut 1
+
+
+d2
+$ stack [
+jux rev
+$ every 4 (# crush 2)
+$ s "{ml-perc sfx}%4"
+|+| n "2 3" |/ n "{6 5}%2"
+# legato 1
+# gain (slow 4 sine),
+struct (ascii "who")
+$ s "[~ relo . ~ kk:4(2,8)]" # gain (slow 4 tri)
+]

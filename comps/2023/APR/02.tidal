@@ -1,0 +1,27 @@
+setcps(160/60/4)
+
+hush
+
+d2
+    $ qtrigger 1
+
+d1
+  $ qt
+  $ sparsity "[1, 2 .. 8]"
+  $ every 4 (rev . (zoom (0.25, 0.75)))
+  $ every 8 (within (0, 0.75) (fast 2))
+  $ s "[[kk:2(3,8,2)] , [~ ~ [~ clap:5] ~] , bshihat:3*16]"
+
+
+d2
+    -- $ qtrigger 1
+$ every 4 (|* speed 0.4)
+$ s "~ ~ ~ kk:5(2,8)"
+    -- # cut 1
+    -- # td_s "a"
+
+
+d3 $ s "hh*8" |+ speed (range 0.5 0.2 sine) # coarse 2
+
+
+hush

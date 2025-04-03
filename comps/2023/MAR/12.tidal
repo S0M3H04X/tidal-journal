@@ -1,0 +1,45 @@
+let segVal' s p n = segment s $ value p # param n
+    segVal p n = segVal' 64 p n
+    rdEffect p n d = segVal p n # dev d
+
+
+t1 $ stack [
+  n "a b c d" |+ n 36
+  , rdEffect (slow 2 $ sine) "Cutoff" "2"
+  ]
+  # s "01"
+
+
+
+
+d1
+  $ every 2 (iter 8)
+  $ s "hi:3*16"
+  |* speed (sine*1.01)
+  # pan (slow 2 $ sine)
+  # orbit 0
+  # cut 1
+
+d2
+  -- $ loopAt 0
+  $ s "kick:4(5,16)"
+  -- # legato 2
+  |+ gain (sine+0.5)
+  # orbit 1
+
+d3
+  -- $ every 8 (jux rev)
+  $ every 4 (fast 8 . iter 2 . jux rev . id)
+  $ s "~ snare:3"
+  |+ gain (sine+1.5)
+  # orbit 2
+
+d4
+  $ n "<1(3,8) [~ 3*4]>"
+  # s "osbasse"
+  |* speed "<0.5 1>"
+  -- |+ gain (sine+1.1)
+  # legato 4
+  # orbit 3
+
+hush

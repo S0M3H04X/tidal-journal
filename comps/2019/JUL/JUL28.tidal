@@ -1,0 +1,49 @@
+setcps (90/60/4)
+
+
+
+
+-- BINARY PATTERN
+let inverse 1 = 0
+    inverse 0 = 1
+
+do 
+    let pat = "[1 1*3 0/2 1*4 0 0 1/2 0]"
+    d1 $ gain pat # s "drum:10"
+    d2 $ gain (inverse <$> pat) # s "cp"
+    d3 $ gain (inverse <$> pat) # s "bd"
+
+    hush
+
+-- Quintuplet swing:
+d1 $ stack [
+    s "[hh ~ ~ hh ~][hh ~ ~ hh ~][hh ~ ~ hh ~ ][hh ~ ~ hh ~]",
+    s "[bd ~ ~ ~ ~][cp ~ ~ ~ ~][bd ~ ~ ~ ~][cp ~ ~ bd ~]"
+]
+
+-- Septuplet swing: (+ kick stutters)
+do
+    d1 
+        $ stack [
+            s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]",
+            every 8 (0.5 <~) 
+            $ sometimesBy 0.5 (# crush 4) 
+            $ s "[bass2 ~ ~ ~ ~ ~ ~][cp ~ ~ ~ ~ ~ bass2][bass2 ~ ~ ~ bass2 ~ ~][cp ~ ~ ~ bass2 ~ bass2]",
+            n (scale "minor" "<5 2 1>") # s (swingBy (1/3) 4 "supersaw(3,8)") |> speed "1 4 5",
+            chunk 3 (hurry 2) $ fast 2 $ s "chin*4"
+            # cut 1 
+            |+| speed "1.2 0.7"
+            # cutoff (range 300 1000 $ slow 2 $ saw) # resonance "0.7"
+        ]
+    d2 
+        $ stack [
+            s "gabba bd*2",
+            s "hh*2 [odx cp] hc future*4",
+            s (samples "h*8" (run 8)) # cut "1"
+        ] 
+        # speed "[[1 0.8], [1.5 2]*2]/3"
+
+
+d7 silence
+
+hush

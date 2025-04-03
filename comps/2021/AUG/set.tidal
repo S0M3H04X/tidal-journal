@@ -1,0 +1,137 @@
+setcps(155/60/4)
+
+d7
+  $ qtrigger 1
+  -- $ every 8 (0.75 ~>)
+  $ whenmod 4 6 (slow 4)
+  $ jux' [
+    rev,
+    id,
+    sometimesBy 0.25 (spin 2),
+    (|* speed (range 0.6 1.2 isaw))
+  ]
+  -- $ striate' "<2 4 8 4>" (2/3)
+  $ s "{zap(2,16), ~ ~ cp!2}%2"
+  # octersubsub 2
+  # lpf (fast "12 4" $ range 4000 1200 $ sine*1.2)
+  # orbit 2
+  -- # silence
+
+d6
+  $ qtrigger 1
+  $ every 8 ((jit 0.125 0.75) . (rep' 2) . (crushit))
+  $ s "[drek(5,16), 808lt:2*4, [~ ~ clp:3 ~]]"
+  |* speed "[1,1, [~ ~ 2 ~]]"
+  # room (fast 8 $ range 0.01 0.1 $ isaw) # size (range 0.4 0.1 isaw)
+  # pan (slow 4 $ range 0.2 0.7 $ (1 - sine*0.5))
+  # delay (0.05+sine*0.8) # delayfeedback (range 0.01 0.5 $ (0.5 - sine*1.2)) # delaytime (0.001+sine*"[0.02 0.04]")
+  # legato 2
+  # orbit 1
+  -- # silence
+
+d3
+  -- $ gtfo
+  $ qtrigger 1
+  $ off 0.25 (|+| 12)
+  $ note (every 8 (((2/3) ~>) . (one)) $ scale "hexPhrygian" "[c a f e]")
+  # s "pm04"
+  # gain (fast 8 $ range 1.2 1 isaw)
+  # legato 1
+  # orbit 3
+
+
+d2
+  $ qtrigger 1
+  $ jux rev
+  $ every 2 (ply 2)
+  $ slowspread ($) [
+      every 4 (crushit),
+      thicken' "0.4" "0.4"
+  ]
+  $ move
+  $ struct "t f [t f] t"
+  $ foldEvery [3,4] (0.75 <~)
+  $ off 0.125 ((|* speed "<-1.2 2.4>") . (+ note "5"))
+  $ note "[c a*2 f*2 e]/3"
+  # s "<jungbass jungbass:4>"
+  # orbit 3
+
+hush
+-- sec 1
+
+
+-- vvv cps slowdown  start vvv
+d1
+  $ every 8 ((3/16) <~)
+  $ off 0.25 (const
+      $ every 4 (iter 2)
+      $ stack [
+          sometimesBy 0.25 (ghost)
+          $ s "[gabba:1(3,8) cp]",
+          jux' [
+              id,
+              rev
+          ]
+          $ s "hh*16"
+          # delay 0.3 # delayfeedback 0.4
+          # bpf (range 8000 4000 saw)
+          # speed (slow 4 $ range 0.7 1.5 $ sine)
+      ]
+      # cutoff (fast 8 $ range 400 4000 $ sine*2.4)
+      # delay 0.2 # delayfb 0.4
+      )
+  $ degradeBy 0.1
+  $ spread ($) [
+      id,
+      spin 2
+  ]
+  $ slice 16 "<[0 3 2@2 8!2][1 8!2 4@2 3]>"
+  $ stack [
+      s "atmoshot",
+      s "angelb"
+  ]
+  # speed "-1"
+  # attack (fast 4 $ range 0.1 0.02 $ saw)
+  # octersubsub (slow 2 $ range 0.8 1.5 $ sine)
+  # room 0.6 # size 0.8
+  # cut 1
+  # cps 0.5
+
+
+-- Base JUKE --
+d1
+  $ s "[drek(5,16), 808lt:2*4, [~ ~ clp:2 ~]]"
+  # legato 1
+
+d2
+  -- $ sometimesBy 0.25 (iter 4)
+  $ stack [
+      slowspread ($) [
+          id,
+          every 4 (rev . (slow 2)),
+          crushit,
+          thicken' "0.8" "0.9"
+      ]
+      -- $ drawLine
+      $ s "[[drek ~ ~ drek ~ ~ drek ~]*2, [~ ~ cp:2 ~]]"
+      # octersub 2.4,
+      every 2 ((1/4) ~>)
+      $ thicken' "1.25" (range 0.3 0.8 $ fast 4 $ sine)
+      $ s "[808lt ~ ~ 808lt ~ ~ 808lt ~]*2"
+      # speed (fast 8 $ range 0.8 1.5 $ sine*2.4),
+      s "hh*16"
+      # hcutoff (range 2000 8000 isaw)
+      # gain (slow 4 $ range 0.9 1.2 $ sine),
+      one
+      $ jux rev
+      $ note "[c ~ ~ g ~ ~ f ~]*2"
+      # s "zap"
+      # speed "<0.6 0.8>" |* "<2 4>!2"
+      -- # bpf (range 800 6000 tri)
+      # gain (fast 2 $ range 0.9 0.7 $ tri)
+      # attack 0.02 # release (range 0.01 0.08 saw)
+      # nudge (1/128)
+  ]
+  # octersubsub (range 0.4 1.2 sine)
+  # room (fast 4 $ range 0.05 0.2 $ saw) # size (fast 8 $ range 0.4 0.8 $ saw)
+  # orbit 0

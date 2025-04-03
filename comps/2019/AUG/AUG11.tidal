@@ -1,0 +1,41 @@
+setcps(130/60/4)
+let ninthArp = "-9 -5 -1 0 2 4 8"
+d1
+    $ jux (iter 2) 
+    $ stack [
+        every 4 (fast 0.75) $ stut 3 1.25 1.5 . (|*| shape "0.125") 
+        $ s "gabba(3,16)"
+        # room "0.2" # sz "0.125",
+        sometimesBy 0.75 (# crush 3) 
+        $ degrade 
+        $ s "cp*8?"
+        # gain (range 1.5 1.2 $ tri),
+        stut 2 1.25 1.75 . (|*| shape "0.25") 
+        $ note ("<e'min7 [c'maj7 [a'6by9 g'maj9]]>") 
+        # s "latibro:2(7,16)"
+        # resonance "0.7"
+        # squiz "{3 1.5 0.8}%4"
+        # slow 2 (vowel "a e o")
+        # hcutoff (range 100 1000 $ slow 1.25 $ saw),
+        stut 2 1.5 1.25 . (|+| shape "0.125") 
+        $ chunk 4 (hurry 2) 
+        $ note ( (|+ "g") $ scale "minor" $ ninthArp - 2   ) 
+        # s "casio(8,16)"
+        # room "0.5" # sz "0.5"
+    ]
+    -- # silence
+
+d2 $ stack [
+    every 4 (fast 2 . (# speed 2)) $ iter 4 $ s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]"
+        # gain rand
+        # pan "0 0.5 1",
+    every 4 (# vowel "a o") $ stut 3 1.125 1.5 . (|*| shape "0.125") $ up "[ 3 [2 [9 4]] 1 4 ]" # s "jungbass:6" 
+        # cut "1.1"
+        # gain "0.6"
+        # cutoff (range 80 1000 $ sine),
+    chunk 8 (hurry 2) $ s "[gabba ~ ~ ~ ~][cp ~ ~ cp ~][gabba ~ ~ ~ ~][cp ~ ~ gabba ~]"
+        # squiz "{2 1.5 0.8}%5",
+    note ( (|+ "a") $ scale "minor" $ ninthArp + 2 ) # s "arpy(5,12)"
+]
+
+hush

@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"tidalcycles.bootTidalPath": "",
+		"tidalcycles.randomMessages": [
+			"%$%$%$%$%"
+		],
+		"tidalcycles.useBootFileInCurrentDirectory": true,
+		"tidalcycles.useStackGhci": true,
+		"tidalcycles.sounds.paths": [
+			"/Users/somehoax/Desktop/SOMEHOAX/VEDAL/samples-extra",
+			"/Users/somehoax/Desktop/SOMEHOAX/VEDAL/samples"
+		],
+		"tidalcycles.shortcuts.showInConsole": true,
+		"tidalcycles.showEvalCount": true
+	}
+}

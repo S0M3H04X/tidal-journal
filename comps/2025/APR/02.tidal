@@ -1,0 +1,16 @@
+do
+  let pat1 = "[2 ~ 2 ~ ][2 ~ ~ 2 ~ ~ 2 ~]"
+      dm = "emudrumulator"
+  d1
+    $ drumM dm [
+      s "[~ perc]*2" # note 12
+      ,n pat1
+      # s "bd"
+      , n "~ 1 ~ 1"
+      # s "<cp>"
+      ,n "4*8"
+      # s "[hh]"
+      |* speed (slow 8 $ rangex 1 0.6 sine)
+      |* gain (fast 3 $ range 0.6 1 rand)
+    ]
+  d2

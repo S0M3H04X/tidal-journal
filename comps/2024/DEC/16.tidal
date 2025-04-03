@@ -1,0 +1,92 @@
+setcps(160/60/4)
+
+hush
+
+do
+  -- asap $ connectionMax 8 # speedSequenser 4
+  d1 -- Made in Abyss
+    $ qt
+    $ whenmod 4 3 (striate 8)
+    $ gtfo
+    $ every 4 (gtfo)
+    $ off 0.5 (|* speed "<-1 1 -0.5>")
+    $ loopAt "<16 4 32>"
+    $ chop 4
+    $ slice 16 "<[8 .. 15][0 .. 3][4 .. 7][0 .. 7]>"
+    $ rarely (off 0.25 (|+ 10))
+    $ n "<0 1>"
+    # s "miaost"
+    # legato 0.75
+    # room 0.3 # size 0.8
+    # bpf (fast 4 $ range 2000 4000 square)
+    # gain (range 1.5 1.2 sine)
+    -- # connectionN 1
+  d2 -- V
+    -- $ gtfo
+    $ fast 2
+    $ qt
+    $ s "bskick:2(3,8)"
+    # gain 1.2
+    -- # legato 4
+    -- # room 0.1 # size 0.2
+    -- # connectionN 2
+  d3 -- V
+    $ qt
+    -- $ gtfo
+    $ every 4 (jux (|* speed "<1 -1>"))
+    -- $ slice "32" "0 .. 31"
+    $ s "rims*16"
+    |* speed (rangex 3 1 $ slow 8 $ tri)
+    # legato (rangex 0.25 0.1 $ fast 8 $ cosine)
+    # hpf (rangex 400 1200 $ fast 4 $ sine)
+    # gain (rangex 0.8 0.6 $ slow 3 $ cosine)
+    -- # room 0.3 # size 0.2
+    -- # connectionN 3
+  d4 -- V
+    -- $ gtfo
+    $ qt
+    $ whenmod 3 4 (fast 2 . striate 4 . iter 2)
+    $ s "bshihat(2,16)"
+    -- # gain 1.2
+    # speed (rangex 3 1 $ slow 4 $ sine)
+    # gain (rangex 0.8 1 $ slow 3 $ cosine)
+    # room 0.3 # size 0.8
+    # pan (slow 2 $ sine)
+    -- # connectionN 4
+  d5 -- V
+    -- $ gtfo
+    $ qt
+    -- $ slow 2
+    $ every 4 (stut 2 2 0.125)
+    $ s "[~ ~ ~ snare:5]"
+    # room 0.3 # size 0.8
+    -- # connectionN 5
+  d6 -- V
+    -- $ gtfo
+    $ ifp ((== 0). (flip mod 2)) (striate 8) (# coarse "4")
+    $ every 4 (gtfo)
+    $ loopAt "<3 2>"
+    $ s "hnbloopfx"
+    # legato "<1 2>"
+    # orbit 5
+    -- # connectionN 6
+  d7 -- V
+    -- $ gtfo
+    $ qt
+    $ fast 2
+    $ whenmod 4 8 (|* speed "-1")
+    -- $ s "[kick:6(3,8,<2 4>) , kick:2(3,8,2)]"
+    $ s "[kick:6(3,8)]"
+    -- # legato 0.25
+    # gain (rangex 1.2 0.8 $ slow 4 $ isaw)
+    -- # pan (range 0.1 0.9 saw)
+    -- # room 0.8 # size 0.8
+    -- # connectionN 7
+  d8
+    $ gtfo
+    $ smash 4 [1,2]
+    $ n "2 4 8"
+    # s "aquat"
+    # cut 1
+    # room (range 0.4 0.2 tri)
+    -- # connectionN 8

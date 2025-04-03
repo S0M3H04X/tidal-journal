@@ -1,0 +1,34 @@
+p "tick" $ "0*4" # s "tick"
+
+setcps(120/60/4)
+
+d1 $ slow 2 $ sound "alphabet(5,8)" # n "0 .. 4"
+
+d1 $ sound "alphabet(5,8)" # nCount "dj"
+d1 $ sound "alphabet(5,8)" # nTake "susan" [7]
+d1 $ sound "alphabet(5,8)" # nTake "susan" [0 .. ]
+d1 $ sound "alphabet(5,8)" # nCount "harold"
+d1 $ rev $ sound "alphabet(5,8)" # nTake "max" [0 .. 5] -- no reverse?
+setF "harold" 0
+d2 $ sound "newnotes*32" # n "^dj" # gain 1
+
+d3 $ struct "t(7,12,3)" $
+  sound "gretsch"
+  # nCountTo "^dj" 5
+
+hush
+
+
+d1 
+  $ struct "t(7,12,3)" 
+  $ sound "gretsch"
+  # nCountTo "rachael" 5
+
+
+-- notes go up
+d1 
+  $ sound "newnotes(5,8)" 
+  -- # n "0 .. 5"
+  # nCount "harold"
+
+hush

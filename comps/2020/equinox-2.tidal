@@ -1,0 +1,71 @@
+-- Ｈello everyone
+-- SOMEHOAX again
+hush
+
+do --
+    setcps(108/60/4)
+    let gtrprog = "<c'maj7 d'6by9 <c'maj7 b'min7> [d'6by9 g'maj9]>"
+        bassprog = "[[~ g2'maj7] c2'maj7]"
+        leadprog = "0 5 2 10"
+        pat = "t <f t> <f [f t] t>"
+    d1
+    -- xfadeIn 1 32
+        $ foldEvery [3,4] (0.25 ~>)
+        $ swingBy (1/9) 4
+        $ stack [
+            ghost
+            $ every 8 (crushit)
+            $ (0.75 <~)
+            $ spread ($) [
+                id,
+                fast (9/8)
+            ]
+            -- $ off "<0.5 0.125" (const $ s "kk:3(2,8)")
+            $ s "[drek ~ ~ ~ ~ ~ ~][cp ~ ~ ~ ~ ~ drek][drek ~ ~ ~ drek ~ ~][cp ~ ~ ~ drek ~ drek]",
+            every 2 (fast (1/3))
+            $ s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]"
+            # coarse "<2 5>"
+        ]
+        # orbit 1
+    d2
+        -- $ gtfo
+        $ sometimesBy 0.5 (|+ speed "<1.2 0.7>")
+        $ note (gtrprog |- "<5 12>") # sound "gtr"
+        # room (range 0.4 0.2 sine) # size 0.5
+        # vowel "<a e>"
+        # lpf (fast 4 $ range 400 1000 tri)
+    d3
+        -- $ gtfo
+        $ swingBy (2/9) 4
+        $ sew pat (n "0 .. 7" # s "noise2") (s "cp:3*<16 2 8 4>" # speed saw + 1.2)
+        # room 0.4 # size 0.6
+        # octersubsub (range 3 6 isaw)
+        # orbit 3
+    d4
+    -- xfadeIn 4 16
+        -- $ gtfo
+        $ jux rev
+        $ striate' 4 (1/4)
+        $ every 4 (|+ note "<5 7 12>")
+        $ s "nb(3,8)"
+        # attack 0.7
+        # gain (range 0.6 0.7 sine)
+        # orbit 1
+    d5
+        -- $ gtfo
+        $ jux rev
+        $ note (scale "ionian" leadprog |+ "<12 5>")
+        # s "wub"
+        # hpf (range 8000 4000 sine)
+        # nudge "[0 0.25]/4"
+        # coarse 2
+    d6
+        -- $ gtfo
+        $ every 4 (iter 2)
+        $ n (arp "<updown pinkup>" bassprog |+ "5 12")
+        # s "~ futuresub"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+hush

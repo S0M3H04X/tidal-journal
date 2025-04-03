@@ -1,0 +1,98 @@
+d1
+  $ gtfo
+  -- $ superimpose ((slow 2) . rev)
+  -- $ (1 ~>)
+  -- $ whenmod 3 4 (striate 2)
+  -- $ whenmod 4 2 (|+ n "10")
+  $ n (scale "ionian" (slow 4 $ arp "updown" "c4'aug"))
+  # s "crave"
+
+hush
+
+d2
+  -- $ gtfo
+  $ fast 2
+  $ jux (iter 4)
+  $ whenmod 2 4 (|* speed (range "-1" 1 sine))
+  $ s "~ chipuin"
+  # pan (slow 4 sine)
+  # legato 1
+
+d3
+  -- $ gtfo
+  $ iter 2
+  $ whenmod 1 2 (|* speed (rangex 2 4 sine))
+  $ every 2 rev
+  $ s "~ ambwave"
+  # legato 1
+
+d1
+  -- $ n "0 2"
+  -- $ gtfo
+  $ every 4 (ply 2)
+  $ layer [id, rev]
+  $ s (steps [("kick", "x [x x] x x "), ("clp", "xx xx")])
+  # legato 1
+  # gain (rangex 0.75 1.05 sine*0.95)
+
+d1
+  -- $ gtfo
+  $ jux rev
+  $ every 2 (|+ n "~ 4")
+  $ whenmod 4 2 (rev)
+  $ s "~ snr*1"
+  # accelerate "-6"
+  # speed 2 
+  # orbit 0
+
+d6 
+  $ gtfo
+  $ every 4 (stripe 3)
+  $ stut 2 0.5 (1/32) 
+  $ n "<[0 .. 4] [2@2 3 0 1]>"
+  # s "chin"
+  # legato "<0.5 0.25 1>"
+  |* speed "<2 -1>"
+
+d6
+  -- $ gtfo
+  $ degradeBy 0.5
+  $ ply "<2 1>"
+  $ off 0.05 (const $ s "nb" # speed (slow 4 $ range 1 "-1" sine) # legato 0.5)
+  $ s (steps [("monsterb", "x__x_x_x"), ("clp", "__x____x")])
+  # legato 1
+
+
+d1
+  -- $ fast 2
+  $ gtfo
+  $ off 0.05 (|+ n (arp "updown" "<c4'm7>"))
+  $ n (scale "minor" "<2 8>") -- <[0 2 8][3 11 4][2 4 8]>
+  # s "crave"
+  -- |+ n "3"
+
+
+d2
+  $ whenmod 4 6 (iter 2)
+  $ off 0.25 (const $ s "clp")
+  $ every 2 (ply 2 . sometimes rev) 
+  $ n "[[4 6] 4 , ~ ~ ~ 4]"
+  # s "kick"
+  # room 0.4 # size 0.4
+
+d3
+  -- $ gtfo
+  $ striate "2 4"
+  $ s "rims txr"
+  # speed (slow 4 $ rangex 0.2 0.3 sine*1.2)
+  # pan (slow 3 $ sine)
+  # legato 1
+
+d4
+  $ n "[~ 1] [~ ~ [~ 4]]"
+  # s "srd"
+  # legato 1
+
+
+
+hush

@@ -1,0 +1,114 @@
+-- Breakcore
+setcps(165/60/4)
+
+hush
+
+d1
+    -- $ gtfo
+    -- $ qtrigger 1
+    -- $ every 3 (gtfo)
+    $ every 4 (off 0.25 (const
+        $ jux rev
+        $ slice 8 "1 5 3"
+        $ s "404:3"
+        # speed "<0.2!2 0.4!4 0.6>"
+        # room 0.3
+        # delay 0.3
+        # delaytime 0.05
+        # cut 1))
+    $ slice 4 "[1 3@4 2]"
+    $ s "<404:3 , 404:2>"
+    # speed "<0.8!4 0.6!2 0.2>"
+    # pan (slow 4 $ range 0.1 0.9 sine)
+    # legato 1
+    # orbit 1
+
+d2
+  -- $ gtfo
+  -- $ slow 2
+  $ every 4 (chop 4)
+  $ n "18" |+ "5"
+  # s "osbassa"
+  # legato 1
+  # vowel "a e i"
+  # room 0.6 # size 0.3
+  # lpf (fast 4 $ range 2000 400 isaw*1.25)
+  # orbit 2
+
+d2
+  -- $ gtfo
+  $ every 4 (crushit . rev)
+  $ s "bskick:2(3,8)"
+  # gain 1.2
+  -- # legato 2
+  -- # room 0.1 # size 0.2
+  # orbit 3
+
+d3
+  -- $ gtfo
+  -- $ qtrigger 1
+  $ slow 2
+  $ off 0.125 (|+| 12)
+  $ jux (|* speed "<1 2>")
+  $ loopAt 2
+  $ slice "32" "0 .. 31"
+  $ s "break"
+  |* speed "2"
+  -- # hpf 400
+  -- # room 0.1 # size 0.2
+  -- # orbit 4
+
+d4
+  -- $ gtfo
+  $ striate 8
+  -- $ every 2 (gtfo)
+  $ loopAt "<4 8>"
+  $ s "hnbloopfx"
+  # legato "<1 2>"
+  # orbit 5
+
+
+-- Hardcore
+
+d1
+  -- $ gtfo
+  -- $ degradeBy 0.25
+  $ slow 2
+  $ every 4 (iter 2)
+  $ chop 4
+  $ loopAt "<4 8>"
+  $ n "<0 1 2*4>"
+  # s "hdmidi"
+  # hpf (fast 8 $ rangex 200 4000 saw)
+  # room 0.2
+  # orbit 1
+
+d2
+  $ every 2 ((1/4) ~>)
+  $ n "2(2,4) 7(3,8)"
+  # s "hdkiv"
+  |* speed (slow 4 $ range 1 0.6 isaw)
+  # legato 1
+  # orbit 2
+
+d3
+  $ slow 2
+  $ every 8 ((1/32) <~)
+  $ n "{~ ~ <4 6> ~}%4"
+  # s "hdfx"
+  -- # room 0.3 # size 0.4
+  -- # delay 0.2
+  # cut 1
+  # orbit 3
+
+d4
+  $ slow 2
+  $ s "hdkiv(3,8)" |+ n "3(2,16)"
+  # cut 1
+  # orbit 4
+
+d5
+  -- $ slow 4
+  $ s "hdkick:6(5,8)"
+  # legato 1
+  # orbit 5

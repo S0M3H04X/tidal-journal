@@ -1,0 +1,104 @@
+do -- SEP25
+    setcps (150/60/8)
+    d1
+    -- xfadeIn 1 32
+        $ slow 2
+        -- $ off 0.125 (|+ 8) 
+        $ (1 <~) 
+        -- $ chunk 4 (slow 2 . (|- n 12)) 
+        $ off 0.75 ((# s "[birds, pm01]") . (|* speed "<1 1.2>") . (# gain (range 0.3 0.6 $ sine))) 
+        $ struct (iter 3 "t(6,12)") 
+        $ n (scale "dorian" "<[0 1 4 6 3][0 -3 4 -5 6 4]>" + 6)
+        # s "pm03"
+        # room 0.8 # size 0.7
+        # delay 0.2
+        # orbit 0
+    d2
+    -- xfadeIn 2 64
+        -- $ gtfo
+        $ jux rev 
+        $ slow 2
+        $ off "<0.25 0.125>" (|- "<12 20 24>")
+        -- $ struct (fast 3 "t(5,16)")
+        $ swingBy (1/7) 4
+        $ n "<a4'min7 e4'maj7 b4'min7 fs'min7>"
+        # s "acid"
+        # pF "harmonic" 2
+        # pF "brightness" 0.2
+        # pF "stiffness" 1
+        # pF "spread" 0.02
+        # gain (fast 4 $ range 1 0.8 sine)
+        # lpf (range 200 2000 sine)
+        # room 0.2 # size 0.4
+        # orbit 0
+    d3 
+    -- clutchIn 3 32
+        -- $ gtfo
+        -- $ slow 2
+        $ struct (iter 2 "t(<3 5>,8)") 
+        $ every 8 (fast 2) 
+        $ sometimesBy 0.25 (# speed "<1 1.2 -3>") 
+        $ s "[reverbkick*2 reverbkick@3, ~@3 [cp@7 cp], ~@2 kk:1@3]"
+        # orbit 1
+        -- # cps(160/60/4)
+        -- # silence
+    d4 
+    -- clutchIn 4 16
+        -- $ every 4 ((1/2) <~) 
+        -- $ gtfo
+        $ slow 2
+        $ struct (iter 2 "t(5,8)?") 
+        -- $ striate' 4 (1/2) 
+        $ off 0.125 (# s "moan" # gain "0.8" ) 
+        $ s "twik"
+        # speed "<1 1.5 -2>"
+        # pan (segment 1 $ choose [0.2, 0.6])
+        # n "<1 2>"
+        # cut 1
+        # orbit 2
+        -- # silence
+    d5 
+    -- clutchIn 5 16
+        -- $ gtfo 
+        $ chunk 4 (hurry 2)
+        -- $ every 4 (0.75 ~>)
+        $ off 0.75 ((# s "ragaga") . (# cut 1)) 
+        $ every 8 (density 2) 
+        $ s "<drek(<3 5>,8,<2 4>), cp(2,16)>"
+        # orbit 3
+    d6 
+    -- clutchIn 6 16
+        $ gtfo
+        $ slow 8 
+        $ jux rev 
+        $ striate' 64 (1/32) 
+        $ sometimesBy 0.25 (# fshift "<240 480 450>") 
+        $ s "ataypula"
+        # gain (fast 4 $ range 1.1 1.2 $ tri)
+        # n (irand 7)
+        # begin 2
+        # cut 1
+        # orbit 4
+    d7 
+    -- clutchIn 7 16
+        $ every 8 (spin "<4 2>") 
+        $ jux rev 
+        $ stack [
+            superimpose (density 2) 
+            $ (1 <~) 
+            $ every' 8 6 (iter 4) 
+            $ off 0.75 (# speed "<2 3 -1>") 
+            $ s "dr2*3",
+            stut 4 0.25 0.75 . (|*| speed "<2 -1 -1.5 3>") 
+            $ s "diphone(3,8)?"
+            # n "<20 [18 14 6]>"
+        ]
+        # pan (segment 1 $ choose [0.1, 0.8])
+        # room 0.2
+        # orbit 5
+        # silence
+    d8 $ gtfo $ s "_"
+
+
+
+hush

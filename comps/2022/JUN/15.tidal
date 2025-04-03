@@ -1,0 +1,35 @@
+setcps(120/60/4)
+
+hush
+
+d1
+  $ s "bd"
+
+d1
+  -- $ gtfo
+  -- $ qtrigger 1
+  -- $ loopAt 8
+  $ chop 32
+  $ slice "<32 16>" "[8 .. 15]"
+  $ bite 8 "0 1*2 2*2 [~ 3]"
+  $ n "0"
+  # s "srd"
+  -- # legato 1
+  # cut 1
+  # orbit 0
+
+d2
+  -- $ gtfo
+  -- $ slow 8
+  -- $ qtrigger 1
+  -- $ loopAt "[4 8 16 8]"
+  -- $ chop 32
+  $ slice 8 "[0 .. 7]"
+  $ n "1"
+  # s "srd"
+  # pan (slow 4 $ sine)
+  # speed (slow 4 $ rangex 0.1 0.01 sine)
+  # cut 1
+  # octersubsub 2
+  # room 0.3 # size 0.8
+  # orbit 0

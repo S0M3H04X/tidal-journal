@@ -1,0 +1,141 @@
+hush
+
+d1
+    -- $ gtfo
+    $ qtrigger 1
+    $ degradeBy 0.25
+    $ jux ((|- n "12") . rev)
+    $ jux' [
+      id,
+      sometimesBy 0.5 (spin 2),
+      (|* speed "0.6")
+    ]
+    $ struct "t(5,8,<2 3>)"
+    $ n "<f'min@2 g'min7@2>"
+    # sound "bass8"
+    |- n 5
+    # legato 2
+    # pan (slow 2 $ range 0.2 0.8 sine)
+    # gain (fast 2 $ range 0.7 0.5 sine)
+    # room 0.2 # size 0.8
+    # delay 0.5 # delayt 0.333 # delayfb 0.333
+
+d2
+    -- $ gtfo
+    $ qtrigger 1
+    $ every 16 (rev)
+    $ every 8 (spreadr ($) [
+        slow 2,
+        spin 4,
+        juxBy 0.6 (|* speed "2")
+    ])
+    $ splice 8 ("0 .. 7")
+    $ s "break:4"
+    # crush 6
+    # fshift 80
+    # orbit 1
+
+d3
+    -- $ gtfo
+    $ qtrigger 1
+    $ struct (every 4 inv "t f [~ t] [~ t] t t f f")
+    $ s "clubkick:2"
+    |* speed (fast 4 $ range 0.8 1.2 $ isaw*0.6)
+    # cut 1
+    # fshift 10
+    # sustain 0.8
+
+d4
+    -- $ gtfo
+    $ jux rev
+    $ struct (every 8 (iter 2) "~ ~ t ~ ~ [~ t] [~ t] ~")
+    $ s "clap:5"
+    # delay 0.03
+    # crush 1.2
+    # orbit 1
+
+d5
+    -- $ gtfo
+    $ qtrigger 1
+    $ jux (rev)
+    $ struct "t(7,12,<0 2>)"
+    $ loopAt "<[2 3 1 6][4 5 7 0]>"
+    $ chop 8
+    $ note "f'min@2 g'min7@2"
+    # s "helando"
+    # gain (slow 4 $ range 1.2 1 saw)
+    # room 0.6
+    # cut 1
+    # orbit 2
+
+d6
+    -- $ gtfo
+    $ jux rev
+    $ every 4 (trunc "<0.75 0.25 1>")
+    $ off 0.25 (|+ 7)
+    $ sew "t <f t> <f [f t] t>" (n "0 .. 15" # s "future") (s "cp:3*16" # speed saw + 1.2)
+    # gain (slow 4 $ range 0.8 1 $ sine + 0.15)
+    # orbit 1
+
+clutchIn 4 1
+    -- $ gtfo
+    $ jux rev
+    $ slow 2
+    $ every 2 (ply 2)
+    $ slowspread ($) [
+        every 4 (crushit),
+        thicken' "0.4" "0.4"
+    ]
+    $ move
+    $ struct "t f [t f] t"
+    $ foldEvery [3,4] (0.75 <~)
+    $ off 0.125 ((|* speed "<-1.2 2.4>") . (+ note "5"))
+    $ note "[c a*2 f*2 e]/3"
+    # s "<jungbass jungbass:4>"
+    # orbit 3
+
+
+import Sound.Tidal.Chords
+chordList
+chordTable
+
+
+n "'maj'"  show
+
+n "[0,4,7]"
+
+-- "CREEP"
+d1
+    $ qtrigger 1
+    $ slow 2
+    -- $ swingBy (1/4) 6
+    -- $ spaceOut ([1,0.95..0.4] ++ [0.4,0.45..1])
+    $ jux ((|- n "12") . rev)
+    -- $ ply 1
+    $ struct "t(5,8,<0 4>)"
+    $ note "<g'maj b'maj c'maj c'min>"
+    # s "karplus01"
+    # lpf (slow 4 $ range 100 10000 isaw)
+    # room 0.6 # sz 0.8
+    # crush "<5 6>"
+    # octersubsub 4
+
+    -- # delay 0.5 # delayt 0.333 # delayfb 0.333
+
+d2
+    $ slow 2
+    $ qtrigger 1
+    -- $ swingBy (3/4) 8
+    $ jux ((|- n "12") . rev)
+    $ every 2 rev
+    $ ply 1
+    $ arp "thumbup" $ n "c'maj7'10 e'min7'4"
+    # s "rhodes"
+    -- # attack 0.6
+    # delay 0.3 # delayt 0.67 # delayfb 0.01
+    # gain (slow 4 $ range 0.7 0.5 saw)
+    # lpf (slow 4 $ range 80 6000 isaw)
+    # room 0.6 # size 0.8
+    # legato 2
+
+hush

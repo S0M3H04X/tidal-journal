@@ -1,0 +1,86 @@
+d1
+  -- $ gtfo
+  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  -- $ every 3 (linger "<0.25 0.5>")
+  -- $ chunk 8 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ s "kick:4"
+  # gain 1.2
+  -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+
+d2
+  -- $ gtfo
+  $ every 6 (slow 3)
+  $ stut 2 8 (1/4)
+  $ n (run 16)
+  # s "bshihat"
+  # pan (slow 2 $ sine*0.8)
+  # gain (fast 3 $ range 0.7 0.4 isaw*0.6)
+  # orbit 1
+
+d3
+  -- $ gtfo
+  $ jux rev
+  $ chop "<2 4 8>"
+  $ whenmod 4 3 ((iter 2))
+  $ n (run 3)
+  # s "bskick(3,8,2)"
+  # orbit 0
+  # gain 1.2
+
+d4 -- Perc
+  -- $ gtfo
+  -- $ qt
+  $ slice "8" "1 .. 7"
+  $ loopAt 4
+  $ n "<1 2>"
+  # s "prc"
+  # pan (range 1 0 isaw)
+  # legato 1
+  # gain (slow 4 $ range 1.2 1 sine)
+  -- # connectionN 5
+  -- # room 0.3
+
+d5
+  -- $ gtfo
+  $ every 8 (superimpose (slow 3))
+  $ every 32 (linger 0.75)
+  -- $ every 16 (layer [id, slow 2, rev])
+  $ splice 8 ("{0 .. 7}/<2 4>")
+  -- $ slow 2
+  -- $ every 8 (jux (|* speed "<1 -1>"))
+  -- $ slice 16 "{0 .. 15}/4"
+  $ s "break:9"
+  -- |* speed "2"
+  # hpf (1000) # gain 1.2
+
+d6
+  -- $ gtfo
+    $ every 2 (gap "{8 <4 3>}%16")
+    -- $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+    -- $ (1 <~)
+    -- $ chunk 8 (# squiz "[2 4 1]")
+    $ stack [
+        -- s "bd(5,16,4)",
+        s "bshihat*4"
+            # speed (segment 9 $ range "-0.1" 2 isaw),
+        s "clap(1,9,<4 2 8>)",
+        striate' 32 (1/64)
+        -- $ struct (every 2 inv "t(<2 3>,9,<5 6>)")
+        $ s "ade:4"
+        -- # room 0.2 |> size (range 0.2 0.4 sine)
+        # vowel "<a e o>"
+        -- # lpf 4000
+        # cut 1
+        >| note "0 2 [3 12] [24 7]"
+        |> pan sine,
+        jux rev
+        $ s "gretsch" >| note "0 2 [3 12] [24 7]"
+    ]
+    >| nudge "[0 0.25]*4"
+    # cps "0.55" -- 0.5
+
+
+
+hush

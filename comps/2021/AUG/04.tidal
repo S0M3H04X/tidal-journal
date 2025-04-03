@@ -1,0 +1,45 @@
+d1
+  -- $ qtrigger 2
+  $ sometimesBy 0.25 (|+| n "0 [1*3|2*4|3 2] 2")
+  -- $ every 8 ((1/3) ~>)
+  $ s (overlay "{drek:4(3,8) rims:3}%3" "{~ hh}%12")
+  -- |+| n "2 3 4" |+| n "4 5 6"
+  # legato 2
+  # room 0.2
+  # delay 0.5
+  -- #silence
+  # orbit 0
+
+
+d2
+  -- $ qtrigger 1
+  $ slow 2
+  $ brak
+  $ s (struct "{t ~ t ~ t t ~ t!4}%3"
+  $ choose ["rims:3", "snr", "uxay"])
+  # legato 2
+  # orbit 1
+
+d3
+  -- $ qtrigger 2
+  $ jux rev
+  $ sometimesBy 0.25 (*| coarse 1.2) . (stutter 2 (1/12))
+  $ swing (5/12)
+  $ spreadr ($) [
+      id,
+      (|* speed "<0.8 1 0.75>")
+    ]
+  $ chop 4
+  $ loopAt "<2 4>"
+  $ struct ("~ t@6")
+  $ s "twik"
+  # octersub 1.2
+  # legato 2
+  # room 0.4
+  -- # pan (range 0.5 0 sine)
+  # orbit 2
+
+setcps 0.55
+
+
+hush

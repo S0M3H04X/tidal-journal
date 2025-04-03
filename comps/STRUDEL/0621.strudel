@@ -1,0 +1,36 @@
+// Lost - Tong En (SOMEHOAX Remix)
+setcpm(95/4)
+
+$: s("bassloop2:4/2").fit()
+  .chop(16).dec(.2)
+  .mul(speed("0.75"))
+  .delay(.75)
+  .room(.5)//.jux(fast(2))
+  .dist("2:.8")
+
+$: s("tong_lost/4").fit()
+  .chop(16).dec(.2)
+  .delay(.25)
+  .room(.5)
+  .sometimes(jux(slow(2)))
+  .dist("2:.8")
+
+$: s("tong_lost:1/8").fit()
+  .chop(16)
+  .dist("2:.8")
+  .room(.3)
+  .gain(".5")
+
+$: s("amen/2").fit()
+  .chop("16")
+  .gain("2")
+
+$: s("bd - [- bd] -").bank('RolandTR909')
+$: s("- cp - cp").bank('RolandTR909')
+$: s("hh*16").n("<[0*3 2 1@4] [1*4 3 2@3]>").bank('RolandTR909').swingBy(2/16,8).degradeBy(".25")
+
+
+
+all(x=>x.reset("<x@7 x*[4 8]>"))
+
+// @version 1.0

@@ -1,0 +1,27 @@
+d1 
+    $ jux rev
+    $ mask (every 4 (fast 2) "t [[f t] t] t(2,8)")
+    $ (1 ~>)
+    $ every 2 (chunk 3 (iter 4))
+    $ chop 8
+    $ (1.5 <~)
+    $ off 0.75 ((|* speed 0.8) . (|* gain 0.75 ))
+    $ n ("[[3 [2 3]] 2 [4 0] 3]/2")
+    # s "jungbass"
+    # gain (range 0.6 0.8 isaw)
+    # room 0.1
+    # nudge "[0 0.25]/4"
+
+
+d2 
+    $ every "<1.5 3>" (striate "<32 8>")
+    $ one
+    $ off 0.125 ((|* speed "0.1") . (|+ crush "<0.25 0.5 0.75>") . (|* gain 0.75) . (|* size 1.2))
+    $ n "<2(3,16) 3(3,8)>" 
+    # s "reverbkick"
+    # room 0.02
+    # delaytime 0.03
+
+
+
+hush

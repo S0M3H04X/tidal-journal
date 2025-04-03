@@ -1,0 +1,62 @@
+-- ĤΨ(x, t) = iħ(∂Ψ(x, t) / ∂t)
+
+-- Ψ(x, t) is the wave function, which depends on position (x) and time (t).
+-- Ĥ is the Hamiltonian operator, which represents the total energy (kinetic and potential) of the system.
+-- i is the imaginary unit (i.e., the square root of -1).
+-- ħ (h-bar) is the reduced Planck constant, equal to the Planck constant (h) divided by 2π.
+
+-- The Hamiltonian operator usually consists of a kinetic energy term and a potential energy term:
+
+-- Ĥ = - (ħ^2 / 2m) ∇^2 + V(x)
+
+-- m is the mass of the particle.
+-- ∇^2 is the Laplacian operator, which represents the second spatial derivatives.
+-- V(x) is the potential energy function, which depends on the position (x).
+
+-- The time-independent Schrödinger equation is derived from the time-dependent version by considering stationary states, in which the wave function does not change with time. The time-independent equation looks like this:
+
+-- ĤΨ(x) = EΨ(x)
+
+-- Ψ(x) is the time-independent wave function, which depends only on position (x).
+-- E is the energy eigenvalue, representing the total energy of the quantum state.
+
+-- The time-independent Schrödinger equation is an eigenvalue problem, where the goal is to find the eigenfunctions (Ψ(x)) and eigenvalues (E) that satisfy the equation. These eigenfunctions represent the stationary states of the quantum system, and the eigenvalues correspond to their respective energy levels.
+
+
+-- TODO:
+-- WaveFunction I/O OSC to GLSL shader: Sphere_QWFunction.glsl
+
+import Data.List (zipWith3)
+
+type WaveFunction = [Double]
+type Potential = [Double]
+type Energy = Double
+
+-- Constants
+mass :: Double
+mass = 1.0
+
+hbar :: Double
+hbar = 1.0
+
+-- Finite difference approximation of second-order derivative
+secondDerivative :: [Double] -> Double -> [Double]
+secondDerivative f deltaX =
+  zipWith3 (\fPrev fCur fNext -> (fPrev - 2 * fCur + fNext) / (deltaX * deltaX))
+           (drop 1 $ init f)
+           (init $ tail f)
+           (tail $ drop 1 f)
+
+-- Hamiltonian operator acting on a wave function
+hamiltonian :: WaveFunction -> Potential -> Double -> [Double]
+hamiltonian psi v deltaX =
+  let kineticEnergy = map (*( - (hbar ** 2) / (2 * mass) )) $ secondDerivative psi deltaX
+      potentialEnergy = zipWith (*) psi v
+  in zipWith (+) kineticEnergy potentialEnergy
+
+-- Time-independent Schrödinger equation
+schrodingerEquation :: WaveFunction -> Potential -> Double -> Energy -> WaveFunction
+schrodingerEquation psi v deltaX energy =
+  let hPsi = hamiltonian psi v deltaX
+  in zipWith (-) hPsi (map (*(energy)) psi)
+
