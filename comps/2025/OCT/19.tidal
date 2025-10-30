@@ -1,0 +1,113 @@
+hush
+
+d1
+  -- $ gtfo
+  $ qt
+  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ every 4 (linger "<0.5 0.25>")
+  $ chunk 8 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ s "kick:6"
+  # gain 1.2
+  -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+  # connectionN 1
+  # color "000000"
+
+d2
+  -- $ gtfo
+  $ qt
+  -- $ every 8 (slow 3)
+  $ stut 2 4 (1/16)
+  $ n (run 16)
+  # s "bshihat"
+  # pan (fast 2 $ sine*0.8)
+  # gain (fast 3 $ range 0.7 1 isaw*0.6)
+  # orbit 1
+  # connectionN 2
+  # color "ffffff"
+
+d3
+  -- $ gtfo
+  $ qt
+  $ jux rev
+  $ foldEvery [2,3](# hpf (slow 4 $ rangex 400 2000 isaw))
+  $ chop "<2 4 8 6>"
+  $ whenmod 4 3 ((iter 2))
+  $ n (run 2)
+  # s "~ clap"
+  # orbit 0
+  # gain 1.2
+  # connectionN 3
+  # color "ffffff"
+
+d4 -- Perc
+  -- $ gtfo
+  $ qt
+  $ slice "8" "1([2,3],8)"
+  $ loopAt 4
+  $ n "<[2 ~] [~ 2]>"
+  # s "prc"
+  # pan (range 1 0 isaw)
+  # legato 1
+  # gain (slow 4 $ range 1.2 1.5 saw)
+  # connectionN 4
+  # room 0.3
+  # color "ffffff"
+
+d5
+  -- $ gtfo
+  $ qt
+  -- $ every 12 (# gain 0)
+  -- $ every 8 (superimpose (slow 3))
+  -- $ every 32 (linger 0.25)
+  -- $ every 16 (layer [id, slow 2, rev])
+  -- $ splice 8 ("<[0 .. 7]/2 [0 3 6 2 [1 0 4]]>")
+  -- $ slow 2
+  -- $ every 8 (jux (|* speed "<1 -1>"))
+  $ slice 16 "[0 .. 15]"
+  $ s "break:10"
+  # cut 1
+  -- |* speed "1"
+  -- # hpf (600)
+  # gain 1
+  # connectionN 5
+  # color "ffffff"
+
+d6
+  $ gtfo
+  $ qt
+    $ every 3 (# gain 0)
+    -- $ every 2 (gap "{8 <4 3>}%16")
+    -- $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+    -- $ (1 <~)
+    -- $ chunk 8 >| sometimesBy 0.6 (# nudge "[0 0.25]" )(# squiz "[2 4 1]")
+    $ sometimesBy 0.8 (|> nudge "[0 0.25]/4")
+    $ stack [
+        -- s "bd(5,16,4)",
+        -- s "bshihat*4"
+            -- # speed (segment 9 $ range "-0.1" 2 isaw),
+        -- s "clap(1,9,<4 2 8>)",
+        striate' 8 (1/32)
+        $ struct (every 4 inv "t(<2 3>,9,<5 6>)")
+        $ s "ade:2"
+        # room 0.4 |> size (range 0.2 0.4 sine)
+        # vowel "<i o>"
+        # hpf (fast 4 $ rangex 800 4000 sine)
+        # legato 1
+        >| note "0 2 [3 12] [24 7]"
+        # gain 1.2
+        |> pan sine
+        # delay 1,
+        -- gtfo
+        jux rev
+        $ s "gretsch" >| note "0 2 [3 12] [24 7]"
+    ]
+    # connectionN 6
+    # color "ffffff"
+    -- # cps "0.55" -- 0.5
+
+
+
+
+hush

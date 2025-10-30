@@ -3,9 +3,9 @@
 SynthDef(\pm04, {
 	|
 	freq=220, amp=1, gate=1, pan=0,out=0,
-	attack=0.01, decay=5, sustain=0.88, release=0.6,
+	attack=0.1, decay=5, sustain=0.88, release=0.6,
 	harmonic=1.5,brightness=0.5,
-	stiffness=0.75,distance=0.5,spread=0
+	stiffness=0.2,distance=0.5,spread=0
 	|
 	var smoothFreq, vibFreq, osc1, osc2, mod, springMod, inforce, panner, env,noise;
 
@@ -29,7 +29,7 @@ SynthDef(\pm04, {
 
 // Synth(\pm04);
 
-/*(
+(
 {
     var inforce, outforce, freq, k, d;
     inforce = K2A.ar(MouseButton.kr(0,1,0)) > 0;
@@ -39,4 +39,4 @@ SynthDef(\pm04, {
     freq = outforce * 400 + 500; // modulate frequency with the force
     SinOsc.ar(freq, 0, 0.2)
 }.play;
-)*/
+)

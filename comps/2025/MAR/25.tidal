@@ -1,10 +1,10 @@
 d1
   -- $ gtfo
-  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
   -- $ every 3 (linger "<0.25 0.5>")
   -- $ chunk 8 (|* speed "<0.8 1.2 -1>")
   $ struct "<t(5,16) t(3,8)>"
-  $ s "kick:4"
+  $ s "kick:6"
   # gain 1.2
   -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
   # orbit 0
@@ -14,9 +14,9 @@ d2
   $ every 6 (slow 3)
   $ stut 2 8 (1/4)
   $ n (run 16)
-  # s "bshihat"
+  # s "bshihat:2"
   # pan (slow 2 $ sine*0.8)
-  # gain (fast 3 $ range 0.7 0.4 isaw*0.6)
+  # gain (fast 3 $ range 0.5 0.3 isaw*0.6)
   # orbit 1
 
 d3
@@ -44,8 +44,8 @@ d4 -- Perc
 
 d5
   -- $ gtfo
-  $ every 8 (superimpose (slow 3))
-  $ every 32 (linger 0.75)
+  -- $ every 8 (superimpose (slow 3))
+  -- $ every 32 (linger 0.75)
   -- $ every 16 (layer [id, slow 2, rev])
   $ splice 8 ("{0 .. 7}/<2 4>")
   -- $ slow 2
@@ -53,12 +53,12 @@ d5
   -- $ slice 16 "{0 .. 15}/4"
   $ s "break:9"
   -- |* speed "2"
-  # hpf (1000) # gain 1.2
+  # hpf (1000) # gain 1.1
 
 d6
   -- $ gtfo
     $ every 2 (gap "{8 <4 3>}%16")
-    -- $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+    $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
     -- $ (1 <~)
     -- $ chunk 8 (# squiz "[2 4 1]")
     $ stack [
@@ -79,7 +79,6 @@ d6
         $ s "gretsch" >| note "0 2 [3 12] [24 7]"
     ]
     >| nudge "[0 0.25]*4"
-    # cps "0.55" -- 0.5
 
 
 

@@ -13,4 +13,30 @@ do
       |* speed (slow 8 $ rangex 1 0.6 sine)
       |* gain (fast 3 $ range 0.6 1 rand)
     ]
-  d2
+    # cps (165/60/4)
+  d2 -- vcl
+    $ qt
+    $ loopAt 8
+    $ stack [
+      n "3 4"
+      # s "danvcR"
+      ,n "3 5"
+      # s "danvcL"
+    ]
+    # legato 1.5
+  d3 -- ot
+    $ qt
+    $ loopAt 4
+    $ stack [
+      
+    ]
+
+
+
+
+
+
+
+
+
+hush

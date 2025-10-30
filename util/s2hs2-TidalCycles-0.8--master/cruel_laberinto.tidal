@@ -1,4 +1,4 @@
-import Sound.Tidal.OscStream
+import Sound.Tidal.Stream
 
 let poetry = Shape {
       params = [ S "word" Nothing,

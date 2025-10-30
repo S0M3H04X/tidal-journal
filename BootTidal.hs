@@ -2,11 +2,18 @@
 :set prompt ""
 
 import Sound.Tidal.Context
+import Sound.Tidal.Pattern
+import Sound.Tidal.Chords
 
 import System.IO (hSetEncoding, stdout, utf8)
 hSetEncoding stdout utf8
 
 
+-- Original osc messaging, target to supercollider
+-- tidal <- startTidal (superdirtTarget {oLatency = 0.05, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cVerbose = True, cFrameTimespan = 1/20})
+
+
+-- didacticpatternvisualizer setup by Iván Abreu
 let  targetdpv = Target { oName = "didacticpatternvisualizer", oAddress = "127.0.0.1", oPort = 1818, oLatency = 0.2, oWindow = Nothing, oSchedule = Live, oBusPort = Nothing, oHandshake = False }
      formatsdpv = [OSC "/delivery"  Named {requiredArgs = []} ]
      oscmapdpv = [(targetdpv, formatsdpv), (superdirtTarget, [superdirtShape])]
@@ -20,9 +27,22 @@ let  targetdpv = Target { oName = "didacticpatternvisualizer", oAddress = "127.0
      figure = pS "figure"
      color = pS "color"
 
--- tidal <- startTidal (superdirtTarget {oLatency = 0.05, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cVerbose = True, cFrameTimespan = 1/20})
+tidal <- startStream defaultConfig oscmapdpv
+--
+
+-- ofxTidal
+-- let sdTarget    = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
+--     -- openFrameworks OSC target
+--     ofxTarget   = Target {oName = "ofx", oAddress = "127.0.0.1", oPort = 2020, oLatency = 0.1, oSchedule = Live, oWindow = Nothing, oHandshake = False, oBusPort = Nothing}
+--     -- openFrameworks OSC message structure
+--     ofxShape    = OSC "/ofx" $ ArgList [("ofx", Nothing), ("vowel", Just $ VS "")]
+--     -- Additional parameters
+--     ofx         = pF "ofx"
+--
+-- tidal <- startStream (defaultConfig {cFrameTimespan = 1/20}) [(sdTarget, [superdirtShape]), (ofxTarget, [ofxShape])]
 
 
+-- Tidal-vis
 -- Target and shape for pattern visualizing.
 -- patternTarget = Target { oName = "Pattern handler", oAddress = "127.0.0.1", oPort = 5050, oBusPort = Nothing, oLatency = 0.02, oWindow = Nothing, oSchedule = Pre BundleStamp, oHandshake = False }
 -- patternShape = OSC "/trigger/something" $ Named {requiredArgs = []}
@@ -38,8 +58,7 @@ let  targetdpv = Target { oName = "didacticpatternvisualizer", oAddress = "127.0
 -- Send pattern as OSC to SuperCollider only.
 -- tidal <- startTidal musicTarget config
 
--- this line returns a warning, but it is necessary
-tidal <- startStream defaultConfig oscmapdpv
+
 
 :{
 let only = (hush >>)
@@ -148,6 +167,14 @@ let drumMachine name ps = stack (map (\ x -> (# s (name ++| (extractS "s" (x))))
     drumFrom name drum = s (name ++| drum)
     drumM = drumMachine
     drumF = drumFrom
+
+-- Breakcore
+let runmod r m o = ((run r) |% m |+ o)
+    runmod' r m mul o = ((run r) |% m |* mul |+ o)
+    slicemod r m o = slice r (runmod r m o)
+    bitemod r m o = bite r (runmod r m o)
+
+
 
 
 -- let td_s = pI "td_s"

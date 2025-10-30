@@ -1,0 +1,76 @@
+d1 $ drumMachine "bossdr220" [
+    s "[~perc]*2" # note 7
+    ,s "bd:4(3,8)"
+    ,s "~[cp,sd]"
+    ,s "hh*8"
+]
+
+hush
+
+d2 $ drumMachine "<bossdr220 rolandtr808>" [
+    s "[~perc]*2" # note 7
+    ,s "bd:4(3,8)"
+    ,s "~[cp,sd]"
+    ,s "hh*8"
+]
+
+do
+    setcps(168/60/4)
+    d1 $ n (run 16 |% "<16 _ _ [5 _ 2]>") # s "amencutup" # cut 1
+
+do
+    -- resetCycles
+    asap $ connectionMax 4 # speedSequenser 4
+    let runmod r m o = ((run r) |% m |+ o)
+        runmod' r m mul o = ((run r) |% m |* mul |+ o)
+        slicemod r m o = slice r (runmod r m o)
+        bitemod r m o = bite r (runmod r m o)
+    d1 $ slice 16 (runmod 16 "<16 _ 8 [3 1]>" 0) $ "breaks125" # cut 1 |+ note 5 # connectionN 1
+    d2 $ "808bd:3(5,8)" # shape 0.6 # cut 1 # connectionN 2
+    d3 $ note (scale "phrygian" $ runmod 16 "<5 7 10>/8" "0@5e <0 -2>") # "gtr:5"
+          # cut 1 # speed 2 # release 0.1
+          # lpf (range 700 10000 $ slow 3 sine)
+          # gain 0.7 # delay 0.2 # delayt 0.4
+          # connectionN 3
+    d4 $ slice 32 (slow 2 $ runmod' 32 7 3 "<0 10>") $ "bev" # cut 1
+        # speed 2 # room 0.4 # size 0.8
+        # connectionN 4
+    -- d5 $ drumMachine "<rolandtr808>" [
+    --     euclidSub 7 16 "<4 3>" 2 "bd"
+    --     ]
+        -- # connectionN 5
+    d6 $ bitemod 8 5 0 $ stack [
+        s "bd ~ [~ bd] ~"
+        , "1*16" # s "hh27" # release 0.4
+        , press "1*2" # s "sd"
+        ,"<~ [~ 808ht]>"
+        ]
+        # connectionN 6
+
+do
+  let dm = "rolandtr808"
+  asap $ connectionMax 4 # speedSequenser 4
+  d1
+    -- $ gtfo
+    $ stack [
+      struct ("1 0 0 0 0 0 1 1 0 0 1 0 0 0 0 0") $ drumFrom dm "bd:4(3,8)",
+      struct ("0 0 1 0 0 1 0 0 0 0 0 0 1 0 1 1") $ drumFrom dm "~[cp,sd]",
+      struct ("1 0 1 1 1 0 1 0 1 1 0 1 0 1 1 0") $ drumFrom dm "[~perc]*2"
+      ]
+      # connectionN 1
+  d2 $ drumMachine "<bossdr220 rolandtr808>" [
+      euclidSub 7 16 "<4 3>" 2 "bd"
+      ]
+      # connectionN 2
+      # color "00ff00"
+  d3
+    $ slow 3
+    $ stack [
+      arp "pinkup"
+      $ n "<c6'maj d6 c6'maj d6 [c6 d6 e6] [f6 e6 d6] [e6 d6 c6] d6>"
+      ,arp "pinkdown"
+      $ n "<[c5'maj] [b4,f,g]>"
+      ] # s "acid309"
+    # gain 0.8
+    # connectionN 3
+    # color "ff00ff"
