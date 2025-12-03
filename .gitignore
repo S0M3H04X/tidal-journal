@@ -6,6 +6,8 @@ solstice/
 synths/
 toplap20/
 templemeltdown/
+shaders/
+util/
 
 # General
 .DS_Store
