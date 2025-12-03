@@ -1,11 +1,15 @@
-comps/
-lib/
+# comps/
+# lib/
+GLSL/
 samples/
 samples-extra/
 solstice/
+sccode/
+studies/
 synths/
 toplap20/
 templemeltdown/
+tidal-midi_demo\ Project/
 shaders/
 util/
 
