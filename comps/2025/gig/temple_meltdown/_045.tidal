@@ -1,0 +1,119 @@
+setcps(155/60/4)
+
+hush
+
+do
+  asap $ connectionMax 8 # speedSequenser 4
+  let mt1 = "<4!3 ~ 4 ~>"
+      mt2 = "3"
+      mt3 = "2!4"
+      slicepat2 = "<4 .. 0>"
+  d1 -- Sangpuy
+    -- $ qt
+    -- $ whenmod 8 3 (striate 2)
+    -- $ gtfo
+    -- $ every 32 (|- n 1)
+     -- $ every 16 (|+ n mt3)
+    $ loopAt 16
+    $ chop 16
+    $ slice 8 slicepat2
+    $ n mt1
+    # s "spuy"
+    |* speed (range 1.2 1.5 tri*0.8)
+    # legato 1
+    # room 0.3
+    # gain (range 1.2 1 sine)
+    # orbit 0
+    # connectionN 1
+  d2
+    -- $ gtfo
+    $ foldEvery [2,4] (|+ n "1(1,16)")
+    $ n "1(3,16,<2 4>)"
+    -- $ n "1"
+    # s "subk"
+    # legato 2
+    # gain 1.2
+    # orbit 1
+    # connectionN 3
+  d3
+    $ gtfo
+    $ slice 8 "{0 .. 7}%<2 4>"
+    $ n "2"
+    # s "glfx"
+    # speed 0.85
+    # gain 1
+    # legato 1
+    # orbit 2
+    # connectionN 2
+  d4
+    -- $ gtfo
+    -- $ every 2 (gap "{8 <4 3>}%16")
+    -- $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+    -- $ (1 <~)
+    -- $ chunk 8 (# squiz "[2 4 1]")
+    $ stack [
+        s "bd(2,16,8)"
+        , s "bshihat*8"
+        # speed (segment 16 $ range "0.8" 1 isaw)
+        , s "clap(3,16,8)"
+        -- , striate' 32 (1/64)
+        , struct (every 2 inv "t(<2 3>,8,<2 3>)")
+        $ s "ade:3"
+        |- note (slow 4 $ range 10 3 square)
+        # vowel "<a i>"
+        # hpf 800
+        # cut 1
+        -- |< note "0 2 [3 12] [24 7]"
+        |> pan sine
+        , n "1(2,6) 2(3,8)"
+        # s "gretsch"
+        # cut 1
+    ]
+    # legato 2
+    # orbit 3
+    # connectionN 4
+  d5
+    $ gtfo
+    -- $ every 8 (superimpose (slow 3))
+    -- $ every 32 (linger 0.75)
+    -- $ every 16 (layer [id, slow 2, rev])
+    -- $ splice 8 ("{0 .. 7}/<2 4>")
+    -- $ slow 2
+    -- $ every 8 (jux (|* speed "<1 -1>"))
+    $ loopAt 4
+    $ chop 4
+    -- $ slice 16 "{0 .. 15}/2"
+    $ s "break:9"
+    -- |* speed "2"
+    # hpf (1000)
+    # gain 1.1
+    # orbit 5
+    # connectionN 5
+  d6 -- FX
+    $ gtfo
+    $ ifp ((== 0). (flip mod 2)) (striate 8) (# coarse "4")
+    $ n "[2 4]"
+    # s "twfx"
+    # legato 1
+    # orbit 5
+    # connectionN 5
+  d7
+    $ gtfo
+    $ triggerWith (const 0.25)
+    -- $ slice "8" "{0 .. 7}"
+    $ loopAt 4
+    $ chop 8
+    $ n "1"
+    # s "grmbs"
+    # legato 1
+    # orbit 6
+    # connectionN 6
+  d8
+    $ gtfo
+    -- $ smash 4 [1,2]
+    $ n "2 3"
+    # s "aquat"
+    # cut 1
+    -- # room (range 0.4 0.2 tri)
+    # orbit 7
+    # connectionN 7

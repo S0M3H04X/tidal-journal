@@ -1,0 +1,9 @@
+-- FINDER
+
+d1
+    $ slice 4 "<0 .. 7>"
+    $ s "dgbt"
+    # n "0 .. 4"
+    
+
+hush

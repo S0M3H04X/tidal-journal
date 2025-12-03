@@ -1,0 +1,582 @@
+let inverse 1 = 0
+    inverse 0 = 1
+
+hush
+
+-- 06.tidal
+
+-- 02 rhode
+
+
+do -- JUL28
+    setcps (125/60/4)
+    -- d1
+    xfadeIn 1 16
+        -- $ gtfo
+        -- $ slow 2
+        $ stack [
+            s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]",
+            every 8 (0.5 <~) 
+            $ sometimesBy 0.5 (# crush 4) 
+            $ s "[bass2 ~ ~ ~ ~ ~ ~][cp ~ ~ ~ ~ ~ bass2][bass2 ~ ~ ~ bass2 ~ ~][cp ~ ~ ~ bass2 ~ bass2]",
+            n (scale "minor" "<5 2 1>") 
+            # s (swingBy (1/3) 4 "supersaw(2,8)") 
+            |> speed "1 4 5"
+            # gain 0.6
+            # silence,
+            chunk 3 (hurry 2) $ slow 2 $ s "chin*4"
+            # cut 1 
+            |+| speed "0.8 0.7"
+            # cutoff (range 400 2000 $ slow 2 $ saw) 
+            # resonance (range 0.2 0.3 saw)
+            # orbit 0
+            # gain (range 0.8 0.4 sine)
+        ]
+    -- d2        
+    xfadeIn 2 32
+        -- $ slow 2
+        $ foldEvery [4,8,16] (hurry 2)
+        $ every 6 (jux' [
+            id, 
+            rev
+        ])
+        $ stack [
+            s "gabba bd*2",
+            s "hh*2 [odx cp] hc future*4",
+            s (samples "h*8" (run 8)) # cut "1"
+        ] 
+        # speed "[[1 0.8], [1.5 2]*2]/3"
+        # orbit 1
+    -- d3
+    xfadeIn 3 32
+        -- $ gtfo
+        $ every 4 (|+ note "12")
+        $ s "nb(3,8)"
+        # speed "<-1 -3>"
+        -- # cut 1
+    d4 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+
+do -- AUG11 (!!cautious gain)
+    setcps(130/60/4)
+    let ninthArp = "-9 -5 -1 0 2 4 8"
+    d1 
+    -- clutchIn 1 32
+        $ slow 4
+        $ foldEvery [8,32] (0.75 ~>)
+        $ chunk 8 (hurry 2)
+        $ jux' [
+            iter 2,
+            foldEvery [4,16] (slow 4)
+        ] 
+        $ stack [
+            every 8 (fast 0.25) $ stut 3 1.25 1.5 . (|*| shape "0.125") 
+            $ ghost
+            $ thicken' 0.6 0.6
+            $ s "gabba(<3 2>,16,<3 5>)"
+            # room "0.2" # sz "0.125"
+            # orbit 1,
+            sometimesBy 0.75 (# crush 2)
+            $ one 
+            $ degradeBy 0.2 
+            $ s "cp*8?"
+            # gain (fast 1.2 $ range 1.5 1.2 $ isaw)
+            # orbit 0,
+            one
+            $ stut 4 0.25 1.25 . (|*| shape "0.25") 
+            $ note (every 16 (0.25 ~>) $ "<e'min7 [c'maj7 [a'6by9 g'maj9]]>") 
+            # s "latibro:2(<3 7>,16)"
+            # resonance (slow 1.2 $ range "0.7" "0.3" sine)
+            # squiz "{3 1.5 0.8}%4"
+            # slow 4 (vowel "a e o")
+            # hcutoff (range 300 3000 $ slow 1.25 $ saw)
+            # orbit 2,
+            stut 2 1.5 1.25 . (|+| shape "<0.125 0.25>") 
+            -- $ chunk 4 (hurry 2) 
+            $ note ( (|+ "<g e>") $ scale "minor" $ ninthArp - 2   ) 
+            # s "casio(<3 5>,16)"
+            # room "0.5" # sz "0.5"
+            # orbit 3
+        ]
+        # gain "0.8"
+        -- # silence
+    d2 $ gtfo $ s "_"
+    d3 $ gtfo $ s "_"
+    d4 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+
+do -- AUG17+04
+    setcps(130/60/4)
+    d1
+    -- clutchIn 1 16
+    -- clutchIn 1 32 
+        $ spread ($) [
+            smash 3 [2,3,4],
+            chunk 4 (degradeBy 0.3),
+            linger "<0.25 0.75 1>",
+            spin 4
+        ]
+        $ brak
+        $ sew "t <f t> <f [f t] t>"
+        (n "0 .. 7" # s "noise2") (s "cp:3*<16 2 8 4>" # speed saw + 1.2)
+        # unit "c"
+        # lpf (range 100 3000 saw)
+        # nudge "[0 0.25]/4"
+        # silence
+    d2
+    -- clutchIn 2 16
+    -- clutchIn 2 32
+        -- $ gtfo
+        -- $ slow 2
+        $ spread ($) [
+            every 4 (linger "0.25"),
+            spin "<2 4>",
+            every 8 (ghost) . (one),
+            foldEvery [8,10] (hurry (3/16))
+        ]
+        $ off 0.125 (
+            const $ thicken' (range "0.6" "0.3" sine) (range "0.6" "1.2" isaw) 
+            $ s "clubkick(3,8)" |> n "0 .. 8" # lpf (range 200 1000 $ slow 4 $ sine))
+        $ every 8 ((striate' 128 (1/16)).(every 4 (# gain 0))) 
+        $ slow 4
+        $ s "jungbass:2"
+        # speed (range 0 1 $ fast 1 $ sine) 
+    d3
+    -- xfadeIn 3 16
+    -- xfadeIn 3 32
+        -- $ gtfo
+        $ slow 2
+        $ jux rev
+        $ every 4 (0.75 ~>)
+        -- $ one
+        $ off 0.5 (|+ note "<12 7>")
+        $ note (scale "phrygian" "<0 1>") 
+        # s "pm02"
+        # pF "brightness" (range "0.5" "0.8" $ slow 4 $ saw)
+        # pF "spread" (range "0.01" "0.02" sine) 
+        # pF "overdrive" (range "0.01" "0.2" $ fast 4 $  sine) 
+        # gain 1.2
+    d4
+    -- xfadeIn 4 16
+    -- xfadeIn 4 32
+        -- $ gtfo
+        $ slow 2
+        $ stack [
+            slow 2 
+            $ jux ((3/8) ~>) 
+            $ sound "bass1(3,8,[0,5])"
+            # speed "[1.0, 1.01]"
+            # n "{0 1 2 3 4}%5"
+            |*| speed "[1.0, -1.5]"
+            # gain "0.9"
+            |+| lpf (slow 8 $ range 400 8000 square)
+            # resonance "0.1"
+            # hcutoff (slow 4 $ range 80 2000 tri),
+            sometimesBy 0.6 (jux ((3/8) ~>)) 
+            $ sound "bass2(<2 3>,8)"
+            # n "1 2"
+            # gain "1.2"
+            # delay "0.5" # delaytime "{0.005 0.02 0.01}%4",
+            s "bass2(5, 16, [0,6,9,12])"
+            # n "{1 2 3}%6"
+        ]
+        # gain "0.8"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+hush
+
+-- A07 -> B04 -> C05 -> finder
+
+hush
+
+do -- SEP21-24
+    setcps(133/60/4)
+    d1 
+    -- xfadeIn 1 32
+        $ slow 2 
+        $ whenmod 4 2 (slow (2/3)) 
+        $ striate' 32 (1/8) 
+        $ superimpose (density 2) 
+        $ s "helando"
+        # speed "<1 1.2 -2>"
+        # cut "1"
+        # pan (segment 1 $ choose [0.2, 0.8])
+        # gain (slow 1.2 $ range 0.8 1.2 sine)
+    d4 
+    -- clutchIn 4 32
+        -- $ gtfo
+        $ brak 
+        $ mask "t [f t ~] [f t t] t" 
+        $ s (cat ["feel*8", "[cp*4 gabba(3,8), bass*5]"])
+        # n (run 8)
+    d2 
+    -- clutchIn 2 32
+        -- $ gtfo
+        $ slow "<2 4>"
+        $ every 4 (density 2) 
+        $ s "<hh*16, industrial(5,8)?>"
+        |* speed "<-1 2 -4 5>"
+    d5 
+    -- xfadeIn 5 32
+        -- $ gtfo
+        $ brak 
+        $ trunc "<0.75 0.25 1>" 
+        $ stack [
+            striate' "<16 8>" (1/4) 
+            $ s "tippi"
+                # cut 1
+                # speed (perlin + 1),
+            superimpose (iter 4) 
+            $ every 4 (0.25 ~>)
+            $ s "[bd sn:2 , [mt rs] hc]"
+        ]    
+    d3 
+    -- xfadeIn 3 16
+        -- $ gtfo
+        -- $ every 8 (superimpose (slow 3)) 
+        $ striate' 64 (1/16) 
+        $ jux rev 
+        $ sometimesBy 0.69 (|+ speed "<1 1.2 -1.5>") 
+        $ s "moan(3,8)?"
+        # speed "<1.2 0.8>"
+        # gain 0.6
+        # resonance (perlin + 0.5)
+    d6 -- xfadeIn 16
+        -- $ gtfo
+        $ slow 4
+        $ chunk 4 (density 2) 
+        $ off 0.75 (|+ n "<12 7 12>") 
+        $ off 0.25 ((# s "birds") . (|+ speed "<1 1.2 -1.5>") . (# gain (range 0.6 0.7 $ sine))) 
+        $ jux rev 
+        $ s "shami"
+        # cut "1.1"
+        # speed "<-1 0.8>"
+        # room 0.8 # size 0.8
+        # n "<2 1 0 3>"
+        # resonance 0.4 
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+    
+
+
+
+do
+    setcps (155/60/4)
+    d1
+        -- $ gtfo
+        $ bite 8 "[0 2 1 3]/3"
+        $ every 8 (jux (rev . (# gain 0.7))) 
+        $ stack [
+            every 2 (# up 4) 
+            $ spin "<2 3 4>" 
+            $ s "less(2,8)",
+            every 3 ((# shape 0.3) . (# cutoff 800)) 
+            $ spin "<3 4 [3 4]>" 
+            $ s "less:3(3,8)",
+            every 2 (chop $ choose [2, 4, 3]) 
+            $ spin "2 4 6" 
+            $ s "less:2"
+        ]
+        -- # silence
+    d2
+        $ every 8 (
+            overlay (
+                (0.25 ~>) 
+                $ s "number:7"
+                # speed 0.8 # gain 0.8
+                # crush 6 # cutoff 400) .
+            trunc 0.75 .
+            rev .
+            (stut 4 0.1 0.2)
+        ) 
+        -- $ slow 2
+        $ stack [
+            note "[0!3 <-3 -3!2 -4>]"
+            # s "uxay:2"
+            # speed "0.5",
+            s "uxay*8"
+            # note "[0 0 1 <-4 -3>/4]"
+            # shape (slow 4 $ range 0.4 0.7 $ sine) 
+            # room 0.3
+            # orbit 1,
+            struct "t [t t] t [~ t]" 
+            $ s "uxay:1"
+            # cutoff (slow 3 (range 2000 200 saw)),
+            s "ul:1(<14,12,8>,16)"
+            # hpf 5000 # gain (range 0.6 0.9 sine)
+            # pan (range 0.3 0.7 sine)
+        ]
+    d3 $ gtfo $ s "_"
+    d4 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+hush
+
+do -- AUG18
+    setcps (155/60/4)
+    let chord1 = "{c4, a3, e4}"
+        pat = "[1 1 0*4 1/2 0 1*2 1 0]"
+        hhPat = "[1 0 0 1 0]*3"
+        bdPat = "[1 0 0 0 0][0 0 0 1 0]*2"
+        cpPat = "[0 0 0 0 1][1 0 0 0 0]*2"
+    d1  
+        -- $ gtfo
+        $ slow 4
+        $ stack [
+            s "supersaw(3, 16, {0,12})" # n chord1 |+| n "12",
+            s "supersaw(3, 16, {2,4,1})" # n chord1 |+| n "7",
+            s "supersaw(3, 16, {0,3,1})" # n chord1 |+| n "3"
+        ]
+        # sustain "0.125"
+        # pan (segment 1 $ choose [0.1,0.8])
+        # gain "0.9"
+        # lpf (slow 8 $ range 800 8000 sine)
+        # resonance "0.4"
+        # orbit 0
+    d2
+        -- $ gtfo
+        $ slow 4
+        $ sometimesBy 0.5 (# crush 4)
+        $ sometimesBy 0.5 ((3/4) <~)
+        $ jux ((4/8) ~>)
+        $ stack [
+            s "gabba(2, 16, {0,6})" 
+                # n "{0}%4" 
+                # gain "1.2"
+                # n (irand 10),
+            every 4 (0.5 <~) $ gain pat # s "bass2" 
+                # gain "1.1"
+                # shape "0.5",
+            gain (inverse <$> pat) # "cp"
+                # hpf (slow 4 $ range 1000 8000 tri)
+        ]
+        |*| gain "1.2"
+        # orbit 1
+    d3 
+        -- $ gtfo
+        $ slow 4
+        $ whenmod 4 2 (# speed "1.5 0.75 0.25") 
+        $ stack [
+            jux (iter 8) $ gain hhPat # s "insect"
+                |+| shape "[-0.5 0.4 0.2 -0.7]/6"
+                # room (range 0.1 0.9 sine) # sz "1.75",
+            every 4 (1.25 ~>) $ stut 3 0.125 0.75 . (|+| shape "0.5") $ gain bdPat # s (swingBy (1/3) 4 "reverbkick")
+                # n (irand 5),
+            gain (inverse <$> cpPat) # s "odx"
+                # hpf (slow 4 $ range 4000 8000 tri)
+                |-| speed "0.5"
+                # pan (range 0.3 0.9 $ tri)
+                # room "0.2" # sz "0.75"
+                # n (irand 7),
+            jux (iter 3) $ every 4 (0.25 ~>) $ gain (inverse <$> hhPat) # s "tabla"
+                # hpf (fast 2 $ range 1000 3000 $ saw)
+                # pan (slow 2 $ range 0.1 0.9 $ sine)
+                # n (irand 12)
+                # resonance "0.3",
+            gain cpPat # s "{juno, realclaps, incoming}%3"
+        ]
+        # orbit 2
+    d4 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+
+do -- SEP25
+    setcps (150/60/8)
+    xfadeIn 1 8 
+        $ slow 4 
+        $ off 0.125 (|+ 8) 
+        $ (1 <~) 
+        $ chunk 4 (slow 2 . (|- n 12)) 
+        $ off 0.75 ((# s "[birds, pm01]") . (|* speed "<1 1.2>") . (# gain (range 0.3 0.6 $ sine))) 
+        $ struct (iter 3 "t(6,12)") 
+        $ n (scale "dorian" "<[0 1 4 6 3][0 -3 4 -5 6 4]>" + 6)
+        # s "pm03"
+        # room 0.8 # size 0.7
+        # delay 0.2
+        # orbit 0
+    xfadeIn 2 8
+        $ jux rev 
+        $ slow 4 
+        $ off "<0.25 0.125>" (|- "<12 20 24>") 
+        $ struct (fast 3 "t(5,16)")
+        $ swingBy (1/7) 4
+        $ n "<a4'min7 e4'maj7 b4'min7 fs'min7>"
+        # s "acid"
+        # pF "harmonic" 2
+        # pF "brightness" 0.2
+        # pF "stiffness" 1
+        # pF "spread" 0.02
+        # gain (fast 4 $ range 1 0.8 sine)
+        # lpf (range 200 2000 sine)
+        # room 0.2 # size 0.4
+        # orbit 0
+    d3 
+        $ slow 2 
+        $ struct (iter 2 "t(5,8)?") 
+        $ every 8 (fast 2) 
+        $ sometimesBy 0.25 (# speed "<1 1.2 -3>") 
+        $ s "[reverbkick*2 reverbkick@3, ~@3 [cp@7 cp], ~@2 kk:1@3]"
+        # orbit 1
+        -- # cps(160/60/4)
+        -- # silence
+    d4 
+        $ every 4 ((1/2) <~) 
+        $ slow 3 
+        $ struct (iter 2 "t(5,8)?") 
+        $ striate' 4 (1/2) 
+        $ off 0.25 (# s "moan") 
+        $ s "twik"
+        # speed "<1 1.5 -2>"
+        # pan (segment 1 $ choose [0.2, 0.6])
+        # n "<1 2>"
+        # cut 1
+        # orbit 2
+        -- # silence
+    d5 
+        $ off 0.75 ((# s "ragaga") . (# cut 1)) 
+        $ every 8 (density 2) 
+        $ s "<gabba(3,8), cp(2,16)?>"
+        # orbit 3
+    d6 
+        $ slow 8 
+        $ jux rev 
+        $ striate' 64 (1/32) 
+        $ sometimesBy 0.25 (# fshift "<240 480 450>") 
+        $ s "ataypula"
+        # gain (fast 4 $ range 1.1 1.2 $ tri)
+        # n (irand 7)
+        # begin 2
+        # cut 1
+        # orbit 4
+    d7 
+        $ every 8 (spin "<4 2>") 
+        -- $ jux rev 
+        $ stack [
+            superimpose (density 2) 
+            $ (1 <~) 
+            $ every' 8 6 (iter 4) 
+            $ off 0.75 (# speed "<2 3 -1>") 
+            $ s "dr2*3",
+            stut 4 0.25 0.75 . (|*| speed "<2 -1 -1.5 3>") 
+            $ s "diphone(3,8)?"
+            # n "<20 [18 14 6]>"
+        ]
+        # pan (segment 1 $ choose [0.1, 0.8])
+        # room 0.2
+        # orbit 5
+    d8 $ gtfo $ s "_"
+
+
+
+hush
+
+
+
+do -- OCT10-22
+    setcps(155/60/4)
+    d1 
+        $ slow 2
+        $ whenmod 4 3 (slow 2)
+        $ (1 ~>)
+        $ every 4 (iter 4)
+        $ (1 <~)
+        $ every 3 (off 0.125 (chop 4))
+        $ stack [
+            ply 16
+            $ s "feel"
+            # n ("<1 5 8>%3")
+            # pan tri
+            # gain (range 0.8 0.6 $ fast 2 $ sine),
+            s "[[~ cp:2(2,6)] cp]"
+            # cutoff (range 800 4000 $ fast 4 $ isaw),
+            s "808bd:4(<5 6 5 9>,16)"
+            # shape 0.2
+            # gain 1.1,
+            sometimesBy 0.25 ((|* crush 1.2) . (iter 4))
+            $ s "_ 808sd:3 _ 808sd:4"
+            # shape 0.8
+            # gain 0.8
+        ]
+        # orbit 0
+    d2 
+        -- $ slow 2
+        $ every 4 ((3/12) <~)
+        $ note ((every 2 (+ "2 -12 <5 -8>") . (off 0.125 (+ "5 7"))) "2 5 7 10 14 5 2")
+        # s "pm04"
+        # pF "attack" (range 0.01 0.03 isaw)
+        # pF "sustain" (range 0.8 0.6 sine)
+        # pF "release" (range 1 0.5 isaw)
+        # pF "harmonic" (range 0.8 1 $ density 4 $ sine)
+        # pF "brightness" (range 0.3 0.5 $ fast 3 $ tri)
+        # pF "overdrive" (range 0.1 1.2 $ fast 8 $ square)
+        # legato 2
+        # nudge "[0 0.75]*12" 
+        # shape 0.4
+        # lpf (range 100 1000 tri)
+        # room 0.4 # size 0.6
+        -- # delay 0.2
+        # orbit 1
+    d3 
+        $ slow 2
+        $ chunk 4 (hurry 2)
+        $ slow 4
+        $ iter 8
+        $ "<0.5 0.125 0 0.75>"
+        <~ ("<0.25 0.5 0.125>" 
+        <~ n "0 .. 7"
+        # s "kurt"
+        # speed 1.1
+        # pan sine
+        # orbit 2
+        -- # silence
+    d4 
+        $ slow 2
+        $ jux rev
+        $ loopFirst
+        $ s "jungbass(5,8)"
+        |< speed (1 <~ range 1 4 rand)
+        # cut 1
+        # gain (range 1.2 1.1 $ slow 4 $ isaw)
+        # orbit 3
+    d5 
+        $ jux rev
+        $ iter 2
+        -- $ superimpose (density (3/4))
+        $ stut 4 (1/128) (3/8)
+        $ s "reverbkick(<3 5>,8)"
+        -- # silence
+    d6  
+        $ jux rev
+        $ someCycles ( rev . chop 4 . (# (room 0.4 # sz 0.7)) )
+        $ slow 2
+        $ note ((|- "24") "0 [4 9] 8 [10 3]")
+        # s "invaders:4"
+        # cut 1
+        # nudge "[0 0.25]*4"
+        # orbit 4
+        -- # silence
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+hush

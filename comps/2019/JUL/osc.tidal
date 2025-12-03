@@ -1,0 +1,95 @@
+let inverse 1 = 0
+    inverse 0 = 1
+
+do
+  let pat = "[0 0 1 1 0 1 1 0]"
+  d1 $ every 2 (|+| speed "0.75") $ every 4 (density 3) $ pan (pat) # "gabba"
+  # cut "1"
+  d2 $ foldEvery [2,3] (0.25 ~>) $ gain (pat) # s "sd"
+
+d1 silence
+
+d1 $ every 2 (|+| speed "0.75" ) $ every 4 (density 1.2) $ "gabba(3,9)"
+  # cut "1"
+  #
+d1 silence
+
+d3 $ foldEvery [2,3] (0.25 ~>) $ gain ("<0.25 0.5>") # s "futuresub"
+d3 silence
+
+
+d7 $ s "{bass2*4}%2"
+  |+| speed "{1 1.5 2}%2"
+  # hcutoff (range 40 800 $ sine)
+d7 silence
+
+d4 $ s "hh(6,12)"
+
+d5 $ every 4 (fast 2) $ whenmod stack [
+  s "[~ [tech:4/6]*4]",
+  s "[~ sn/1, [bd ~ ht mt]]/3*2"
+  |-| speed "[0.8 0.8 0.6 0.5 0.4]"
+  # pan (range 80 100 $ sine),
+]
+d5 silence
+
+d6 $ note (off 0.125 "c a f e") # s "futuresub"
+  # legato 1
+  # speed "<0.5 1.5>"
+
+d6 $ stack [
+  every 2 (0.5 ~>) $ every 4 rev $ striate 64 $ s "{breaks125}%4"
+  # cut "1"
+  |+| speed "<0.75 1.25>"
+  # cutoff (range 40 1000 $ saw),
+  $ chunk 4 (|+ note 5) $
+
+]
+
+
+d1 $ every 2 (rev) $ n "0 <0 4> [2 0] [2 1]"
+  # s "feel"
+  # speed "1.75 2"
+
+d3 $ every 2 (fast 2) $ "bd(2,9)"
+  # speed "<2 1>"
+
+d4 $ stack [
+  every 2 (rev) $ s "[bass2:2 cp] [bass1 ~ hh*4]"
+  |+| speed "<1 0.8 2 2.5 1.2 0.75>"
+  # room 0.3,
+  $ s "sd(3,8) <bass2:0*3>"
+  # pan "0.3 0.8"
+  # cut "1"
+]
+
+
+d4 $ every 4 (fast 1.5) $ s "bass1(2,8) [bass2:0*3]"
+  |+| speed "1*5"
+
+d4 silence
+
+d5 $ chunk 4 (|+ note 5) $ stack [
+  s "hh*8",
+]
+
+d6 $ jux rev $ arp "up" $ n "c'maj4 e4'min'8 f4'maj'8" # s "supermandolin"
+  # cut "1"
+  # legato 1
+  # room "0.3"
+
+
+d6 $ whenmod 4 2 (# speed "1.2 0.5") $ s "{bass1*2}%2 [bd(3,4) [cp*2 ~]]"
+  |+| speed "{1 1.5 2}%2"
+  |+| coarse "{4 8 64}%2"
+
+d7 $ every 4 (slow 2) $ whenmod 4 2 (# speed "0.5 0.75")$ stack [
+  s "cp [cp ~*2 [cp ~]]",
+  s "hh*2 [sn cp] cp future*4"
+]
+
+d6 silence
+
+
+
+hush

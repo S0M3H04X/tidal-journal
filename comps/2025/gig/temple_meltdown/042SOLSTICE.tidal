@@ -1,0 +1,137 @@
+setcps(160/60/4)
+
+hush
+
+do
+  asap $ connectionMax 8 # speedSequenser 4
+  let mt1 = "<4!3 ~ 4 ~>"
+      mt2 = "3"
+      mt3 = "2!4"
+      jrsyK = "[2 ~ 3 ~ ][4 ~ ~ 2 ~ ~ 2 ~]"
+      slicepat2 = "<7 .. 0>/4"
+  d1 -- Sangpuy
+    -- $ gtfo
+    $ qt
+    -- $ slow 2
+    $ whenmod 4 3 (striate 2)
+    -- $ every 3 (|* speed (range 1.61 1.414 tri))
+    $ every 16 (|+ n mt3)
+    $ loopAt 8 -- 16 8 4
+    $ chop 8 -- 16 8 4
+    $ slice 16 slicepat2
+    $ n mt1
+    # s "spuy"
+    # legato 1
+    -- # cut 1
+    # room 0.3
+    # gain (range 1.2 1 sine)
+    # orbit 0
+    # connectionN 1
+  d2
+    -- $ gtfo
+    $ slow 2
+    -- $ foldEvery [3,4] (|+ n "1(2,16)")
+    $ stack [
+      n "2(3,16,<2 4>)"
+      -- $ n "1"
+      # s "subk"
+      , every 32 (linger "<0.25 0.75>")
+      $ chunk 8 (|* speed "<0.8 1.2 -1>")
+      $ struct "<t(5,16) t(3,8)>"
+      $ s "kick:3"
+    ]
+    # cut 1
+    # gain 1
+    # orbit 1
+    # connectionN 2
+  d3
+    -- $ gtfo
+    $ slice 8 "{0 .. 7}%<2 4>"
+    $ n "3"
+    # s "glfx"
+    # gain 1
+    # legato 1
+    # orbit 2
+    # connectionN 3
+  d4
+    -- $ gtfo
+    -- $ slow 2
+    -- $ every 2 (gap "{8 <4 3>}%16")
+    -- $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+    -- $ (1 <~)
+    $ chunk 8 (# squiz "[2 4 1]")
+    $ stack [
+        s "kick:2(2,16,8)"
+        , s "bshihat*8"
+        # speed (segment 16 $ range "0.8" 1 isaw)
+        , s "clap(3,16,8)"
+        -- , striate' 32 (1/64)
+        , struct (every 2 inv "t(<2 3>,8,<4 8>)")
+        $ slow 4
+        -- $ note (scale "phrygian" $ runmod 8 "<5 8 12>/4" "0@5g <0 1>")
+        $ s "ade:3"
+        |/ speed "<2.1 1.05>"
+        # vowel "<a i>"
+        # octersubsub 1
+        # lpf 400
+        # cut 1
+        |> pan sine
+        , n "1(2,6) 2(3,8)"
+        # s "gretsch"
+        # cut 1
+    ]
+    # legato 2
+    # orbit 3
+    # connectionN 4
+  d5
+    -- $ gtfo
+    $ every 8 (superimpose (slow 3))
+    $ every 32 (linger 0.25)
+    -- $ every 16 (layer [id, slow 2, rev])
+    -- $ slow 2
+    $ every 8 (jux (|* speed "<1 -1>"))
+    $ loopAt 2
+    $ chop 2
+    -- $ slice 16 "{0 .. 15}%4"
+    $ s "break:9"
+    -- |* speed "2"
+    -- # hpf (1000)
+    # gain 1
+    # orbit 5
+    # connectionN 5
+  d6 -- FX
+    $ gtfo
+    $ ifp ((== 0). (flip mod 2)) (striate 8) (# coarse "4")
+    $ slow 4
+    $ qt
+    $ stack [
+      loopAt 16
+      $ chop 8
+      $ n jrsyK
+      # s "mohisylp"
+    ]
+    # gain 0.7
+    # hpf 1200
+    # room 0.4
+    # orbit 5
+    # connectionN 6
+  d7
+    -- $ gtfo
+    $ triggerWith (const 0.25)
+    -- $ slice "8" "{0 .. 7}"
+    $ loopAt 8
+    $ chop 2
+    $ n "1"
+    # s "grmbs"
+    # legato 1
+    # orbit 6
+    # connectionN 7
+  d8
+    -- $ gtfo
+    $ smash 4 [1,2]
+    $ n "2 3"
+    # s "aquat"
+    # cut 1
+    -- # room (range 0.4 0.2 tri)
+    # orbit 7
+    # connectionN 8

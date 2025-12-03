@@ -1,0 +1,30 @@
+-- randomness
+
+-- rand, for control patterns
+d1 
+    $ s "arpy*8" 
+    # gain 1.2 
+    # speed (range 1 2 $ rand)
+
+-- "sometimes", transforms 
+-- "sometimesBy" , with specified probability
+-- "rarely" 0.25
+-- "often" 0.75
+d1 
+    $ sometimes ( # speed 2 )
+    $ s "arpy*8" 
+        # gain 1.2
+
+d2 
+    $ sometimes ( # pan 1 )
+    $ (1 <~) -- shift 1 cycle
+    $ sometimes ( # speed 2 )
+    $ s "arpy*16"
+
+
+-- "degrade", remove 50% of the note played 
+-- "degradeBy" 
+
+
+
+hush

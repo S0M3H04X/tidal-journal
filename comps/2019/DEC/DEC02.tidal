@@ -1,0 +1,46 @@
+setcps(120/60/4)
+
+let inverse 1 = 0
+    inverse 0 = 1
+
+do 
+    let kPat = "[1 1 0/3 0/4 1 0*2 0 1 0/4 0 1 0/3 0*4 0 0*2 0]/8"
+        cPat = "[0 0 1 0 0 0 0 0 0 0 1 0 1 0 1 0]"
+        prog = "[1 0 -3 0 1 0 4 6]"
+    d1 
+        $ slow 8
+        $ every 4 ( (rip 0.85 2) . (0.25 ~>) )
+        $ rep' 2
+        $ struct ("t f t*2 f")
+        $ shift' 256
+        $ one
+        $ every 8 (jit 0.125 0.75)
+        $ gain (inverse <$> kPat) # s "reverbkick:2" # cut 1
+        # room 0.2
+        -- # silence
+    d2 
+        $ ghost 
+        $ shift' 1024
+        $ gain (kPat) # "hh"
+        # nudge "[0 0.25]/4"
+        # orbit 1
+    d3 
+        $ crushit
+        $ trunc "<0.75 0.25 1>"
+        $ move $ rep' 2
+        $ gain cPat # s "cp:6"
+        # nudge "[0 0.125]/4"
+        -- # silence
+    d4 
+        $ degradeBy 0.5 
+        $ (1 ~>)
+        $ striate' 8 (1/4)
+        $ sometimesBy 0.25 (off 0.125 (|+ 12) . (|* gain "0.6") . (# cut 1))
+        $ thicken' 1.2 0.8 
+        $ gain (kPat |* "0.8") # s "bass1:6"
+        # room 0.5 # sz 0.8
+        # delaytime 0.03
+        -- # silence
+    
+
+    hush

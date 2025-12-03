@@ -1,0 +1,64 @@
+setcps(135/60/4)
+
+d1
+  -- $ degradeBy 0.25
+  -- $ slow 4
+  $ every 4 (|* speed "-1")
+  $ chop 4
+  $ loopAt 4
+  $ n "<0 1 2*4>"
+  # s "hdmidi"
+  # lpf (fast 4 $ rangex 200 6000 isaw)
+  # room 0.3
+  # orbit 0
+  -- # cut 1
+
+d2
+  -- $ every 4 (ghost)
+  $ n "{0(2,4) 1(5,8)}%4" 
+  # s "hdsiv"
+  # legato 1
+
+d3
+  $ chop 4
+  $ loopAt 4
+  $ n "10"
+  # s "break"
+  # pan (slow 8 $ isaw*1.8)
+  # room 0.4 # size 0.8
+
+d5
+  $ every 8 ((iter 4) . (rev) . (+| n "[~ ~ [~ 1]]"))
+  $ n "[~ [1 [~ 5]]]"
+  # s "glsnare"
+  # gain 1.1
+  # room 0.3
+  # coarse 4
+
+d4
+  -- $ gtfo
+    -- $ degradeBy 0.5
+    -- $ spreadr ($) [
+    --     slow 4,
+    --     gap 3,
+    --     spin 4
+    -- ]
+    $ whenmod 4 6 ((iter 2) . (|* room (range 0.3 0.6 sine)))
+    $ struct (every 2 inv "t(3,8) f t*2 f [f t*2] f t f")
+    $ chop 4
+    $ loopAt 1
+    $ n "5 10 17"
+    # s "osbassb"
+    |* speed (range 0.6 1.2 sine)
+    -- # bpf (slow 2 $ range 400 3000 $ isaw*1.2)
+    # fshift (fast 8 $ rangex 200 1000 $ saw*0.3)
+    # room (fast 4 $ range 0.2 0.6 $ sine*2.4)
+    -- # legato 1
+    # orbit 0
+
+
+
+
+
+
+hush

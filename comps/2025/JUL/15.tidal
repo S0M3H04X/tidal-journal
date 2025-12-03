@@ -1,0 +1,13 @@
+d2
+  -- $ gtfo
+  $ qt
+  $ foldEvery [2,3](# lpf (slow 2 $ rangex 400 5000 isaw))
+  $ every 4 (linger "<0.5 0.75>")
+  -- $ chunk 8 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ s "bass8"
+  -- # gain 0.3
+  -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+
+hush

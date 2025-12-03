@@ -1,0 +1,38 @@
+-- SETUP
+hush
+setcps(155/60/4)
+
+d2 $ ccv 64 # ccn 30 # s "sp404"
+
+d1
+  $ ccv 1 # ccn 71
+  # s "sp404"
+  # midichan 10
+
+d2
+  -- $ gtfo
+  $ slow 4
+  $ every 4 ((1/"<16 32>") <~)
+  $ off 0.125 (|+ n "12")
+  -- $ n "c a f e" 
+  $ n (scale "phrygian" (arp "<thumbup pinkyup>" "'major7 [8,5,2,10]"))
+  # s "crave" 
+  # midichan 0
+  # cps 0.55
+
+
+d2
+  $ n "72 73 75" 
+  # s "tascam" 
+  # midichan 1
+
+p "midiclock" $ midicmd "midiClock*48" # s "crave"
+once $ midicmd "stop" # s "crave"
+p "midictl" $ midicmd "start/4" # s "crave"
+p "midictl" $ silence
+let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16]
+~midiOut.latency = 0;
+
+
+
+hush

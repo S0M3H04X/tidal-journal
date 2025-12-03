@@ -1,0 +1,39 @@
+setcps(155/60/4)
+
+d6
+    $ every 8 ((jit 0.125 0.75) . (rep' 2) . (crushit))
+    $ s "[drek(5,16), 808lt:2*4, [~ ~ clp:3 ~]]"
+    |* speed "[1,1, [~ ~ 2 ~]]"
+    # room (fast 8 $ range 0.01 0.1 $ isaw) # size (range 0.4 0.1 isaw)
+    # pan (slow 4 $ range 0.2 0.7 $ (1 - sine*0.5))
+    # delay (0.05+sine*0.8) # delayfeedback (range 0.01 0.5 $ (0.5 - sine*1.2)) # delaytime (0.001+sine*"[0.02 0.04]")
+    # legato 2
+    -- # silence
+
+d3
+    -- $ gtfo
+    -- $ qtrigger 1
+    $ note (every 8 (((2/3) ~>) . (one)) $ scale "hexPhrygian" "[c a f e]")
+    # s "pm04"
+    # gain (fast 8 $ range 1.2 1 isaw)
+    # legato 1
+    # orbit 3
+
+
+d2
+  -- $ qtrigger 1
+    $ jux rev
+    $ every 2 (ply 2)
+    $ slowspread ($) [
+        every 4 (crushit),
+        thicken' "0.4" "0.4"
+    ]
+    $ move
+    $ struct "t f [t f] t"
+    $ foldEvery [3,4] (0.75 <~)
+    $ off 0.125 ((|* speed "<-1.2 2.4>") . (+ note "5"))
+    $ note "[c a*2 f*2 e]/3"
+    # s "<jungbass jungbass:4>"
+    # orbit 3
+
+hush

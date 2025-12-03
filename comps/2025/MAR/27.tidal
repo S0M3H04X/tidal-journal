@@ -1,0 +1,51 @@
+do
+  let c1 = "0 3 2 ~ 1 ~ 6 ~"
+  let c2 = "0 .. 3"
+  d1
+    -- $ gtfo
+    $ qt
+    $ stut 3 "<4 8>" (1/"<4 2>")
+    -- $ sometimesBy 0.25 (jux rev)
+    $ splice 8 c1
+    $ loopAt 8
+    $ s "break:9"
+    # bpf 4000
+    -- # gain 0.7
+    # legato 1
+    # cps (155/60/4)
+  d2
+    -- $ gtfo
+    $ qt
+    -- $ chunk 8 (|* speed "<0.8 1.2>")
+    -- $ every 32 (linger "0.25 0.75")
+    $ stack [
+      struct "<t(5,16) t(3,8)>"
+      $ s "kick:4"
+      # lpf 400,
+      foldEvery [4,3](# hpf (fast 2 $ rangex 800 5000 square))
+      $ s "bshihat*16"
+      # hpf 4000
+      # gain (fast 4 $ rangex 0.8 1 isaw),
+      every 6 ((iter 2) . (1 <~))
+      $ struct "<[~ ~ t ~] [[~ t] ~ ~ [~ t]]>"
+      $ s "clap:5"
+      # lpf 800
+    ]
+    # gain 1.1
+  d3 -- Sangpuy
+    -- $ qt
+    -- $ gtfo
+    -- $ whenmod 4 3 (striate 16)
+    $ foldEvery [2,4] (|* speed "-1")
+    $ every 4 (striate 4)
+    $ every 8 (splice 4 c2)
+    $ chop "{8}%8"
+    $ loopAt 8
+    $ n "4"
+    # s "spuy"
+    # legato 1
+    # gain 1.5
+    # room 0.6
+
+
+hush

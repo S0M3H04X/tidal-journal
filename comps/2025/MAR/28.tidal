@@ -1,0 +1,90 @@
+setcps(165/60/4)
+
+do
+  let pat1 = "[2 ~ 2 ~ ][2 ~ ~ 2 ~ ~ 2 ~]"
+      dm = "akaimpc60"
+  d1 -- drum
+    $ gtfo
+    $ qt
+    $ every 16 ((1/2) ~>)
+    $ stack [
+      n "<2(2,8) 7(3,8)>"
+      -- n pat1
+      # s "subk"
+      -- # vowel "e"
+      # octersubsub 4
+      # legato 2.5
+      # coarse 1
+      ,jux rev
+      $ n "3*8"
+      # s "bshihat"
+      |* speed (slow 4 $ rangex 1.2 1.8 saw)
+      |* gain (fast 3 $ range 0.6 1 rand)
+      ,sometimesBy 0.25 (|* vowel "<a e o>")
+      $ n "~ 4 ~ 4"
+      # s "cp"
+    ]
+    # gain 1.2
+    # orbit 0
+  d2
+    $ gtfo
+    -- $ every 2 (gtfo)
+    -- $ qt
+    -- $ fast "<3 6>"
+    -- $ ((1/4) <~)
+    $ chunk 4 (hurry 2)
+    $ n "0"
+    # s "tjukbas"
+    -- # bpf (fast 8 $ rangex 1000 4000 $ isaw/1.2)
+    # octersubsub 4
+    -- # speed (fast 4 $ range 1.2 0.6 $ sine*1.2)
+    -- # room 0.3
+    # gain 1.2
+    # legato 1.5
+    # orbit 1
+  d3 -- bass
+    $ qt
+    -- $ whenmod 4 3 (striate 8)
+    -- $ slow 2
+    -- $ gtfo
+    -- $ every 4 (jux rev)
+    -- $ off 0.25 (|* speed "<-1 1 -0.5>")
+    $ loopAt 8
+    $ chop 8
+    -- $ slice 32 "<[8 .. 15][0 .. 3][4 .. 7][0 .. 7]>" $ every 8 ((1/8) ~>)
+    $ sometimesBy 0.5 (off 0.25 (|+ 12))
+    $ n "4"
+    # s "tpmpyrotR"
+    # legato (fast 4 $ rangex 0.25 1 sine)
+    # room 0.6 # size 0.3
+    # gain (rangex 1.5 1.2 saw)
+    # orbit 2
+  d4 -- vocal
+    -- $ gtfo
+    -- $ ifp ((== 0). (flip mod 2)) (striate 2) (# squiz 2)
+    -- $ every 8 (gtfo)
+    $ loopAt 8
+    $ chop 8
+    -- $ splice 8 "0 .. 7"
+    $ n "3"
+    # s "tpmpyrvcl"
+    -- # cut 2
+    -- # hpf 600
+    # gain 1.5
+    # orbit 3
+  d5 -- perc
+    $ gtfo
+    $ drumM dm [
+      s "[~ perc]*2" # note 12
+      ,n pat1
+      # s "bd"
+      , n "~ ~ ~ 1 ~ ~"
+      # s "sd"
+      ,n "3*16"
+      # s "hh"
+      |* speed (fast 4 $ rangex 1.2 1.5 sine)
+      |* pan (fast 3 $ range 0.6 1 rand)
+    ]
+
+
+hush

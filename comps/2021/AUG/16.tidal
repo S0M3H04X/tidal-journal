@@ -1,0 +1,17 @@
+d1
+$ every 4 (superimpose (spin 2))
+$ stack [
+struct (ascii "soul") $ striate' 16 (1/8) $  n (irand 15) # s "scnFight" # gain (rotL 4 $ slow 4 tri) # legato 1,
+every 4 (rev) $ struct (ascii "bot") $ n "9 8 2 6 7 2 4 2" # s "[808bd barung]" # gain (slow 2 isaw) # legato 1,
+struct (ascii "human") $ n (irand 10) # s "ade" # gain (slow 8 $ range 0.2 0.6 tri)
+] # speed (slow 4 $ range "-1" 1.2 tri)
+
+
+d2
+$ brak
+$ every 8 (iter' 4)
+$ struct (ascii "meme")
+$ stack [
+whenmod 6 2 (stut 2 0.25 0.33) $ s (density (1/12) (overlay "{echobeat:2(3,9) popkick:3}%3" "{~ hh}%16")) |+| n "2 3 4" |+| n "4 5 6" # up (irand 4) # cut 1,
+every 4 (rev) $ struct (ascii "bot") $ n (run 8) # s (fit' 1 2 "0 1" "1 0" "[808bd hdvc]") # gain (slow 4 isaw) # cut 1
+] # crush "<4 2>" # shape "<0.2 0.4>" # cut 1 # gain (slow 2 $ range 0.1 0.8 $ tri)

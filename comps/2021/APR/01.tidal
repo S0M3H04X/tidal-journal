@@ -1,0 +1,44 @@
+setcps (160/60/4)
+
+d4
+  -- $ qtrigger 1
+  -- $ sometimesBy 0.25 (slow 2)
+  -- $ layer [
+    -- id,
+    -- every 8 ((iter 2) . (1 ~>))
+    -- striate' "<2 1>" (1/"<4 8 2 16>")
+  -- ]
+  -- $ stut "<4 2 3>" 0.05 0.25
+  $ every 4 (ghost)
+  $ s "[drek:2(<3 5>,8), [~ clap:2] bsperc, bshihat*16]"
+  # n "<[[2 2 1 4*2], 0] [[5 2 4], [[~ 0] 1]]>"
+  |* speed "[1 0.4 3, ~ 4]"
+  -- |- speed "[10 1 2, ~ 0.25 , 0.05]"
+  -- # lpf 2000
+
+hush
+
+d4
+  -- $ gtfo
+  -- $ density (3/8)
+  $ jux rev
+  $ every 8 crushit
+  $ off 0.25 (|+ note "[5 12 8 10]")
+  $ n "<[~ 0 ~ ~ 2 ~ ~ 5] [2 ~ ~ 5 ~ ~ 1 ~]>"
+  # s "bsbass"
+  # octersub 2
+  |+| coarse "<2 3 4>"
+  # cut 1
+  |* speed "-1"
+  # gain (fast 16 $ range 0.7 1 $ saw)
+  # lpf (fast 4 $ range 400 1000 $ isaw)
+  # vowel "<i e a>"
+
+d6
+  -- $ gtfo
+  -- $ qtrigger 1
+  $ jux rev
+  $ crushit
+  $ s "drek [snare:2 [~ snare:4]]"
+
+hush

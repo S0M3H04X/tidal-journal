@@ -1,0 +1,36 @@
+let inverse 1 = 0
+    inverse 0 = 1
+
+do
+    let chord1 = "{c4, a3, e4}"
+        pat = "[1 1 0*4 1/2 0 1*2 1 0]"
+    d1  
+        $ stack [
+            s "supersaw(3, 16, {0,12})" # n chord1 |+| n "12",
+            s "supersaw(3, 16, {2,4,1})" # n chord1 |+| n "7",
+            s "supersaw(3, 16, {0,3,1})" # n chord1 |+| n "3"
+        ]
+        # sustain "0.125"
+        # gain "0.9"
+        # lpf (slow 8 $ range 800 8000 sine)
+        # resonance "0.4"
+    d2
+        $ slow 2
+        $ sometimesBy 0.25 (# crush 4)
+        $ sometimesBy 0.5 ((3/8) <~)
+        $ jux ((3/8) ~>)
+        $ stack [
+            s "gabba(3, 16, {0,6})" 
+                # n "{0}%4" 
+                # gain "1.2"
+                # n (irand 10),
+            every 4 (0.5 <~) $ gain pat # s "bass2" 
+                # gain "1.1"
+                # shape "0.5",
+            gain (inverse <$> pat) # "cp"
+                # hpf (slow 4 $ range 1000 8000 tri)
+        ]
+        |*| gain "1.2"
+
+        
+hush

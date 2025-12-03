@@ -1,0 +1,36 @@
+d1
+    $ slowspread ($) [
+        id,
+        iter 4
+    ]
+    $ jux rev
+    $ slow 4
+    $ striate' 8 (1/6)
+    $ slice 8 "[0*2 4 1 [~ 2 ~ 3] [2 0 3]]%4/3"
+    $ off 0.125 (|+ note "<5 12 8 7>")
+    $ s "angelb"
+    # bpf (range 600 800 $ fast 4 $ sine)
+    # gain 1.2
+    # legato 2
+
+d2
+    $ slow 2
+    $ slowspread ($) [
+        iter 4,
+        foldEvery [3, 4] (fast 2) . (crushit),
+        (0.25 <~),
+        jux' [
+            rev,
+            (0.75 ~>)
+        ]
+    ]
+    $ ghost
+    $ s "[cp(2,16) reverbkick(<3 5>,8)]/2" 
+    |+| cut "1"
+    # cps 0.6
+
+
+    
+
+hush
+    -- # cut "2"

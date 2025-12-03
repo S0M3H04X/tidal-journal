@@ -1,0 +1,32 @@
+d4 $
+    stack [
+        density 2 $
+        every' 8 2 (density 2 . iter 4) $
+        every 4 ((1/3) <~) $
+        s "[[clubkick(3,8) ~] hh*16]"
+            # speed "<-3 -0.5 0.8 1.2>"
+            # begin (slow 2 (range 0 0.5 saw))
+            # shape (fast 4 $ range 0.4 0.7 $ sine) # room 0.3,
+        stutWith 8 (1/6) (# vowel "{a e i o u}%2") $
+        slow 2 $ striate' 8 (1/4) $
+        jux rev $
+        every 4 ((1/6) ~>) $
+        superimpose (iter 2) $
+        s "{~*2 cp}%2"
+            |* speed "<1.5 -2 0.8>",
+        stutWith 6 (1/4) (# vowel "{i o u}%3") $
+        every 8 (slow 4) $
+        (1 <~) $
+        every 2 (spin "<2 4>") $
+        every 4 (density 2) . (rev) $
+        n (arp "<up down diverge>" "<a'm11s'5 b'm7f9'4 g'maj7'2>")
+            # s "supermandolin"
+            # delaytime 0.3
+            # shape (slow 6 $ range 0.2 0.6 $ saw)
+            -- # room 0.8
+            # hpf (range 400 3000 tri)
+    ]
+    -- # silence
+
+
+    hush

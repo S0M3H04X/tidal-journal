@@ -1,0 +1,75 @@
+let inverse 1 = 0
+    inverse 0 = 1
+
+do
+    setcps(140/60/4)
+    let pat = "1(<3 5 9 7>,16,<0 2 4>)"
+    d1
+        $ jux (|+ speed 0.01)
+        $ ghost
+        $ whenmod 32 16 ( palindrome . bite 8 "{0 2 5 <1 3 5 7>}%4" )
+        $ every 4 (0.25 <~)
+        $ every 4 (bite 8 "{0 5 1}%16")
+        $ sometimesBy 0.125 ( crushit . one )
+        $ stut "<2 4>" 0.25 0.5
+        $ s "bd(<2 3 5 3>,16)"
+        # n "<4 [4 5 4]>"
+        # shape (range 0.2 0.5 $ slow 4 $ saw)
+        # resonance "0.8"
+        # coarse "4 2"
+        # legato 2
+        -- # cps(143/60/"<4 8>")
+    d2
+        $ fast 2
+        $ degrade
+        $ stutWith 4 0.25 ( (|+ note "-12") . (|* speed 0.5) . (# pan sine))
+        $ note (scale "phrygian" "<7 8>")
+        # s "wub"
+        # pan (range 0.2 0.8 $ slow 4 $ sine)
+        # bpf (range 800 3000 $ fast 4 $ sine)
+        # gain (range 0.8 1.0 $ slow 4 $ sine)
+    d3
+        $ slow 2
+        $ jux rev
+        $ every 4 (0.25 <~)
+        $ one
+        $ off 0.5 (|+ note "<7 12>")
+        $ note (scale "phrygian" "<0 1>")
+        # s "pm02"
+        # pF "brightness" (range "0.5" "0.8" $ slow 4 $ saw)
+        # pF "spread" (range "0.01" "0.02" sine)
+        # pF "overdrive" (range "0.01" "0.2" $ fast 4 $  sine)
+    d4
+        -- $ slow 2
+        $ spread ($) [
+            smash 3 [2,3,4],
+            chunk 4 (degradeBy 0.3),
+            linger "<0.25 0.75 1>",
+            spin 4
+        ]
+        $ brak
+        $ sew "t <f t> <f [f t] t>"
+        (n "0 .. 7" # s "noise2") (s "cp:3*<16 2 8 4>" # speed saw + 1.2)
+        # unit "c"
+        # lpf (range 100 3000 saw)
+        # nudge "[0 0.25]/4"
+    d5
+        $ slow 2
+        $ spread ($) [
+            every 4 (linger "0.25"),
+            spin "<2 4>",
+            every 8 (ghost) . (one)
+        ]
+        $ off 0.125 (
+            const $ thicken' (range "0.6" "0.3" sine) (range "0.6" "1.2" isaw)
+            $ s "clubkick(3,8)" |> n "0 .. 8" # lpf (range 200 1000 $ slow 4 $ sine))
+        $ every 8 ((striate' 128 (1/16)).(every 4 (# gain 0)))
+        $ slow 2
+        $ s "jungbass:2"
+        # speed (range 0 1 $ fast 1 $ sine)
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+hush

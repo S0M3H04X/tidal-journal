@@ -1,0 +1,141 @@
+setcps(160/60/4)
+
+hush
+
+do
+  asap $ connectionMax 8 # speedSequenser 1
+  let jrsyK = "[2 ~ 3 ~ ][4 ~ ~ 2 ~ ~ 2 ~]/2"
+      ltck = "8*16"
+      dm = "akaimpc60"
+      slicepat1 = "<[8 .. 15][0 .. 3][4 .. 7][0 .. 7]>"
+      slicepat2 = "{0 .. 15}/1"
+  -- d9 $ grid "1 0!7"
+  d1 -- drum
+    -- $ gtfo
+    $ slow 4
+    $ qt
+    -- $ every 32 (linger "0.25 0.75")
+    -- $ every 6 (bitemod 2 6 9)
+    $ stack [
+      -- n "<2(2,8) 7(3,8)>"
+      n jrsyK
+      # s "subk"
+      # octersubsub 1
+      # legato 2.5
+      ,n "3*16"
+      # s "bshihat"
+      # cut 1
+      # coarse 2
+      |* speed (fast 4 $ rangex 0.8 1.2 rand)
+      # gain (slow 4 $ rangex 0.5 0.3 isaw)
+      ,sometimesBy 0.5 (linger "0.75 0.5")
+      $ every 3 (swingBy 4 (1/8))
+      $ n "~ 4 ~ 4"
+      # s "cp"
+    ]
+    # gain 1
+    # orbit 0
+    # connectionN 1
+  d2 -- bass
+    -- $ gtfo
+    -- $ every 2 (gtfo)
+    -- $ qt
+    -- $ chunk 4 (fast 2)
+    $ loopAt 8
+    $ chop 4
+    -- $ slice 16 slicepat2
+    $ n "2"
+    # s "whoabas"
+    -- # bpf (slow 8 $ rangex 1000 4000 $ isaw/1.2)
+    # octersubsub 1
+    -- # speed (fast 4 $ range 1.2 0.6 $ sine*1.2)
+    -- # room 0.3
+    # gain 1
+    -- # legato 1.5
+    # orbit 1
+    # connectionN 2
+  d3 -- gtr & oth
+    -- $ gtfo
+    $ qt
+    -- $ whenmod 4 3 (striate 4)
+    -- $ sometimesBy 0.75 (off 0.25 (|- "5 12 10"))
+    -- $ off "<0.33 0.25>" (|* speed "<-1 1>")
+    -- $ every 16 ((1/16) ~>)
+    $ loopAt "16"
+    $ chop "16"
+    -- $ slice 16 slicepat2
+    $ stack [
+      slow 4
+      $ note (scale "phrygian" $ runmod 8 "<5 7 10>/4" "0@5e <0 -2>")
+      # "whoaotR"
+      # pan (range 0 1 sine)
+      # cut 1
+      -- ,n 1
+      -- # s "whoaotL"
+      -- # pan (range 1 0 sine)
+      -- # cut 1
+    ]
+    # legato (slow 4 $ rangex 4 2 sine)
+    # delay 0.05 # size 0.3
+    # gain (slow 3 $ range 0.7 1 sine)
+    # orbit 2
+    # room 0.3
+    # connectionN 3
+  d4 -- vocal
+    -- $ gtfo
+    $ qt
+    $ every 64 gtfo
+    $ slow 3
+    -- $ every 2 (fast 3)
+    -- $ slice 16 (slow 3 $ runmod' 16 6 3 "<0 12 10>")
+    -- $ every 32 (jux rev)
+    $ loopAt "8"
+    $ chop "8"
+    $ stack [
+      n "3"
+      # s "whoavcl"
+      # legato 1
+      -- ,n "5 2(3,8)"
+      -- # s "whoavcl"
+      -- # cut 1
+    ]
+    # legato 1
+    # bpf 1200
+    # gain 1
+    # release 0.9
+    # delay 0.2 # delayt 0.4
+    # orbit 3
+    # connectionN 4
+  d5 -- perc
+    -- $ gtfo
+    $ qt
+    -- $ fast 2
+    $ loopAt 2
+    $ chop 1
+    $ slice 16 (runmod 8 "<16 2 _ [8 1]>" 0)
+    $ "breaks165:4"
+    # cut 1 |+ note (fast 4 $ range 0 3 isaw)
+    # gain 1
+    # orbit 4
+    # connectionN 5
+  d6 -- synth
+    $ gtfo
+    $ slow 4
+    $ qt
+    $ stack [
+      loopAt 16
+      $ chop 8
+      $ n jrsyK
+      # s "mohisylp"
+    ]
+    # gain 0.7
+    # hpf 1200
+    # room 0.4
+    # orbit 5
+    # connectionN 6
+
+
+
+
+
+hush

@@ -1,0 +1,32 @@
+d3 
+    -- $ degradeBy 0.1
+    $ slowspread ($) [
+        iter 4,
+        stut 3 0.25 0.5,
+        jux rev,
+        (0.25 ~>),
+        iter 4
+    ]
+    $ off 0.25 ( const $ ghost $ crushit $ thicken' 0.8 1.2 $ s "clubkick(<3,5>,16)" # gain (range 0.2 0 sine) )
+    -- $ move 1024
+    $ thicken' "<0.8 1.2>" 1.5
+    $ slice 8 "{[0 1] [0 2] [4 ~ 0] [~ 3] ~ 4}%4"
+    $ s "{breaks125}%8"
+    # gain (range 0.6 1.2 $ fast 2 $ saw)
+    # room 0.2 # size 0.8
+    # unit "c"
+    -- # cps 0.4
+
+d2 
+    $ slow 2
+    $ stutWith 4 0.25 ( (|+ note "-12") . (|* speed 0.5) . (# pan sine))
+    $ note (scale "phrygian" "<7 8>")
+    # s "wub"
+    # pan (range 0.2 0.8 $ slow 4 $ sine)
+    # bpf (range 800 3000 $ fast 4 $ sine)
+    # gain (range 0.8 1.0 $ slow 4 $ sine)
+    -- # silence
+
+
+
+hush

@@ -1,0 +1,35 @@
+d1
+    -- $ slow 4
+    $ off "[0.125 , 0.33]" (|- note "<7 12>")
+    $ note (arp "<up down>" ("<c e>" |+ "'m7s5 ") )
+    # s "cs80lead"
+    # pF "fdecay" (range 0.007 0.124 sine*1.02)
+    # pF "fatt" (fast 4 $ range 0.5 0.75 sine*1.02)
+    # pF "dtune" (slow 2 $ range 0.001 0.01 isaw)
+    # pF "cutoff" (range 100 2000 sine)
+    # pF "sustain" (range 0.6 0.8 sine)
+    # lpf (fast 4 $ range 500 2000 sine*1.2)
+    # room 0.3
+    # legato 1
+    # gain 0.6
+    # orbit 0
+
+d2
+    $ stack [
+        every 8 ((# crush 2) . (fast 2))
+        $ s "bskick:2([3,5],8)",
+        every 4 (iter 2)
+        $ s "~ ~ bssnare ~"
+        # n "<1 2 5>",
+        s "bshihat*16"
+        |* speed (fast 4 $ range 0.8 1.5 isaw)
+    ]
+    # room 0.2
+    # orbit 1
+    # gain 1.1
+
+d3
+    $ s "jungbass:2"
+
+
+hush

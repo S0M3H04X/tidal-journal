@@ -1,0 +1,85 @@
+do -- first
+    setcps (105/60/4)
+    d1
+    -- clutchIn 1 32
+        -- $ gtfo
+        -- $ struct "[[t f!3] [t!3 f] [f t] t f]"
+        -- $ foldEvery [4,8,16] (iter 2)
+        -- $ foldEvery [9,12] (0.75 <~)
+        $ chunk 4 (hurry 2)
+        $ stack [
+            slow 4
+            $ sometimesBy 0.25 (|* crush (fast 2.4 $ range 10 6 $ isaw))
+            $ off 0.33 ( (|* vowel "<i e o>") . (stut 4 0.25 0.125) )
+            $ n (arp "<updown diverge>" "[[~ g2'maj7] c2'maj7]")
+            # s "~ futuresub"
+            # room (slow 1.2 $ tri/"<0.2 0.8>")
+            # nudge "[0 0.25]/8"
+            # release (fast 4 $ range 1.2 0.6 sine)
+            # gain 0.7
+            # orbit 1,
+            jux rev
+            $ striate' "<4 16>" (1/4)
+            $ s "~ rims(<1 2>,8)"
+            # speed "<-2 1.2>"
+            # gain 0.8
+            # orbit 2,
+            -- one
+            move
+            $ slow 2
+            $ jux rev
+            -- $ spike
+            $ s "reverbkick(<5 3>,8)"
+            # orbit 2
+            # gain 0.9,
+            every 4 (0.25 ~>) -- (fast 2)
+            $ stutWith 4 2 (|* gain "0.5")
+            $ s "hh*16"
+            # gain (fast 1.2 $ range 1 0.8 sine)
+            # pan (range 0.2 0.8 sine)
+            # orbit 2,
+            jux rev
+            $ slice 8 "0 .. 3"
+            $ s "~ fx:2(2,16)"
+            # speed "<4 -0.5>"
+            # start 0.5
+            # cut 1
+            # orbit 3
+            # gain 0.8
+        ]
+    d4
+    -- clutchIn 4 32
+        -- $ gtfo
+        $ slow 2
+        $ every 2 (off 0.125 ( every 4 (|+ n "<2 5 10>") . (stut 4 0.125 0.25) . (slow 2)))
+        $ n ("<g3'maj7 e3'min7 c4'maj7 a3'min7>")
+        # s "rhodes"
+        # speed "<-1 0.8>"
+        # pF "sustain" (slow 1.2 $ range 1 1.2 sine*0.75)
+        # distort (slow 1.5 $ range 0.1 0.3 $ sine/1.2)
+        # gain 0.8
+        # nudge "[0 0.25]/4"
+        # orbit 0
+    d2
+    -- xfadeIn 2 8
+        -- $ gtfo
+        $ degradeBy 0.6
+        $ slow 2
+        $ slice 16 "<[7 .. 9][0 .. 6]>"
+        $ s "chipuin"
+        # unit "c"
+        # release 2
+        # speed "<1 0.5 -1>"
+        -- # cut 1
+        # orbit 5
+    d3 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+
+
+
+hush

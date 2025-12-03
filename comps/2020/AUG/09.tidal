@@ -1,0 +1,44 @@
+setcps 0.6
+
+d1
+    $ every 8 (rev)
+    $ whenmod 4 3 (|* speed "[1.2 1.5 0.8]")
+    $ n "[1 ~ 1] [4 ~ 2 ~] ~ [0 4]"
+    # s "kick"
+    # room (slow 4 $ range 0.2 0.4 sine)
+    # orbit 0
+
+d2
+    $ whenmod 6 2 (iter 2)
+    $ n "~ ~ [3 2] [~ 6 ~ 3]"
+    # s "snare"
+    # orbit 1
+
+d5
+    $ n "[0 4 1 5]*3"
+    # s "bshihat"
+    # crush (range 2 4 isaw)
+    # orbit 2
+
+
+d4
+    $ crushit
+    $ slow 2
+    $ striate 2
+    $ note (every 8 ((1/4) <~) $ scale "phrygian" "<[[~ 0] 1 7 6][0 [~ 1] 11 3]>")
+    # s "rhodes"
+    # pF "sustain" (range 1.5 2 sine)
+    # bpf (slow 4 $ range 1000 4000 $ density 2 tri)
+    # room 0.2
+    # delay 0.05
+    # gain (slow 2 $ range 0.8 0.7 $ sine)
+    # orbit 3
+
+
+d5
+    $ note (every 4 ((1/4) <~) $ scale "phrygian" "<[[~ 0] [~ 1] [5 4] [4 5]][~ 1 [~ 7] [2 ~]]>")
+    # s "bass8"
+    # pF "gate" 0.5
+
+
+hush

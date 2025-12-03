@@ -1,0 +1,8 @@
+d2
+$ chop "<16 32>" 
+$ loopAt "<[0 .. 15] [16 .. 31]>"
+$ striate' 16 (1/4)
+$ stut 4 0.334 0.667
+$ s "scnFight:6"
+# cut 1
+# speed (fast 8 $ range "-0.8" 1.2 saw)

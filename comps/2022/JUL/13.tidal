@@ -1,0 +1,33 @@
+hush
+
+d1
+  $ slow 8
+  $ every 4 (chop 4)
+  $ note "<0 12>"
+  # s "cb"
+  # legato 1
+  # lpf 3000
+  # vowel "a e i"
+
+
+d2
+  -- $ every 4 (chop 16)
+  $ brak
+  $ n "4*4"
+  # s "bskick"
+  # legato (rangex 0.25 2 saw) 
+  # room 0.3 
+
+
+d3
+  $ chop "<8 16>"
+  -- $ every 2 (silence)
+  $ (1 ~>)
+  $ every 4 (|+ n "{~ 1}%8")
+  $ s "break:4"
+  # cut 1
+
+d4
+  -- $ slice 4 "<0 1>"
+  $ s "bsperc:1"
+  
