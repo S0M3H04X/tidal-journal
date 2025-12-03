@@ -1,0 +1,56 @@
+
+
+do
+  setcps(165/60/4)
+  let pKick = (((segment 1 $ choose [0.0625, 0.125..1]) ~>) "{0 [0 1] 0 [0 1] 0 [0 1] 0 1}%8") :: Pattern Bool
+      rest = (slow "<2 4 1>" $ "{[0 0 1]/2 [0 1]/4 [1 0]/2 1 0}%4") :: Pattern Bool
+      pClap = (sometimes (0.25 ~>) $ "{0 0 [1 0 0] [0 1]}%16") :: Pattern Bool
+  d1
+    -- $ gtfo
+    $ jux rev
+    $ every 8 ((trunc "<0.75 0.25 1>") . (|* speed "<0.6 -1 0.2>"))
+    -- $ qtrigger 1
+    $ every 2 (shift' (1/16))
+    $ mask (pKick)
+    $ struct "1*4"
+    $ thicken' 0.2 0.4
+    $ s "kick:5"
+    # room 0.5
+    # legato (fast 4 $ range 0.5 1.25 $ saw)
+  d2
+    -- $ gtfo
+    $ crushit
+    $ every 4 brak
+    -- $ qtrigger 1
+    $ foldEvery [3,4] (mask (inv rest))
+    $ mask (inv pClap)
+    $ struct "1*8"
+    $ s "snare:2"
+    # speed "<2 2.5>"
+  d3
+    -- $ gtfo
+    $ every 2 ((|* speed "[0.8 1.2 [1.5 -0.6]]") . ((1/2) ~>))
+    $ every 4 (shift' (1/2))
+    $ mask (pKick)
+    $ struct "1*8"
+    $ s "gabba:3"
+    # gain (slow 8 $ range 0.2 1.25 $ sine*1.2)
+    # shape (range 0.1 0.4 sine)
+  d4
+    -- $ gtfo
+    -- $ qtrigger 1
+    $ slow 4
+    $ stut 4 0.25 0.33
+    $ splice "<8 16>" ("<3 .. 0> <1 .. 5>")
+    $ s "twik"
+    # speed "<-2 0.5 -0.01>"
+    # lpf (slow 4 $ range 80 2000 $ isaw)
+    # legato 1.25
+    # room 0.6 # gain 1.25
+  d5
+    -- $ gtfo
+    $ s "hh*8"
+    |* speed "<1.5 2 1.25>"
+    # gain (fast 2 $ range 0.8 1.5 $ square)
+
+  hush

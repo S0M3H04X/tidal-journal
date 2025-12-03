@@ -1,0 +1,15 @@
+d4 $ qt $ slow 4 $ jux rev $ off (1/16) (const $ loopAt 2 $ chop 32 $ s "glndbass:2" # cut 1 # gain (fast 8 $ range 0.5 0.7 cosine)) $ ply 2 $ n "1 . 2 3*2 " # s "drek"
+
+d5 $ n "1*4 2*2 4*4" # s "hh27" |* speed (range 1 1.5 sine)
+
+setcps(160/60/4)
+
+
+hush
+
+
+d1 $ qt $ every 4 ( off (1/8) (const $ loopAt 2 $ chop 16 $ s "hnbbass" # speed "0.95" # gain 0.9 # legato 4))  $ juxBy 0.8 (|* speed "<1 2 4>") $ loopAt 2 $ chop 32 $ s "break:2"
+
+d2 $ qt $ smash 16 [2,4,6] $ s "bhkick:5(2,8)" # gain (range 0.8 0.4 tri)
+
+d3 $ qt $ n (slow "<2 4 8>" $ segment 16 $ range 0 32 $ tri) # sound "amencutup"

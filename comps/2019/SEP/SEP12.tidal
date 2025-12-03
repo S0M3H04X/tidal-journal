@@ -1,0 +1,28 @@
+d1 $
+  trigger 1 $
+    every' 8 3 (density 2) $
+    every 2 (chop 4 . iter 2) $
+    (1 <~) $
+    every 4 ((1/2) <~) $
+    superimpose (iter 8) $
+    s "{[~ [~ bd]*<5,7,13>]}%<4 8>"
+        |+| n (run "<5 7 3 2>")
+        # gain (range 1 0.8 $ rand)
+        # room (range 0.2 0.9 $ square)
+        # sz (range 0.4 0.8 $ tri)
+        # lpf (range 400 5000 $ saw)
+        # accelerate "<0 1 -1 0.25 -0.5 2 -3>"
+        # hresonance "<0 0.2 0.4 0.6>"
+    -- # silence
+
+d3 $
+    every 2 (chop 4) $
+    every 4 (iter 2 . superimpose (whenmod 4 2 (|* speed "3"))) $
+    s "{gabba(3,16), cp}%2"
+        # accelerate "<0 1 -1 0.25 -0.5 2 -3>"
+        # gain 1
+        # lpf (range 400 5000 $ saw)
+    # cps(140/120/4)
+
+
+        hush

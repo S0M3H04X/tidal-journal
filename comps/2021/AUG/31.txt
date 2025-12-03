@@ -1,0 +1,64 @@
+!listviews (see what views are available)
+!presetview n (choose one from above output)
+!publishview def (set current view as default for all users?)
+!presetview def (return to the default view)
+!dumpview (see what current view code looks like)
+!localview audiomap (list all samples)
+!localview [] (show visuals only)
+!showtempo (query tempo)
+!setcps x.y (set cps)
+
+##JSoLang vars
+
+// note variable name defs here
+main = x:allRules* { return "##tidal\n" + x.join("") }
+allRules = chords / kickpat / anyCharacter
+anyCharacter = .
+
+// specific replacement rules, the i makes the find operation
+// case insensitive
+chords = "chords"i { return "<[c4'm9'8@1.5 af'maj9@1 g4'dom7@1.5 ] c4'm9'16 c'm9'12>" }
+kickpat = "kickpat"i { return "<[10000[01]0[01]] [1 1 1 0]>" }
+
+##vars
+
+struct "kickpat"
+$ note (arp "<[up down thumbup] down down>" "chords")
+# s "sid"
+
+
+Adding sound files to Estuary/WebDirt on the fly (early August 2021)
+First of all, any media files to be added (whether in Solo or Collaborative mode) must be available through a CORS-compliant web server. The easiest known way to do this is to make a gh-pages site on a GitHub repository, and commit your files there.
+
+To add an individual sound (available through a CORS-compliant web server), do this at the Estuary terminal (replacing nameOfSampleBank with the sample bank you want the sound to be available through, and replacing 0 with the number/position you want that sound to occupy in that bank): !insertsound "https://complete-url-to-sound.wav" nameOfSampleBank 0
+
+To see the "resource operations" that have been added to your Solo window or Collaborative ensemble, do this at the terminal: !showresources
+
+If you do that, in a new ensemble or Solo window, you'll see just one item that says: reslist "samples/resources.json"
+
+A reslist is a JSON file that points to many available sounds, images, videos. The reslist at "samples/resources.json" is a complete list of the default sound samples set up for the Estuary server. Here's a small sample of what a reslist looks like:
+
+[
+{ "url":"808/CB.WAV","type":"audio","bank":"808","n":0},
+{ "url":"808/CH.WAV","type":"audio","bank":"808","n":1},
+{ "url":"808/CL.WAV","type":"audio","bank":"808","n":2}
+]
+The URLs in the reslist above are relative to wherever the reslist itself is located on the web. For example, the folder "808" in the above reslist should be in the same folder where the reslist file is located (and so, the WAV files in the above example would be in the 808 folder, ie. below the level of the reslist file). If you are editing/making a restlist by hand: Note that the JSON "keys" in the above MUST be in quotation marks, or it will not work.
+
+If you are adding more than a few sounds, you'll probably want to make reslists for them. If you have your own reslist on the web you can add it to your solo window or collaborative ensemble like so: !reslist "https://complete-url-to-my-custom-samplebank.json"
+
+There is a script in the top folder of the Estuary github repository called generateAudioResources.sh. You can run this BASH script at BASH/the terminal to auto-generate a reslist for a whole folder of folders containing audio samples. That might work like this, assuming your sample bank is located in ~/mySampleBank/ and you have cloned or downloaded the Estuary repository to ~/Estuary/:
+
+cd ~/mySampleBank
+~/Estuary/generateAudioResources.sh . > resources.json
+After that ~/mySampleBank should have a new file called resources.json in it. You can check it out with a text editor to verify it makes sense, then commit it to your gh-pages repository. You should then be able to use the !reslist command (see above) to add that whole collection of sample banks all in one go (the same script is used at estuary.mcmaster.ca to generate the default resources.json).
+
+To completely erase the defaults (ie. in the current window or ensemble), you can do this in a terminal (note that you will have no samples available until you add something back...): !clearresources
+
+To restore the default resource operations, you can do this in a terminal: !defaultresources
+
+CineCert0
+quant 4 0 $setRotate (ramp 5 225 30) $ setBlur 1.2 $ setSize (ramp 4 1 0.5) $ setPosX (sin 0.01) $ setPosY (sin 0.02) $ setGrayscale (sin 0.25) $ circleMask (sin 0.5) $ rate 3 $  setBrightness (sin 16) $ setOpacity 0.7 $ video "https://github.com/MaxxeW/livecoding/blob/main/samples/videos/donutMorph-3.mp4?raw=true"
+
+Hydra
+shape([3,4,5,6].smooth()).repeat(20).kaleid().modulateScale(o0,0.2,0.25).modulateRotate(o0, [1.5,2.5,3.5].fast(3).smooth()).out()

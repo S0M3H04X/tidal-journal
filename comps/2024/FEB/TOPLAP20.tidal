@@ -1,0 +1,83 @@
+setcps(165/60/4)
+
+hush
+
+do
+  asap $ connectionMax 8 # speedSequenser 4
+  d1 -- Made in Abyss
+    $ qt
+    -- $ whenmod 6 8 (striate 2)
+    -- $ gtfo
+    -- $ every 8 (iter 1)
+    $ off 0.25 (|* speed "<-1 1>")
+    $ loopAt "<16 32>"
+    -- $ chop 4
+    -- $ slice 16 "<[0 .. 15][8 .. 15][0 .. 3][4 .. 7]>"
+    $ n "0"
+    # s "miaost"
+    # legato 0.5
+    # room 0.2 # size 0.6
+    # bpf 800
+    # gain (range 1.5 1.2 sine)
+    # connectionN 1
+  d2 -- V
+    -- $ gtfo
+    $ qt
+    $ s "bskick:2(5,16,2)"
+    # gain 1.2
+    # legato 2
+    # room 0.1 # size 0.2
+    # connectionN 2
+  d3 -- V
+    $ qt
+    -- $ gtfo
+    $ slow 4
+    $ every 8 (jux (|* speed "<1 -1>"))
+    $ slice "32" "0 .. 31"
+    $ s "break"
+    -- |* speed "2"
+    # hpf (400)
+    # room 0.1 # size 0.2
+    # connectionN 3
+  d4 -- V
+    -- $ gtfo
+    -- $ whenmod 2 6 (fast 2 . striate 4)
+    $ s "bshihat*16"
+    # speed (rangex 3 1 $ slow 2 $ sine)
+    # gain (rangex 0.8 1 $ slow 3 $ cosine)
+    # room 0.3 # size 0.8
+    # connectionN 4
+  d5 -- V
+    -- $ gtfo
+    $ qt
+    $ slow 4
+    $ every 3 (stut 2 2 0.125)
+    $ s "[~ ~ ~ snare:5]"
+    # room 0.3 # size 0.8
+    # connectionN 5
+  d6 -- V
+    -- $ gtfo
+    -- $ ifp ((== 0). (flip mod 2)) (striate 8) (# coarse "4")
+    $ every 2 (gtfo)
+    $ loopAt "<4 8>"
+    $ s "hnbloopfx"
+    # legato "<1 2>"
+    # orbit 5
+    # connectionN 6
+  d7 -- V
+    -- $ gtfo
+    $ whenmod 4 16 (fast 2)
+    $ s "[kick:6(2,8,<2 4>) , kick:2(5,8,<2 3>)]"
+    -- # legato 0.5
+    # gain (rangex 0.8 0.6 $ slow 4 $ isaw)
+    # pan (range 0.1 0.9 saw)
+    # room 0.8 # size 0.8
+    # connectionN 7
+  d8
+    -- $ gtfo
+    $ smash 4 [1,2]
+    $ n "2 4"
+    # s "aquat"
+    # cut 1
+    # room (range 0.4 0.2 tri)
+    # connectionN 8

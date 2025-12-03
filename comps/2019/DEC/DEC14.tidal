@@ -1,0 +1,69 @@
+do 
+    let steps = take 16 [0, 0.0625..]
+        prog = "{1 7 3 0, 2 8 3 0 10}%4"
+    d1 
+        $ every 4 ((iter 2) . (0.5 <~))
+        $ ghost
+        $ struct (sometimesBy 0.25 (inv) "t [f t] f t")
+        -- $ foldEvery [3,4] (0.25 <~)
+        $ off 0.5 (const $ density (9/6) $ one $ s "[hh*8 , clubkick(<2 3>,8,<1 2>)]")
+        $ jux rev
+        $ n "[1 4*3 [[5 6]/4 2]/3 4]/2"
+        # s "drumtraks"
+        # vowel "a|<o i e>"
+    d2
+        $ every 2 (ply 2)
+        $ slowspread ($) [
+            every 4 (crushit),
+            thicken' "0.4" "0.4"
+        ]
+        $ move
+        $ struct "t f [t f] t"
+        $ foldEvery [3,4] (0.75 <~)
+        $ off 0.125 ((|* speed "<-1.2 2.4>") . (+ note "5"))
+        $ note "[c a*2 f*2 e]/3"
+        # s "jungbass"
+        # legato (range 1 0.01 saw)
+    d3
+        $ degradeBy 0.5
+        $ slow 2
+        $ slowspread ($) [
+            id,
+            jux rev,
+            foldEvery [3,4] (0.25 <~),
+            stut "<4 2 6>" 0.25 0.5,
+            (|+| coarse "8 6 12"),
+            -- slow "<2 1 4>",
+            iter 4
+            ]
+        $ layer [
+            (const $ sound "[cp(2,16) reverbkick(<3 5>,8)]/2" |+| cut "1"), 
+            stutWith 6 (1/6) $ (
+                const $ note (scale "phrygian" prog) 
+                # s "[wub(<3 5>,8)]/4"
+                # vowel "{i o u}%2")
+            ]
+        $ every 3 (|+| accelerate "<-1 0.8>") 
+        $ off 0.125 ((|* speed "<-1.2 2.5>") . (|+ note "<7 12>"))
+        $ note (scale "phrygian" prog)
+        # s "bass8"
+        # gain (range 0.6 1 $ slow 4 $ isaw)
+        # legato (range 1 0.01 saw)
+        # room (range 0.5 0.8 sine)
+        # lpf (range 150 1000 $ slow 8 $ sine)
+    d4 
+        $ spread ($) [
+            chop "<2 4>",
+            striate' "<4 2>" (1/"<2 4>")
+        ]
+        $ n (every 4 (0.25 ~>) "<0 .. 7> . <4 .. 9>")
+        # s "birds"
+        # cut 1
+        # gain (range "0.6" "0.9" $ slow 4 $ sine)
+        # pan (slow 4 $ saw)
+
+
+hush
+
+        
+

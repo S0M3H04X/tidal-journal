@@ -1,0 +1,135 @@
+setcps(60/60/4)
+hush
+
+d3
+  $ qt
+  -- $ gtfo
+  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  -- $ every 4 (linger "<0.5 0.25>")
+  -- $ chunk 3 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ loopAt "<0.5 1>"
+  -- $ chop "2 4"
+  $ s "<medi ~@1>"
+  -- $ s "<heard ~@1>"
+  # cut 1
+  # gain 0
+  # pan (slow 4 $ sine * 0.5 + 0.26/2)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 4
+
+d2
+  -- $ gtfo
+  $ qt
+  $ loopAt 128
+  $ s "<anime:2 ~@10>"
+  # cut 1
+  # gain 0.6
+  # pan (fast 4 $ sine * 0.5 + 1)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 3
+
+-- 那你們有聽得懂我嗎？
+-- intro faded out
+d1
+  $ gtfo
+  $ qt
+  -- $ loopAt 128
+  $ n "<0 ~@10>"
+  # s "origin"
+  # cut 1
+  # gain 0
+
+  -- # pan (fast 4 $ sine * 0.5 + 1)
+  -- # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+
+d4
+  $ gtfo
+  $ qt
+  -- $ every 4 (rolledBy "0.7 0.5 0.3 0.2 0.1")
+  -- $ struct (iter 2 "t(5,8)")
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "75"
+  -- $ chop "<8 16>"
+  $ s "<chiptune:2>"
+  # cut 1
+  # gain 0
+  # pan (fast 4 $ sine * 0.1)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+
+d5
+  $ gtfo
+  $ qt
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "<128>"
+  $ chop "<8 4>"
+  $ s "<trap:2>"
+  # cut 1
+  # gain 0
+  -- # pan (fast 4 $ sine * 0.5 + 1)
+  -- # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 1
+
+
+d6
+  -- $ gtfo
+  $ qt
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "8"
+  $ chop "<8 4>"
+  $ s "<aiFull:5>"
+  # cut 1
+  # gain 0.8
+  # pan (fast 4 $ sine * 0.5 + 1)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 2
+
+d7
+  $ gtfo
+  -- $ striate 42 (1/6)
+  $ qt
+  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "<1 2 0.25>"
+  $ chop "<8 4 2>"
+  $ s "<noErr:4>"
+  -- $ s "cheersVbr:2 "
+  |+ n "1"
+  # cut 1
+  # gain 0.7
+  # pan (fast 4 $ sine * 0.5 + 1)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 2
+
+
+d7
+  $ gtfo
+  $ qt
+  -- $ striate (1/6)
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "16 64"
+  $ chop "<8 4 2>"
+  $ s "<aiFull:8>" -- WAIT!!
+  # cut 1
+  # gain 0
+  # pan (fast 4 $ sine * 0.25)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 2
+
+d9
+  -- $ gtfo
+  $ qt
+  -- $ striate (1/6) 3
+  -- $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ loopAt "8"
+  $ chop "<8 4>"
+  $ s "<aiFull:2>"
+  # cut 1
+  # gain 0
+  # speed "<1 0.8>"
+  # pan (fast 4 $ sine * 0.5 + 1)
+  # room 0.8 # sz (rangex 0.6 0.8 isaw)
+  # orbit 2
+
+hush

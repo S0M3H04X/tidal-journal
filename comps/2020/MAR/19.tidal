@@ -1,0 +1,181 @@
+setcps(180/120/4)
+
+d1
+    -- $ someCycles (|* speed (range 0.6 0.4 $ sine*1.2))
+    -- $ whenmod 4 3 (stut 4 0.125 0.5)
+    $ every 8 ( (0.25 ~>). (jux (iter 4)) )
+    $ s "[bd(3,8, <2 3>), ~ cp:3] . [kk*2, clp(3,8,<3 4>)]/<1 2 4>"
+    |* coarse (irand (-(8)))
+    -- # octersubsub 3
+    # room (range 0.1 0.2 $ saw)
+    # cutoff (range 200 2000 $ saw*1.2)
+    # orbit 0
+
+
+
+d2
+    $ layer [
+        id,
+        chunk 4 (hurry 2),
+        every 4 (|* vowel "<a e o>")
+    ]
+    $ chop 8
+    $ s "angelb"
+    |* speed "<-1 0.6>?"
+    # resonance "0.4"
+    # cut 1
+    # orbit 1
+    -- # silence
+
+d4
+    $ degradeBy 0.5
+    $ every 4 (gtfo)
+    $ chop "<4 8 [2 4] 16>"
+    -- $ gtfo
+    $ s "nb(3,8)"
+    -- # octersubsub 8
+    |* vowel "<a e o>"
+    # pan (fast 1.2 $ range 0.1 0.8 $ sine*1.2)
+    # gain (fast 3.2 $ range 0.8 0.6 $ saw*0.8)
+    # lpf (slow 1.2 $ range 60 800 $ tri*1.2)
+    # cut 1
+    # waveloss 8
+
+d5
+    -- $ gtfo
+    $ jux' [
+        id,
+        (|* speed "<0.6 -0.8 1.2>")
+    ]
+    $ (0.25 ~>)
+    $ striate 16
+    $ s "clk(2,6)"
+    # pan (range 0.1 0.8 $ sine)
+    # crush (range 8 4 $ tri*sine*1.2)
+    # gain (range 0.6 0.8 saw)
+    # cut 1
+
+d5
+    $ chop 16
+    $ loopAt "<2!4 4!3 1!2>"
+    $ slice 8 "[0 .. 5]"
+    $ s "bar(3,12,<2 6>)"
+    # delay "0.05"
+    # room "0.6" # size (range 0.3 0.6 sine)
+    # orbit 1
+    # cut 1
+    # silence
+
+
+
+d6
+    $ every 8 (0.25 ~>)
+    $ whenmod 8 6 (fast 2)
+    $ jux' [
+      id,
+      sometimesBy 0.25 (spin 2),
+      (|* speed "0.6")
+    ]
+    $ striate' 3 (1/12)
+    $ s "[zap(2,12), kk:4(3,8) , ~ ~ cp!2]/6"
+    # octersubsub 4
+    -- # silence
+
+d7
+    -- $ gtfo
+    $ accelerate "1.2"
+    $ s "snr:2 ~ snr:3*2"
+    # gain (range 0.8 1.1 sine)
+    -- # silence
+
+
+
+
+
+hush
+
+
+d1
+    $ slice 16 "0 .. 15"
+    $ sometimesBy 0.125 ( crushit . one )
+    $ off "0.25" (
+        const $ thicken' (range "0.6" "0.3" sine) (range "0.6" "1.2" isaw)
+        $ s "clubkick(3,8)" |> n "0 .. 8" # lpf (range 200 1000 $ slow 4 $ sine))
+    $ s "[papua(5,8), ~ cp]"
+    # gain (range 0.4 0.8 $ sine*1.2)
+    # octersubsub (range 6 8 $ tri*0.8)
+    # pan (slow 8 $ range 0.1 0.8 $ sine*1.2)
+    # resonance "1.2"
+    -- # gain
+    # shape (range 0.2 0.5 $ slow 4 $ saw)
+    # coarse "<4 0.3>"
+    # cut 1
+    # orbit 0
+
+
+d4
+    -- $ gtfo
+    $ qtrigger 1
+    $ slow 2
+    $ someCycles (0.25 <~)
+    $ off "<0.333 0.67>" (|- "<12 17 20>")
+    $ n (scale "dorian" "{[0 1 4 6][1 -3 4 -7]}%[0.5|2|4]" |+| "<5 12>")
+    # s "rhodes"
+    # distort (fast 12 $ range 2 4 $ sine*1.2)
+    # ring (slow 8 $ range 0.4 0.8 $ tri*2.4)
+    -- # octersubsub (fast 4 $ range 4 1 $ tri*1.2)
+    # hcutoff (fast 12 $ range 800 2400 $ isaw*1.2)
+    # pan (slow 16 $ range 0 1 $ sine*1.5)
+    # resonance 2
+    -- # gain (range 0.8 0.6 sine)
+    # room 0.2
+    # orbit 1
+
+
+d3
+  $ qtrigger 1
+  $ every 4 (chunk 2 (off 0.25 (slow "<2 4>")))
+  $ s "clubkick:2(<3 5>,12,<2 4>)"
+  # squiz (slow 4 $ range 2 1 sine*0.8)
+  # krush 0.2 # kcutoff (irand 1)
+  # shape (fast 8 $ range 0.2 0.5 sine)
+  # octersubsub (range 0.7 2 sine)
+  -- # vowel "<o u a>"
+  -- # lpf (range 1000 600 sine)
+
+
+d1
+  $ gtfo
+  $ slowspread ($) [
+      id,
+      density 2,
+      (|* speed "<1.2 -0.8>")
+  ]
+  $ slice 16 "[0 .. 8]"
+  $ note "<1 2 4 -2>"
+  # s "atmoshot"
+  # attack  0.2
+  # release 0.3
+  # squiz (range 0.2 0.4 $sine)
+  # cut 1
+  # orbit 0
+    --
+
+d2
+  -- $ gtfo
+    $ one
+    $ every 8 (0.25 ~>)
+    $ jux' [
+        id,
+        spin 4,
+        iter 2
+    ]
+    $ off 0.25 (const $ s "[kk:2(5,16),~ cp]")
+    $ note "<1 2 5 10>"
+    # s "zap(3,12)"
+    # shape (range 0.4 0.7 sine)
+    # room 0.3
+    # orbit 1
+
+
+hush

@@ -1,0 +1,21 @@
+d1
+  -- $ gtfo
+  $ chunk 8 (|* speed "<0.8 1.2>")
+  $ every 16 (linger "<0.25 0.5>")
+  $ stack [
+    struct "<t(5,16) t(3,8)>"
+    $ s "kick:4",
+    foldEvery [4,3](# hpf (fast 2 $ rangex 800 5000 square))
+    $ s "bshihat*16",
+    struct "<[~ ~ t ~] [[~ t] ~ [~ t] ~]>"
+    $ s "clap:5"
+  ]
+  # gain 1.2
+  -- # room 0.3 # sz (rangex 0.2 0.8 isaw)
+  # orbit 0
+  # cps (155/60/4)
+
+
+
+
+hush

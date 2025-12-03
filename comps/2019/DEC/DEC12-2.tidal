@@ -1,0 +1,88 @@
+d1
+    -- $ slow 2
+    -- $ chunk 4 (slow 2)
+    $ struct (every 2 inv "t(<3 5>,16,<2 4>) f(3,8)")
+    -- $ stut 4 0.25 0.125
+    $ s (cat ["future*4", "[cp*4 clubkick*5, jungbass*5]"])
+    # n (run "<2 4>")
+    -- # silence
+
+let only x = do
+                hush
+                x
+
+d2
+    $ slow 4
+    $ chunk 4 ((hurry 2) . (0.25 ~>))
+    $ off ("<2/16 1/8>") ((|* speed "0.8") . (|- note "12"))
+    $ note ("[0@3|<2 1 10 7>]")
+    # s "juno@8"
+    # vowel "[a i|<e i o>]"
+    # room 0.3 # sz 0.8
+    # lpf (range 600 3000 sine)
+    # nudge "[0 0.25]/4"
+    -- # silence
+
+
+d3
+    $ every 8 (slowspread ($) [
+        iter 4,
+        slow (3/8)
+        ])
+    $ off (2/16) (const $ struct "f [t f] f t" $ note (scale "phrygian" "0 4!3 6@2 1!2") # s "jungbass:4" # cutoff 1000)
+    $ one
+    $ (1 ~>)
+    $ chunk 4 (hurry 2)
+    $ n "{[0 |2 3]/<2 4>, [2|6 7]/<2 8>}%2"
+    # s "[clubkick , ~ cp!2]"
+    -- # silence
+    |* gain (range 0.7 1 $ slow 2 $ isaw)
+
+d1
+    $ jux rev
+    $ striate'  (1/32)
+    -- $ brak
+    $ loopAt "<[1 2]/4 3 0>"
+    $ chop "<4 8 16>"
+    $ n "{[4 .. 7], [2 .. 8]}%2"
+    # s "insect industrial"
+    # hpf (range 1000 4000 sine)
+    -- # silence
+
+
+d2
+    $ every 3 (ghost . rev . move)
+    $ every "<8 32>" (gtfo . ("<0.25 0.5>" <~))
+    $ one
+    $ thicken' (range 0.5 0.8 sine) "0.7"
+    $ n "[0 .. 4]"
+    # s "reverbkick(5,12)"
+    # legato 1
+    # cps(130/60/4)
+    -- # silence
+
+d3
+    $ ply 2
+    $ iter 4
+    $ off ("1/6 1/8") (|* speed "1.2 0.8 -1.5")
+    $ crushit
+    $ n "[1*2 1!2 0@3]"
+    # s "rs"
+    # vowel "[a|<i o e>]"
+    # legato 1
+    -- # silence
+
+d5
+    $ every 4 (0.75 <~)
+    $ bite 16 "0 .. 9"
+    $ off ("1/16 1/32") (|* speed 1)
+    $ stack [
+        stut 4 0.5 0.125
+        $ s "[hh*6 , ~ cp(3,8)]",
+        ghost
+        $ n "0(<3 5>,8,<2 7>)"
+        # s "gabba"
+    ]
+
+
+hush

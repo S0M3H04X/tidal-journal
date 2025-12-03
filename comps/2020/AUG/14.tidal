@@ -1,0 +1,47 @@
+setcps 0.6
+
+d1
+    $ off "<0.25 , 0.75>" (const $ note (every 4 ((3/16) ~>) $ scale "phrygian" $ "[[0 1] [5 2] 7]") # s "jungbass:4(4,9)")
+    $ every 4 (rev . (iter 2). ((2/3) <~) )
+    $ s "[bd@3] . [cp/2 bd/3 hh*8 cp] . [bd*4@3]"
+    |* speed (slow 2 $ range 0.8 2.5 sine)
+    # coarse 2
+    # room (slow 10 tri) # size (slow 7 tri)
+    # delay (slow 7 tri)
+    # orbit 0
+
+
+d2
+    $ every 2 (|+ note "<2 5 10 12>")
+    $ note "[0@3 ~ ~ 1@4 ~ ~]"
+    # s "404"
+    # attack (range 1.2 1.5 sine)
+    # sustain (fast 4 $ range 0.8 1.5 $ tri)
+    # legato 1.5
+    # speed "-1"
+    # orbit 1
+    -- # silence
+
+d3
+    $ crushit
+    $ s "kk:1([5 3],8,3)"
+    |* speed (fast 4 $ range 0.5 1.5 tri)
+    # octersub 1.2
+    # gain (slow 4 $ range 1.1 1.2 $ sine*1.08)
+    # orbit 3
+
+d4
+    -- $ crushit
+    $ jux rev
+    $ ghost
+    $ every 4 ((iter 2) .  ((1/4) ~>) . (fast 2) . (|+ gain 1.1))
+    $ off 0.125 (|+ note "<12 -8>")
+    $ note (every 8 ((1/4) ~>) "0 1 5 1")
+    # s "dsynth"
+    # gain 1.1
+    # room 0.4 # size 0.2
+    # orbit 2
+
+
+
+hush

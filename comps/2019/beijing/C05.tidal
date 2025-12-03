@@ -1,0 +1,90 @@
+do
+    setcps (160/60/4)
+    let steps = take 8 [0, 0.0625..]
+        prog = "{1 7 3 0, 7 10 4 0, 5 0 2 8, 0 1 12 3}%8"
+    d1
+        $ gtfo
+        $ qtrigger 1
+        -- $ every 4 ((iter 4) . ((3/8) <~) . (palindrome))
+        -- $ ghost
+        $ foldEvery [3,4] (1 <~)
+        -- $ struct (sometimesBy 0.75 (inv) "[t t] t f t [f t] [f t] f [t f]")
+        -- $ off "<0.75, 0.25>" (const $ density (3/4) $ one $ s "drumtraks")
+        $ jux rev
+        $ spread ($) [
+            chop "<16 32>",
+            striate' "<2 4>" (1/"<8 4>")
+        ]
+        -- $ density (3/4)
+        $ n prog
+        # s "[hh*16, clubkick:2(<3 2>,16,<2 4 1>) , [~ ~ sn:2(2,8) ~]]"
+        # decay 0.2
+        # room 0.3 # size 0.2
+        # cut 1
+        # gain 1
+        -- |+| coarse "<2 3 4>"
+        # vowel "<a i e>"
+    d2
+        -- $ slow 2
+        $ qtrigger 1
+        $ gtfo
+        -- $ every 2 (ply 2)
+        -- $ slowspread ($) [
+        --     every 4 (crushit),
+        --     thicken' "0.4" "0.4"
+        -- ]
+        -- $ move
+        -- $ struct "<t f [t f] t>"
+        -- $ foldEvery [3,4] (0.75 <~)
+        -- $ off 0.125 ((|* speed "<-1.2 2.4>") . (|+ note "<12 7>"))
+        $ note "[c a*2 f*2 e]/2"
+        # s "jungbass"
+        # legato (range 1 0.01 saw)
+    d3
+        $ gtfo
+        $ qtrigger 1
+        -- $ degradeBy 0.1
+        $ every 8 (|+ note "<7 12 -10>")
+        $ sometimesBy 0.25 (slow 2)
+        $ slowspread ($) [
+            id,
+            -- jux rev,
+            -- foldEvery [3,4] (0.75 <~),
+            stut "<4 2 6>" 0.25 0.5,
+            -- (|+| coarse "8 6 12"),
+            -- slow "<2 1 4>",
+            iter 4
+            ]
+        $ layer [
+            (const $ sound "[cp(2,16) drek(<3 5>,8)]" |+| cut "1")
+            -- stutWith 6 (1/6) $ (
+            --     const $ note (scale "phrygian" prog)
+            --     # s "[wub(<3 5>,8)]/4"
+            --     # vowel "{i o u}%2")
+            ]
+        -- $ every 3 (|+| accelerate "<-1 0.8>")
+        $ off 0.75 ((|* speed "<-1.2 2.5>") . (|+ note "<7 12 5>"))
+        $ note (scale "phrygian" prog)
+        # s "bass8"
+        # gain (range 0.6 1 $ slow 4 $ isaw)
+        -- # legato (range 1 0.01 saw)
+        -- # room (range 0.5 0.8 sine)
+        -- # lpf (range 100 1000 $ fast 4 $ saw)
+    d4
+        -- $ gtfo
+        $ spread ($) [
+            chop "<2 4>",
+            striate' "<4 2>" (1/"<2 4>")
+        ]
+        $ n (every 4 (0.25 ~>) "<0 .. 7> . <4 .. 9>")
+        # s "birds"
+        # cut 1
+        # gain (range "0.6" "0.9" $ slow 4 $ sine)
+        # pan (slow 4 $ saw)
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+
+
+hush

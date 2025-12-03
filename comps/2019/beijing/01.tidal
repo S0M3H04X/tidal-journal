@@ -1,0 +1,77 @@
+do
+    d1
+        $ slow "<2 6 4>"
+        $ stack [
+            every 4 (slow "<0.8 1.2>")
+            superimpose ((|* speed "<1.6 4.2>").(# pan (slow 1.5 $ sine)))
+            $ bite 32 "<0 .. 7><10 .. 15>" 
+            -- $ (1 ~>)
+            $ rarely ((|* speed "<10 12 14>").(# pan (segment 1 $ choose [0,0.75])).(stut 4 0.125 0.25))
+            $ s "drek:0*10"
+            # cut 1
+            # gain (fast 8 $ cosine*1.2)
+            # speed (isaw * "<0.2 0.5>")
+            # room (slow 1.2 $ tri/"<1.2 2>")
+            # size (slow 1.4 $ cosine*0.3)
+            # lpf (fast 1.4 $ range 600 4000 isaw*0.5)
+            # distort (slow 1.5 $ range 0.1 0.3 $ sine/1.2)
+            # crush (slow 1.1 $ range 10 3 $ isaw)
+            # orbit 1,
+            thicken' "0.4" "0.6"    
+            $ ghost
+            $ one
+            $ every 4 (0.25 ~>)
+            $ s "drek:0(<3 2>,16,<2 4>)"
+            # cut 1
+            # speed (saw * "<1.25 4 2.5>")
+            # pan (segment 1 $ choose [0,0.25])
+            # gain (slow 4 $ range 1.2 1.5 isaw*1.2)
+            # orbit 0,
+            every 4 (0.25 ~>)
+            $ one
+            $ s "[chin*8 , ~ clp:2(<3 4>,16,<2 4>)]"
+            # cut 1
+            # speed (isaw * "<1.25 4 2.5>")
+            # orbit 1
+        ] 
+        # nudge "[0 0.25]/4"
+        # speed "[0.8 1.2]"
+        # cps 0.4
+    d2 
+        $ s "insect*16"
+    d3 $ gtfo $ s "_"
+    d4 $ gtfo $ s "_"
+    d5 $ gtfo $ s "_"
+    d6 $ gtfo $ s "_"
+    d7 $ gtfo $ s "_"
+    d8 $ gtfo $ s "_"
+        -- $ silence
+
+
+
+
+hush
+
+d1 
+    $ s "bd*50"
+    # gain (fast 2.8 $ range 0.2 0.8 sine)
+    # lpf (slow 1.2 $ range 400 4000 saw)
+
+
+d2
+    $ striate 8
+    $ off 0.25 (|* speed "2 4")
+    $ s "cinema(3,<6 12>)"
+    # cut 1
+    -- # silence
+
+d3
+    -- $ slow 2
+    -- $ degrade 0.8
+    -- $ loopAt "1"
+    $ chop "<4 8>"
+    $ s "atmoshot"
+    # orbit 0
+    # cps 0.5
+    # cut 1
+    -- # silence

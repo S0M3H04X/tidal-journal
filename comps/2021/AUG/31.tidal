@@ -1,0 +1,19 @@
+d5
+-- $ gtfo
+$ every 4 (spin 3)
+$ stack [
+jux rev
+$ every 4 (# crush 2)
+$ s "{ml-perc sfx}%4"
+|+| n "2 3" |/ n "{6 5}%4"
+# speed "<0.3 0.6 0.9>"
+# gain (range 1 0.4 $ slow 8 tri)
+# legato 1,
+struct (ascii "who")
+$ s "[~ relo . kk:4(5,12)]",
+s "amo" # gain (slow 2 tri) # legato 1
+] # hcutoff (range 2000 200 $ fast 4 isaw)
+# vowel "<a o i>"
+# legato 1
+
+hush

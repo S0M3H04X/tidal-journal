@@ -1,0 +1,21 @@
+setcps 0.55
+
+d1
+    $ every 8 (spin 2)
+    $ fix (# crush (fast 4 $ range 3 5 $ saw)) (n "[2,7]")
+    $ n "0 1 2 [3 2] [4 2] 0 2 [7 1]"
+    # s "amencutup"
+    # octersub (range 1.2 2 sine)
+    # room 0.4
+    # orbit 0
+
+
+d2
+    $ jux rev
+    $ every 4 (trunc "<0.75 0.25 1>")
+    $ off 0.25 (|+ 7)
+    $ sew "t <f t> <f [f t] t>" (n "0 .. 15" # s "future") (s "cp:3*16" # speed saw + 1.2)
+    # gain (slow 4 $ range 0.8 1 $ sine + 0.15)
+    # orbit 1
+
+hush

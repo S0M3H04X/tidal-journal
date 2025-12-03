@@ -1,0 +1,8 @@
+d1
+    -- $ chunk 4 (hurry 2)
+    $ s "bd(3,16)"
+    # speed "2"
+    # resonance 0.4
+
+
+hush

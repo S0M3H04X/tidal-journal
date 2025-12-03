@@ -1,0 +1,60 @@
+d1
+    $ every 4 ((3/4) <~)
+    $ s "drek hh cp [hh cp] [hh cp] [bd bd] cp [hh drek]"
+    # lpf (fast 4 $ range 400 10000 $ saw*1.2)
+    -- # silence
+
+setcps(95/60/4)
+
+hush
+
+
+    d1
+    --   $ gtfo
+        $ stack [
+            s "[hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~][hh ~ ~ ~ hh ~ ~]"
+            # n "0 1",
+            every 8 (0.5 <~)
+            $ sometimesBy 0.5 (# crush 4)
+            $ s "[drek ~ ~ ~ ~ ~ ~][cp ~ ~ ~ ~ ~ drek][drek ~ ~ ~ drek ~ ~][cp ~ ~ ~ drek ~ drek]"
+            -- n (scale "minor" "<5 2 1>") # s (swingBy (1/3) 4 "supersaw(3,8)") |> speed "1 4 5",
+            -- chunk 3 (hurry 2) $ fast 2 $ s "chin*4"
+            -- # cut 1
+            -- |+| speed "1.2 0.7"
+            -- # cutoff (range 300 1000 $ slow 2 $ saw) # resonance "0.7"
+        ]
+
+d4
+    $ fast 2
+    -- $ gtfo
+    $ off 0.125 (const
+        $ every 2 (crushit)
+        $ every 4 ((fast 4) . ((3/4) <~))
+        $ note "<0 1 3 [5 1]>"
+        # s "bass8"
+        # orbit 0
+        )
+    -- $ every 8 (|+ note "[12 10] [5 0]")
+    $ every 4 ((3/4) <~)
+    $ note "<[0 5][[3 5 [1 0]][10 8 7]]>"
+    # s "cs80lead"
+    # gain (fast 8 $ range 0.9 0.6 sine)
+    # room (slow 4 $ range 0.6 0.1 sine)
+    -- # delay 0.55 # delayfb 0.02
+    # legato 1
+    # orbit 1
+    # silence
+
+d5
+    $ ghost
+    $ slow 4
+    $ s "clubkick:2(<3 5>,8)"
+    # room 0.2
+    # coarse 2
+    # octersubsub 1
+    -- # silence
+
+d4
+    $ s "clp:3 ~ [~ clp:2]"
+
+hush

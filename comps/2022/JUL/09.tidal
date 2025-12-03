@@ -1,0 +1,85 @@
+d1
+  $ n (run 4)
+  # s "bd"
+
+hush
+
+
+d1
+  $ jux rev
+  $ chop "<2 4 8>"
+  $ whenmod 4 3 ((iter 2) . (|* room (range 0.3 0.6 sine)))
+  $ n (run 8)
+  # s "bskick(3,8,2)"
+  # orbit 0
+  # gain 1.2
+  -- # silence
+
+d2
+  $ every 6 (slow 3)
+  -- $ stripe "<4 2>"
+  $ stut 2 8 (1/4)
+  $ n (run 16)
+  # s "bshihat"
+  # pan (slow 2 $ sine*0.8)
+  # gain (fast 3 $ range 0.7 0.4 isaw*0.6)
+  # orbit 1
+  -- # silence
+
+
+d3
+  $ every 8 (linger 0.75)
+  $ iter 2
+  $ chop "<6 4>"
+  $ loopAt "<2 6>"
+  $ s "break"
+  # orbit 1
+  # legato 1
+  -- # silence
+
+d4
+  $ rot "<0 0 1 2>"
+  $ stripe 2 $ trunc "[0.25 0.5] . [0.67]"
+  $ every 4 (id . (iter 2))
+  $ note (scale "mixolydian" (arp "<down diverge>" "a5'm7 g5'm7"))
+  # s "bsguitar"
+  # n "<0 .. 8>"
+  # orbit 2
+  # silence
+  # legato 1
+
+
+d5
+  -- $ gtfo
+  $ foldEvery [2,3](# lpf (slow 4 $ rangex 400 5000 isaw))
+  $ every 3 (linger "<0.25 0.5>")
+  -- $ chunk 8 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ s "kick:4"
+  # gain 1.2
+  -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
+  # orbit 2
+
+d6
+  $ slow "<2 3 4>"
+  $ jux rev
+  -- $ off 0.125 (|+ note "12")
+  $ every 8 ((ply 2) . (iter 4) . (|- note "0 .. 12"))
+  $ note "a4@2 e5 f5@3"
+  # s "dbass:8"
+  # legato 2
+  # pan (slow 4 $ isaw)
+  # octersub 1
+  # gain 0.8
+  # lpf (slow 8 $ rangex 400 5000 isaw)
+  |* speed (quantise 1 $ fast 4 $ rangex 4 1 isaw*2.4)
+  # room (rangex 0.1 0.5 isaw) # sz 0.4
+  # orbit 2
+  # silence
+
+
+
+
+hush
+
+:show scaleLis

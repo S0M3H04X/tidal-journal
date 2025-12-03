@@ -1,0 +1,16 @@
+d1 
+    $ every' 8 3 (const (s "sax(5,8)")) $ silence 
+    # fast 4 (vowel "a e o")
+    # pan (fast 2 $ tri)
+
+d2 $ n (arp "thumbup _? _ <updown diverge?>" "e'7m11'8 _ _ <a'm9'8 . e'7sus4'8>") 
+    # s "jvbass(12,16)" 
+
+    
+
+hush
+
+d1
+    $ "sax"
+    
+     

@@ -1,0 +1,97 @@
+hush
+
+
+d1
+  $ qt
+  -- $ gtfo
+  $ every 4 (rolledBy "0.7 0.5 0.3 0.2 0.1")
+  -- $ struct (iter 2 "t(5,8)")
+  $ slow 4
+  $ every 6 ( jux rev )
+  -- $ crushit
+  -- $ density 2
+  $ note (scale "chromatic" "<a4'm9'8 e4'7sus4'8 g4'm9'8 d4'm9'8>")
+  # s "pm04"
+  # gain 1.5
+  # room (slow 4 $ rangex 0.6 0.3 $ sine)
+  -- # gain 0.3
+  -- # attack (slow 8 $ range 0.5 0.1 tri)
+  # legato 1
+
+d2
+  -- $ gtfo
+  $ qt
+  $ foldEvery [2,3](# lpf (slow 2 $ rangex 400 5000 isaw))
+  $ every 4 (linger "<0.5 0.75>")
+  -- $ chunk 8 (|* speed "<0.8 1.2 -1>")
+  $ struct "<t(5,16) t(3,8)>"
+  $ s "kick_nthn"
+  # gain 0.3
+  -- # room 0.3 # sz (rangex 0.6 0.8 isaw)
+  # orbit 0
+
+d3
+  $ slow 2
+  $ qt
+  $ degradeBy (0.3)
+  $ struct (iter 4 "t(5,8)")
+  $ chop "3"
+  $ loopAt "3"
+  $ slice 8 "5 6!3 2!2 7 4"
+  -- $ every 2 ((1/2) ~>)
+  $ n "4"
+  # s "tjukvcl"
+  # gain 1.2
+  # hpf 800
+  # legato 2
+  -- |* speed "-1 2"
+  -- # ofx 1.0
+  -- # vowel "a _ e i"
+
+d4
+  -- $ gtfo
+  $ every 6 (slow 3)
+  $ stut 2 8 (1/4)
+  $ n (run 16)
+  # s "bshihat:2"
+  # pan (slow 2 $ sine*0.8)
+  # gain (fast 3 $ range 0.5 0.3 isaw*0.6)
+  # orbit 1
+
+d5
+  -- $ gtfo
+  -- $ every 8 (superimpose (slow 3))
+  $ every 32 (linger 0.75)
+  $ every 16 (layer [id, slow 2, rev])
+  $ splice 8 ("{0 .. 7}/<2 4>")
+  -- $ slow 2
+  $ every 8 (jux (|* speed "<1 -1>"))
+  $ slice 16 "{0 .. 15}/4"
+  $ s "break:9"
+  -- |* speed "2"
+  # hpf (800) # gain 1.1
+
+d6
+  -- $ gtfo
+  -- $ every 2 (gap "{8 <4 3>}%16")
+  $ foldEvery [3,4] (stutWith 2 (1/16) ((|* speed "<0.125 0.625>") . (|* gain 0.5)))
+  -- $ (1 <~)
+  $ chunk 8 (# squiz "[2 4 1]")
+  $ stack [
+      -- s "bd(5,16,4)",
+      s "bshihat*4"
+          # speed (segment 9 $ range "-0.1" 2 isaw),
+      s "clap(1,9,<4 2 8>)",
+      striate' 32 (1/64)
+      -- $ struct (every 2 inv "t(<2 3>,9,<5 6>)")
+      $ s "ade:4"
+      -- # room 0.2 |> size (range 0.2 0.4 sine)
+      # vowel "<a e o>"
+      -- # lpf 4000
+      # cut 1
+      >| note "0 2 [3 12] [24 7]"
+      |> pan sine,
+      jux rev
+      $ s "gretsch" >| note "0 2 [3 12] [24 7]"
+  ]
+  >| nudge "[0 0.25]*4"
