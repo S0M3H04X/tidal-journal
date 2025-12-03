@@ -1,3 +1,18 @@
+# comps/
+# lib/
+GLSL/
+samples/
+samples-extra/
+solstice/
+sccode/
+studies/
+synths/
+toplap20/
+templemeltdown/
+tidal-midi_demo\ Project/
+shaders/
+util/
+
 # General
 .DS_Store
 .AppleDouble
@@ -5,23 +20,6 @@
 
 # Icon must end with two \r
 Icon
-
-# comps/
-solstice/
-# config/
-GLSL/
-lib/
-samples/
-samples-extra/
-sccode/
-shaders/
-studies/
-synths/
-templemeltdown/
-tidal-midi_demo\ Project/
-toplap20/
-util/
-.code-workspace
 
 # Thumbnails
 ._*
@@ -46,3 +44,4 @@ Temporary Items
 **/samples
 **/synths
 **.scd
+.code-workspace

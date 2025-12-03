@@ -1,7 +1,0 @@
--- Dilla Style
-setcps (90/60/4)
-
-d1 $ s "bd bd ~ ~ bd [bd bd] ~ ~"
-
-
-hush
