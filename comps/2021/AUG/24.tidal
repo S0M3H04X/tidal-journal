@@ -1,11 +1,11 @@
 d1
     -- $ off 0.05 (const $ nudge "1 4" $ s "clubkick hh clubkick cp hh hh")
     $ slice 8 "0 .. 5"
-    $ (1 ~>)
+    -- $ (1 ~>)
     $ loopAt "<0 1 2>"
-    $ (1 <~)
+    -- $ (1 <~)
     $ note (scale "phrygian" "<0 5 2>")
-    $ s "subroc3d*20"
+    # s "subroc3d*20"
     # n (irand 11)
     # legato 1
 
@@ -27,13 +27,13 @@ d4
 
 
 d3
-  $ swingBy 4 (3/16)
+  $ swingBy 8 (3/16)
   $ s "hh([6,9],16)"
   # gain (fast 4 $ rangex 1.2 1 $ rand) # pan sine
 
 
 d4
-  $ gtfo
+  -- $ gtfo
   $ jux rev
   $ n "0*8"
   |+| coarse "<2 3 4>"

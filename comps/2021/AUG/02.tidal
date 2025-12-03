@@ -17,7 +17,7 @@ hush
 d1 $ fastcat [s "bd*4", s "hh27*8", s "superpiano" # n 0]
 
 d1
-  $ qtrigger 1
+  -- $ qtrigger 1
   $ timeCat [
     (6, s "drek*3"),
     (2, s "hh:2*2 ragaga*2"),
@@ -31,7 +31,7 @@ d1
   $ fastAppend (sound "bd*2 sn") (sound "arpy jvbass*2")
 
 d2
-  $ trigger 1
+  $ qt 1
   $ wedge (1/2) (timeCat [
     (2, s "drek*3"),
     (1, s "hh:2*4 ragaga*2"),
@@ -62,7 +62,7 @@ d2
   # gain (range 1.5 1.2 isaw)
   # speed "1.2"
   # cut 1
-  # orbit 0 
+  # orbit 0
 
 d3
   -- $ superimpose (iter 2)

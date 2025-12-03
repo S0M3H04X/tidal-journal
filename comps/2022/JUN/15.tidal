@@ -6,10 +6,10 @@ d1
   $ s "bd"
 
 d1
-  -- $ gtfo
+  $ gtfo
   -- $ qtrigger 1
   -- $ loopAt 8
-  $ chop 32
+  $ chop 4
   $ slice "<32 16>" "[8 .. 15]"
   $ bite 8 "0 1*2 2*2 [~ 3]"
   $ n "0"

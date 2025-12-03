@@ -28,7 +28,7 @@ do
     # note "c3"
 
 d5
-  $ gtfo
+  -- $ gtfo
   -- $ qtrigger 1
   -- $ someCyclesBy 0.25 (crushit)
   -- $ mask (every 4 inv "[1 0 [1 0]*3]/4")

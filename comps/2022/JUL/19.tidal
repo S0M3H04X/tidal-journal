@@ -1,8 +1,8 @@
 setcps(165/60/4)
 
 d1
-  $ every 8 (# vowel "e o i")
-  $ off 0.75 (|* speed "2")
+  -- $ every 8 (# vowel "e o i")
+  -- $ off 0.75 (|* speed "2")
   $ struct "{t*2 f}%2"
   $ n "<0 4>"
   # s "hdkick"
@@ -31,7 +31,7 @@ d4
   $ loopAt "<4 8>"
   $ n (run 4)
   # s "hdvc"
-  # hpf (slow 4 $ rangex 1000 8000 sine)
+  -- # hpf (slow 4 $ rangex 1000 8000 sine)
   # legato 1
 
 d5

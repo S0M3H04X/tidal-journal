@@ -1,5 +1,6 @@
 !setcps 0.5
 
+hush
 
 d1
 $ striate' 8 (1/4)

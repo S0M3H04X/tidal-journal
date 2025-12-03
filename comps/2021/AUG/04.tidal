@@ -22,21 +22,21 @@ d2
 
 d3
   -- $ qtrigger 2
-  $ jux rev
+  -- $ jux rev
   $ sometimesBy 0.25 (*| coarse 1.2) . (stutter 2 (1/12))
-  $ swing (5/12)
+  -- $ swing (3/16)
   $ spreadr ($) [
-      id,
-      (|* speed "<0.8 1 0.75>")
+      id
+      -- (|* speed "<0.8 1 0.75>")
     ]
-  $ chop 4
-  $ loopAt "<2 4>"
-  $ struct ("~ t@6")
+  $ chop 8
+  $ loopAt "<2 4 12 8>"
+  $ struct ("~ t@4")
   $ s "twik"
-  # octersub 1.2
-  # legato 2
+  -- # octersub 1.2
+  # legato 4
   # room 0.4
-  -- # pan (range 0.5 0 sine)
+  # pan (range 0.5 0 sine)
   # orbit 2
 
 setcps 0.55

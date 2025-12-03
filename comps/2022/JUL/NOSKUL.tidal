@@ -9,29 +9,30 @@ setcps(165/60/4)
 hush
 
 d1
-  $ slow 2
-  $ striate "8 4"
-  -- $ slice 4 "<0 .. 3>"
+  $ slow 8
+  -- $ striate "8 4"
+  $ slice 4 "<0 .. 3>"
   $ n "{3 8}%4"
   # s "hnbbass"
   # speed "<2 0.4 -1>"
   # pan (slow 2 $ sine)
-  -- # bpf (fast 8 $ rangex 500 2000 sine*0.25)
+  # bpf (fast 8 $ rangex 500 2000 sine*0.25)
   # legato 2
 
 d2
-  $ off 0.25 (const $ s "cpu")
-  -- $ loopAt 4
-  -- $ every 2 (gtfo)
+  $ gtfo
+  -- $ off 0.25 (const $ s "cpu")
+  $ loopAt 4
+  $ every 2 (gtfo)
   $ n "[0*2 ~ [. 2] [. 1]]"
   # s "kick"
-  # room 0.3 # size 0.4
+  -- # room 0.3 # size 0.4
   # orbit 1
   # gain 1.2
 
 d3
-  -- $ gtfo
-  $ ghost
+  $ gtfo
+  -- $ ghost
   $ every 16 (stut 4 2 (1/4))
   $ n "<1 {2*4}%<8 4>>"
   # s "clap"
@@ -39,6 +40,7 @@ d3
   # speed (range 0.5 2.5 sine)
   # gain 0.8
   # legato 1
+  # orbit 1
 
 d4
   -- $ striate 8
@@ -49,7 +51,7 @@ d4
 
 
 d5
-  -- $ loopAt 6
+  $ loopAt 6
   $ gtfo
   $ s "bsperc"
   # gain (rangex 0.6 1.1 sine)
@@ -57,36 +59,39 @@ d5
 
 d6
   -- $ step 4 "xx x"
-  -- $ gtfo
+  $ gtfo
   $ every 4 (trunc "0.5")
   $ stack [
     chop 4
-    $ loopAt 2
+    $ loopAt 4
     $ s "break"
     -- s "plaid"
   ]
-  # room 0.2 # size (rangex 0.3 0.5 sine)
-  # gain (fast 8 $ range 0.7 0.9 isaw)
-  # pan (slow 4 $ sine)
-  # legato 2
+  -- # room 0.2 # size (rangex 0.3 0.5 sine)
+  # gain (fast 2 $ range 1 0.9 saw)
+  # pan (fast 4 $ sine)
+  -- # legato 2
   # orbit 0
 
 d7
+  $ gtfo
   $ jux rev
-  $ every 2 ((striate 8) . (rev))
+  -- $ every 2 ((striate 8) . (rev))
   $ s "hdkick(2,8,2)"
   # n (run "<8 5 2>")
   # gain 0.8
-  # room 0.4 # size 0.3
+  -- # room 0.4 # size 0.3
   # cut 1
 
 d8
+  -- $ gtfo
   $ jux rev
-  $ slow 4
-  $ chop 8
-  $ loopAt 2
-  $ n "10"
+  $ slow 2
+  $ chop 4
+  $ loopAt 4
+  $ n "<10@4 6 2@8>"
   # s "cvp"
-  # legato 2
+  # legato 4
+  # room 0.4 # delay 0.15
 
 hush

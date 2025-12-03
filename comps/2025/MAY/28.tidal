@@ -1,6 +1,6 @@
 d3
   -- $ slow 2
-  $ qt
+  -- $ qt
   -- $ degradeBy (0.3)
   $ chop "6"
   $ loopAt "6"

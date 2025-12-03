@@ -1,11 +1,12 @@
 let hhpat = "0*8" -- "0 0 0*2 0 0 0*2 0 0*2 0 0*2 0 0"
     rimpat = "~ ~ 1 ~ ~ ~ ~ 1"
+    kkpat = "0 1@2 0*2 1@3 0*2"
 
 
 d3
   -- $ gtfo
   $ qt
-  $ struct (iter 8 "{t f f f t f f f}")
+  $ struct (iter 8 kkpat)
   -- $ n hhpat
   $ s "kick:6"
   # gain (rangex 1.2 1.1 tri)
@@ -55,26 +56,26 @@ let scale = getScale (scaleTable ++ [("techno", [0,2,3,5,7,8,10]),
                                      ("broken", [0,1,4,7,8,10])
                                     ])
 
-d1 $ gtfo $ n (scale "broken" "0 1 2 3 4 5 6 7") # sound "superpiano"
+d1 $ n (scale "broken" "0 1 2 3 4 5 6 7") # sound "superpiano"
 
 chordL "m9'8>"
 chordList
 
 filter (\(_,x)->x==[0,4,7,10]) chordTable
 
-d1 $ gtfo $ n (arp "<up down diverge>" "<a'm9'8 e'7sus4'8>") # sound "acid309"
+d1 $ n (arp "<up down diverge>" "<a'm9'8 e'7sus4'8>") # sound "acid309"
 
-d1 $ gtfo $ slow 2 $ rolled $ n "<a'm9'8 e'7sus4'8 g'm9'8 a'm9'8>" # sound "acid309"
+d1 $ slow 2 $ rolled $ n "<a'm9'8 e'7sus4'8 g'm9'8 a'm9'8>" # sound "acid309"
 
 
 hush
 
 d2
   $ qt
-  $ gtfo
+  -- $ gtfo
   $ every 3 (slow 4)
   -- $ slow 2
-  -- $ every 3 ( jux rev )
+  $ every 3 ( jux rev )
   -- $ struct (iter 2 "t(5,8)")
   -- $ crushit
   -- $ density 2
@@ -101,9 +102,9 @@ d5
 
 d6
   $ qt
-  $ gtfo
+  -- $ gtfo
   -- $ jux rev
   -- $ ply 2
-  -- $ every 8 ((1/8) ~>) . (ply 2)
+  $ every 8 ((1/8) ~>) . (ply 2)
   $ n hhpat
   # s "bshihat"

@@ -20,7 +20,7 @@ $ s "[kk:2(<3 1>,8) , nb:3!]"
 every 2 (|> vowel "<e o i>") $ slow 2 $ s "sfx" # gain (slow 4 $ range 0.2 0.6 tri) # speed "0.4" # legato 1
 ]
 
-
+d3
 $ every 4 ((3/16) <~)
 $ foldEvery [3,5] (0.25 <~)
 $ stack [
@@ -28,4 +28,4 @@ slow 2 $ striate' 8 (1/16) $ n ("<6 17 12 21>") # s "ml-vo" # legato 1 # speed "
 struct (ascii "<no oh>") $ s "[ml-perc kk:3]" |> n "11" # gain 1,
 slow 4 $ struct (ascii "ai") $ striate' 8 (1/16) $ s "gh-vo:6" # legato 1 # gain (slow 4 sine),
 iter 2 $ s "gps" |* speed (range 0.4 0.8 sine) # cut 1
-] # cutoff 4000 # silence
+] # cutoff 4000 
